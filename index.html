@@ -1,9 +1,8 @@
 <!-- 
 ================================================================================
-WIN Predict MVP (Finalized - STATIC UI VERSION)
-目的: UIデザインと画面構成の確認用。GitHub Pagesでのエラー回避を最優先。
-機能: 予想、SNS、タスクインセンティブ、ポイント交換所、管理画面のUI設計を表示。
-NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機能は無効化されています。
+WIN Predict MVP - GOLF THEME UI (Finalized - STATIC UI VERSION)
+目的: ゴルフ特化のデザインに刷新し、MVPの洗練されたUI/UXを提示。
+NOTE: データ保存、ポイント計算、遷移以外のJavaScript機能は無効化されています。
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -11,21 +10,21 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WIN Predict - MVP UI</title>
+    <title>GOLFIN Predict - MVP UI</title>
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Interフォント設定 */
+        /* カラーパレット: 深緑(#065F46)、紺(#3730A3)、アクセント黄(#FACC15) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f9;
+            background-color: #f0fdf4; /* Pale Green Background */
         }
         .container-mobile {
             max-width: 420px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
         .nav-item {
             display: flex;
@@ -34,7 +33,16 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
             color: #64748b;
         }
         .nav-item.active {
-            color: #4f46e5;
+            color: #065F46; /* Deep Green */
+        }
+        .golf-header {
+            background-color: #065F46; /* Deep Green */
+        }
+        .golf-btn-primary {
+            background-color: #3730A3; /* Indigo/Navy */
+        }
+        .golf-btn-primary:hover {
+            background-color: #4F46E5;
         }
         .fade-in {
             animation: fadeIn 0.5s ease-out;
@@ -47,21 +55,24 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
             opacity: 0.6;
             cursor: not-allowed;
         }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body class="p-2">
     <!-- メインコンテナ -->
-    <div id="app" class="container-mobile mx-auto min-h-screen bg-white shadow-lg rounded-lg overflow-hidden">
+    <div id="app" class="container-mobile mx-auto min-h-screen bg-white shadow-lg rounded-xl overflow-hidden">
         
         <!-- UI表示エリア -->
         <div id="content">
             <!-- ナビゲーションバー (常に表示) -->
-            <header class="sticky top-0 bg-white border-b border-gray-100 z-10 p-4 flex justify-between items-center">
-                <h1 class="text-2xl font-extrabold text-indigo-600 cursor-pointer" data-view="home">WIN Predict</h1>
+            <header class="sticky top-0 golf-header border-b border-gray-100 z-10 p-4 flex justify-between items-center">
+                <h1 class="text-2xl font-extrabold text-white cursor-pointer" data-view="home">GOLFIN Predict</h1>
                 <div class="flex space-x-3 items-center">
-                    <button class="text-sm text-gray-500 hover:text-indigo-600" data-view="admin">管理</button>
-                    <button data-view="mypage" class="p-2 rounded-full bg-indigo-50 hover:bg-indigo-100 transition">
-                        <i data-lucide="user" class="h-6 w-6 text-indigo-600"></i>
+                    <button class="text-sm text-gray-200 hover:text-white" data-view="admin">管理</button>
+                    <button data-view="mypage" class="p-2 rounded-full bg-white transition">
+                        <i data-lucide="user" class="h-6 w-6 text-gray-800"></i>
                     </button>
                 </div>
             </header>
@@ -72,7 +83,7 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
             </div>
 
             <!-- ナビゲーションフッター -->
-            <footer id="nav-footer" class="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100 shadow-md flex justify-around p-3 container-mobile mx-auto">
+            <footer id="nav-footer" class="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100 shadow-2xl flex justify-around p-3 container-mobile mx-auto">
                 <button class="nav-item active" data-view="home">
                     <i data-lucide="home" class="h-6 w-6"></i>
                     <span class="text-xs">ホーム</span>
@@ -113,11 +124,11 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
         userHitRate: 45,
         tournamentId: 't1',
         tournaments: [
-            { id: 't1', title: '第1回 WIN Predict杯', sponsorName: 'GolfGear Pro', prizePool: 10000, status: 'voting', taskType: 'quiz_answer', players: [{ id: 'p1', name: '田中 太郎' }, { id: 'p2', name: '佐藤 花子' }, { id: 'p3', name: '山本 健太' }] },
-            { id: 't2', title: '欧州サッカー 優勝予想', sponsorName: 'Adidas', prizePool: 20000, status: 'upcoming', taskType: 'video_watch', players: [{ id: 'p4', name: 'FC Tokyo' }, { id: 'p5', name: 'Osaka Blue' }] },
+            { id: 't1', title: '第1回 GOLFIN杯', sponsorName: 'GolfGear Pro', prizePool: 10000, status: 'voting', taskType: 'quiz_answer', players: [{ id: 'p1', name: '田中 太郎' }, { id: 'p2', name: '佐藤 花子' }, { id: 'p3', name: '山本 健太' }] },
+            { id: 't2', title: 'ウィンターオープンコンペ', sponsorName: 'Travel Golf', prizePool: 20000, status: 'upcoming', taskType: 'video_watch', players: [{ id: 'p4', name: '松本 健太' }, { id: 'p5', name: '小林 結衣' }] },
         ],
         posts: [
-            { id: 'post1', userId: 'ui_mock_user_2', userName: '勝利の女神', text: '田中太郎選手、絶好調！今週も優勝間違いなし！ #WINPredict', player: '田中 太郎', likes: 15, isPrediction: true },
+            { id: 'post1', userId: 'ui_mock_user_2', userName: '勝利の女神', text: '田中太郎選手、絶好調！今週も優勝間違いなし！ #GOLFINPredict', player: '田中 太郎', likes: 15, isPrediction: true },
             { id: 'post2', userId: 'ui_mock_user_3', userName: 'ゴルフ好き', text: '新しいシューズを買いました！ラウンド楽しみ！[写真]', player: null, likes: 5, isPrediction: false },
         ],
         rewards: [
@@ -161,21 +172,25 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
     function renderHomeView() {
         return `
             <div class="fade-in">
-                <h2 class="text-2xl font-bold mb-2">開催中の予想イベント</h2>
-                <p class="text-indigo-600 mb-6 font-semibold">
-                    参加タスクは任意です。タスク完了で的中ポイント2倍のチャンス！
+                <h2 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">開催中のゴルフコンペ・トーナメント</h2>
+                <p class="text-yellow-700 mb-6 font-semibold bg-yellow-50 p-2 rounded-md border border-yellow-200 text-sm">
+                    ✨ 参加タスクは任意です。タスク完了で的中ポイント2倍のチャンス！
                 </p>
 
                 ${MOCK_DATA.tournaments.map(t => `
-                    <div class="bg-white p-4 border rounded-lg shadow-md mb-4 flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-bold">${t.title} (UI確認用)</h3>
-                            <p class="text-sm text-gray-500">${t.sponsorName} / 🏆 ${t.prizePool}pt</p>
-                            <span class="text-xs font-semibold px-2 py-0.5 mt-1 rounded-full ${t.status === 'voting' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">
-                                ${t.status === 'voting' ? '投票受付中' : '開催予定'}
-                            </span>
+                    <div class="bg-white p-4 border border-green-100 rounded-xl shadow-md card-shadow mb-4 flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="flag" class="h-6 w-6 text-green-700"></i>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800">${t.title}</h3>
+                                <p class="text-xs text-gray-500">${t.sponsorName}</p>
+                                <div class="flex items-center mt-1">
+                                    <i data-lucide="trophy" class="h-4 w-4 text-yellow-500 mr-1"></i>
+                                    <p class="text-sm font-semibold text-gray-600">${t.prizePool} pt</p>
+                                </div>
+                            </div>
                         </div>
-                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition" 
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md hover:bg-green-700 transition" 
                             onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
                             予想する
                         </button>
@@ -192,65 +207,66 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
         
         return `
             <div class="fade-in">
-                <h2 class="text-2xl font-bold mb-4">${t.title}</h2>
-                <div class="mb-6 p-4 bg-gray-50 border rounded-lg">
-                    <p class="text-sm text-gray-600">スポンサー: <strong>${t.sponsorName}</strong></p>
-                    <p class="text-sm text-gray-600">賞金プール: <strong>${t.prizePool}pt</strong></p>
-                    <p class="text-sm text-gray-600">状態: <strong>${t.status === 'voting' ? '投票受付中' : '開催予定'}</strong></p>
+                <h2 class="text-2xl font-bold mb-2 text-gray-800">${t.title}</h2>
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl card-shadow">
+                    <p class="text-sm text-gray-700 mb-1 flex items-center"><i data-lucide="building" class="h-4 w-4 mr-2 text-green-700"></i>スポンサー: <strong>${t.sponsorName}</strong></p>
+                    <p class="text-sm text-gray-700 mb-1 flex items-center"><i data-lucide="dollar-sign" class="h-4 w-4 mr-2 text-yellow-600"></i>賞金プール: <strong>${t.prizePool} pt</strong></p>
+                    <span class="text-xs font-semibold px-3 py-1 mt-2 rounded-full bg-green-700 text-white">${t.status === 'voting' ? '投票受付中' : '開催予定'}</span>
                 </div>
                 
                 <!-- 参加登録セクション -->
-                <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                     <h3 class="text-lg font-bold text-blue-800 flex items-center mb-2">
-                        <i data-lucide="users" class="h-5 w-5 mr-2"></i>イベント参加（コンペ幹事・参加者向け）
+                        <i data-lucide="calendar" class="h-5 w-5 mr-2"></i>コンペ参加登録
                     </h3>
-                    <p class="text-sm mb-3">このイベントに参加登録し、アプリでスコア集計を行うことができます。</p>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm disabled-action">参加登録する (UI)</button>
-                    ${!isTaskCompleted ? `<p class="mt-2 text-sm text-blue-600 font-semibold">（参加登録後はスコア入力が可能になります）</p>` : ''}
+                    <p class="text-sm mb-3">このコンペに実際に参加し、アプリでリアルタイムにスコア集計を行えます。</p>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md disabled-action">参加登録する (UI)</button>
+                    ${!isTaskCompleted ? `<p class="mt-2 text-xs text-blue-600 font-semibold">（参加登録後、スコア入力画面が有効になります）</p>` : ''}
                 </div>
 
                 <!-- 予想フォーム -->
-                <div class="p-4 border rounded-lg shadow-sm bg-white mb-8">
-                    <h3 class="text-xl font-semibold mb-3 flex items-center">
-                        🏆 優勝予想を投稿する
+                <div class="p-4 border border-gray-200 rounded-xl shadow-lg bg-white mb-8 card-shadow">
+                    <h3 class="text-xl font-bold mb-3 flex items-center text-gray-800">
+                        🏆 優勝選手を予想する
                     </h3>
                     
                     <!-- インセンティブバナー -->
                     ${!isTaskCompleted ? `
-                        <div class="bg-yellow-100 text-yellow-800 p-3 rounded-md mb-4 text-sm font-semibold flex justify-between items-center">
-                            <span>✨ タスク完了で的中ポイントが2倍に！</span>
-                            <button class="text-indigo-600 underline" onclick="window.navigate('sponsor-page', { id: '${t.id}' })">確認する →</button>
+                        <div class="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm font-semibold flex justify-between items-center border border-yellow-300">
+                            <span>ポイント2倍チャンス！タスクを完了 →</span>
+                            <button class="text-indigo-600 underline font-bold" onclick="window.navigate('sponsor-page', { id: '${t.id}' })">詳細へ</button>
                         </div>
-                    ` : `<p class="text-green-600 font-semibold mb-4 flex items-center"><i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>ポイント2倍ボーナス有効です！</p>`}
+                    ` : `<p class="text-green-600 font-semibold mb-4 flex items-center"><i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>ボーナス有効！</p>`}
 
                     <div class="flex flex-wrap gap-2 mb-4">
                         ${t.players.map(p => `
-                            <label class="p-2 border rounded-full cursor-pointer bg-gray-100 text-gray-700 hover:bg-indigo-50 transition">
+                            <label class="p-2 border border-gray-300 rounded-full cursor-pointer bg-gray-50 text-gray-700 hover:bg-green-50 transition">
                                 <input type="radio" name="player" value="${p.id}" class="hidden" />
                                 ${p.name}
                             </label>
                         `).join('')}
                     </div>
                     
-                    <textarea placeholder="予想に一言コメントを追加 (任意)" rows="2" class="w-full p-2 border rounded-md mb-4 focus:ring-indigo-500"></textarea>
+                    <textarea placeholder="予想に一言コメント (任意)" rows="2" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-green-500"></textarea>
                     
                     <div class="flex space-x-2 mb-4">
-                        <input type="file" accept="image/*" class="w-full text-sm border p-1 rounded-md" disabled>
-                        <button class="bg-gray-400 text-white px-3 py-1 rounded-md text-sm disabled-action"><i data-lucide="image" class="h-4 w-4"></i></button>
+                        <input type="file" accept="image/*" class="w-full text-sm border p-1 rounded-lg" disabled>
+                        <button class="bg-gray-400 text-white px-3 py-1 rounded-lg text-sm disabled-action"><i data-lucide="image" class="h-4 w-4"></i></button>
                     </div>
 
-                    <button class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">予想を確定 & 投稿する (UI)</button>
+                    <button class="w-full bg-green-600 text-white font-bold py-3 rounded-lg shadow-lg hover:bg-green-700 disabled-action">予想を確定 & 投稿する (UI)</button>
                 </div>
 
                 <!-- タイムライン -->
-                <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">リアルタイム 予想タイムライン</h3>
+                <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2 text-gray-800">⛳ リアルタイム 予想タイムライン</h3>
                 ${MOCK_DATA.posts.map(p => `
-                    <div class="p-4 border rounded-lg mb-3 bg-white">
+                    <div class="p-4 border border-gray-200 rounded-xl mb-3 bg-white card-shadow">
                         <div class="flex items-center mb-2">
-                            <div class="bg-indigo-200 h-8 w-8 rounded-full mr-3"></div>
+                            <div class="bg-indigo-200 h-8 w-8 rounded-full mr-3 border border-indigo-400"></div>
                             <span class="font-semibold text-sm cursor-pointer" onclick="window.navigate('user-profile', { userId: '${p.userId}' })">${p.userName}</span>
+                            <span class="text-xs text-gray-400 ml-auto">10分前</span>
                         </div>
-                        ${p.isPrediction ? `<p class="text-sm font-semibold text-indigo-600 mb-1">🎯 ${p.player} に優勝を予想</p>` : ''}
+                        ${p.isPrediction ? `<p class="text-sm font-bold text-indigo-700 mb-1 flex items-center"><i data-lucide="target" class="h-4 w-4 mr-1"></i> ${p.player} に優勝を予想</p>` : ''}
                         <p class="text-gray-800">${p.text}</p>
                         ${p.player === null ? `<div class="mt-3"><img src="https://placehold.co/100x100/A7F3D0/065F46?text=Photo" alt="投稿写真" class="rounded-lg w-24 h-24 object-cover"></div>` : ''}
                         
@@ -259,7 +275,7 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                                 <span class="cursor-pointer hover:text-red-500"><i data-lucide="heart" class="h-4 w-4 inline mr-1"></i> ${p.likes}</span>
                                 <span class="cursor-pointer hover:text-indigo-500"><i data-lucide="message-square" class="h-4 w-4 inline mr-1"></i> 3</span>
                             </div>
-                            <button class="text-green-600 font-semibold disabled-action"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援ギフト (UI)</button>
+                            <button class="text-yellow-600 font-semibold disabled-action"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援ギフト (UI)</button>
                         </div>
                     </div>
                 `).join('')}
@@ -280,8 +296,8 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
             taskTitle = 'クイズに回答してボーナスをゲット！';
             taskContent = `
                 <p><strong>${taskValue}</strong></p>
-                <input type="text" placeholder="回答を入力" class="w-full p-2 border rounded-md my-4 focus:ring-indigo-500 disabled-action">
-                <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">回答を送信 (UI)</button>
+                <input type="text" placeholder="回答を入力" class="w-full p-2 border rounded-md my-4 focus:ring-green-500 disabled-action">
+                <button class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md disabled-action">回答を送信 (UI)</button>
             `;
         } else if (taskType === 'video_watch') {
             taskTitle = '動画を視聴してボーナスをゲット！';
@@ -290,7 +306,7 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                     <i data-lucide="play-circle" class="h-10 w-10 text-gray-500"></i>
                 </div>
                 <p class="text-sm text-gray-600">動画を最後まで視聴するとタスク完了となります。</p>
-                <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">動画を視聴完了 (UI)</button>
+                <button class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md disabled-action">動画を視聴完了 (UI)</button>
             `;
         }
 
@@ -299,13 +315,13 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
                     <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> イベント詳細に戻る
                 </button>
-                <h2 class="text-2xl font-bold mb-4">${t.sponsorName} - スポンサーページ</h2>
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">${t.sponsorName} - スポンサーページ</h2>
                 
-                <p class="mb-6">この大会は${t.sponsorName}様の提供でお送りしています。タスクを完了して的中ボーナスをゲットしましょう。</p>
+                <p class="mb-6 text-gray-700">このコンペは${t.sponsorName}様の提供でお送りしています。タスクを完了して**ポイント2倍ボーナス**をゲットしましょう。</p>
 
                 <!-- タスクエリア -->
-                <div class="p-5 border rounded-lg mb-8 ${isTaskCompleted ? 'bg-green-50' : 'bg-indigo-50 border-indigo-200'}">
-                    <h3 class="text-xl font-bold ${isTaskCompleted ? 'text-green-700' : 'text-indigo-700'} flex items-center mb-3">
+                <div class="p-5 border border-green-300 rounded-xl mb-8 ${isTaskCompleted ? 'bg-green-100' : 'bg-green-50'}">
+                    <h3 class="text-xl font-bold ${isTaskCompleted ? 'text-green-800' : 'text-green-700'} flex items-center mb-3">
                         ${isTaskCompleted ? '<i data-lucide="check-circle" class="h-6 w-6 mr-2"></i> タスク完了済み' : '<i data-lucide="list-check" class="h-6 w-6 mr-2"></i> ' + taskTitle}
                     </h3>
                     ${isTaskCompleted ? 
@@ -315,12 +331,12 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 </div>
                 
                 <!-- 企業への投げ銭 -->
-                <h3 class="text-lg font-bold mt-6 mb-3">🤝 スポンサーを応援する</h3>
-                <p class="text-sm mb-3">応援ギフトを贈ることで、スポンサー企業に感謝の気持ちを伝えられます。</p>
-                <button class="text-indigo-600 font-semibold disabled-action"><i data-lucide="gift" class="h-5 w-5 inline"></i> 応援ギフトを贈る (UI)</button>
+                <h3 class="text-lg font-bold mt-6 mb-3 border-t pt-4 text-gray-800">🤝 スポンサーを応援する</h3>
+                <p class="text-sm mb-3 text-gray-600">応援ギフトを贈ることで、スポンサー企業に感謝の気持ちを伝えられます。</p>
+                <button class="text-yellow-600 font-semibold disabled-action flex items-center"><i data-lucide="gift" class="h-5 w-5 inline mr-2"></i> 応援ギフトを贈る (UI)</button>
 
                 <!-- 企業紹介 -->
-                <h3 class="text-lg font-bold mt-8 mb-3 border-t pt-4">企業紹介</h3>
+                <h3 class="text-lg font-bold mt-8 mb-3 border-t pt-4 text-gray-800">企業紹介</h3>
                 <p class="text-gray-700">最高のゴルフ体験を提供するために、私たちは常に革新的なギアとサービスを開発しています。ブランドのビジョンや製品ラインナップについて、ぜひご覧ください。</p>
             </div>
         `;
@@ -333,21 +349,21 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
 
         return `
             <div class="fade-in">
-                <h2 class="text-2xl font-bold mb-6">マイページ / 実績</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">マイページ / 実績</h2>
 
                 <!-- ユーザーサマリー -->
-                <section class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg mb-8">
-                    <p class="text-xl font-semibold mb-2">${MOCK_DATA.userName}さん</p>
+                <section class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl card-shadow mb-8">
+                    <p class="text-xl font-semibold mb-2 text-gray-800">${MOCK_DATA.userName}さん</p>
                     <div class="grid grid-cols-3 gap-3 text-center">
-                        <div class="p-2 bg-white rounded-md shadow-sm">
+                        <div class="p-2 bg-white rounded-lg shadow-sm">
                             <p class="text-xs text-gray-500">累計ポイント</p>
                             <p class="text-2xl font-extrabold text-indigo-600">${MOCK_DATA.userPoints.toLocaleString()}pt</p>
                         </div>
-                        <div class="p-2 bg-white rounded-md shadow-sm">
+                        <div class="p-2 bg-white rounded-lg shadow-sm">
                             <p class="text-xs text-gray-500">的中率</p>
                             <p class="text-2xl font-extrabold text-green-600">${hitRate}%</p>
                         </div>
-                        <div class="p-2 bg-white rounded-md shadow-sm">
+                        <div class="p-2 bg-white rounded-lg shadow-sm">
                             <p class="text-xs text-gray-500">予想回数</p>
                             <p class="text-2xl font-extrabold">${totalPredictions}</p>
                         </div>
@@ -355,21 +371,21 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 </section>
 
                 <!-- ポイントの使い道 -->
-                <h3 class="text-xl font-bold mb-3">💰 ポイントの使い道</h3>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">💰 ポイントの使い道</h3>
                 <div class="flex space-x-4 mb-8">
-                    <button class="flex-1 bg-red-500 text-white font-semibold p-3 rounded-lg flex flex-col items-center disabled-action" onclick="window.navigate('reward-store')">
+                    <button class="flex-1 bg-red-600 text-white font-semibold p-3 rounded-lg flex flex-col items-center shadow-md disabled-action" onclick="window.navigate('reward-store')">
                         <i data-lucide="gift" class="h-6 w-6 mb-1"></i>
-                        <span>リワード交換所へ</span>
+                        <span>景品交換所へ</span>
                     </button>
-                    <button class="flex-1 bg-yellow-500 text-white font-semibold p-3 rounded-lg flex flex-col items-center disabled-action" onclick="window.navigate('item-store')">
+                    <button class="flex-1 bg-yellow-600 text-white font-semibold p-3 rounded-lg flex flex-col items-center shadow-md disabled-action" onclick="window.navigate('item-store')">
                         <i data-lucide="shopping-cart" class="h-6 w-6 mb-1"></i>
-                        <span>アイテム購入ストアへ</span>
+                        <span>アイテムストアへ</span>
                     </button>
                 </div>
 
                 <!-- 予想履歴セクション -->
                 <section>
-                    <h2 class="text-xl font-bold mb-3">予想履歴 (UI)</h2>
+                    <h2 class="text-xl font-bold mb-3 text-gray-800">予想履歴 (UI)</h2>
                     <p class="text-sm text-gray-600">ここに過去の予想と結果が表示されます。</p>
                 </section>
             </div>
@@ -382,20 +398,20 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('mypage')">
                     <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> マイページに戻る
                 </button>
-                <h2 class="text-2xl font-bold mb-6">ポイント交換所 (リワードストア)</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">ポイント交換所 (景品)</h2>
                 
-                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-6 flex justify-between items-center">
-                    <p class="text-sm text-yellow-800">現在の残高:</p>
-                    <p class="text-2xl font-extrabold text-yellow-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
+                <div class="p-4 bg-green-50 border border-green-200 rounded-xl mb-6 flex justify-between items-center">
+                    <p class="text-sm text-green-800">現在の残高:</p>
+                    <p class="text-2xl font-extrabold text-green-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     ${MOCK_DATA.rewards.map(r => `
-                        <div class="p-3 border rounded-lg shadow-sm bg-white flex flex-col items-center text-center">
-                            <img src="${r.imageUrl}" alt="${r.name}" class="w-20 h-20 rounded-lg mb-2 object-cover">
+                        <div class="p-3 border rounded-xl shadow-sm bg-white card-shadow flex flex-col items-center text-center">
+                            <img src="${r.imageUrl}" alt="${r.name}" class="w-20 h-20 rounded-lg mb-2 object-cover border border-gray-200">
                             <p class="text-sm font-semibold mb-1">${r.name}</p>
-                            <p class="text-lg font-bold text-indigo-600 mb-3">${r.cost.toLocaleString()} pt</p>
-                            <button class="w-full bg-red-500 text-white text-sm font-semibold py-2 rounded-lg disabled-action">交換する (UI)</button>
+                            <p class="text-lg font-bold text-red-600 mb-3">${r.cost.toLocaleString()} pt</p>
+                            <button class="w-full bg-red-600 text-white text-sm font-semibold py-2 rounded-lg shadow-md disabled-action">交換する (UI)</button>
                         </div>
                     `).join('')}
                 </div>
@@ -409,21 +425,21 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('mypage')">
                     <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> マイページに戻る
                 </button>
-                <h2 class="text-2xl font-bold mb-6">アイテム購入ストア (投げ銭用)</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">アイテム購入ストア (投げ銭用)</h2>
                 
-                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-6 flex justify-between items-center">
-                    <p class="text-sm text-yellow-800">現在の残高:</p>
-                    <p class="text-2xl font-extrabold text-yellow-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
+                <div class="p-4 bg-green-50 border border-green-200 rounded-xl mb-6 flex justify-between items-center">
+                    <p class="text-sm text-green-800">現在の残高:</p>
+                    <p class="text-2xl font-extrabold text-green-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
                 </div>
                 <p class="text-sm mb-4 text-gray-600">購入したアイテムは、投稿者、選手、スポンサーへの応援ギフトとして使用できます。</p>
 
                 <div class="grid grid-cols-2 gap-4">
                     ${MOCK_DATA.items.map(i => `
-                        <div class="p-3 border rounded-lg shadow-sm bg-white flex flex-col items-center text-center">
+                        <div class="p-3 border rounded-xl shadow-sm bg-white card-shadow flex flex-col items-center text-center">
                             <div class="text-5xl my-2">${i.icon}</div>
                             <p class="text-sm font-semibold mb-1">${i.name}</p>
-                            <p class="text-lg font-bold text-red-500 mb-3">${i.cost.toLocaleString()} pt</p>
-                            <button class="w-full bg-indigo-600 text-white text-sm font-semibold py-2 rounded-lg disabled-action">購入する (UI)</button>
+                            <p class="text-lg font-bold text-indigo-600 mb-3">${i.cost.toLocaleString()} pt</p>
+                            <button class="w-full bg-indigo-600 text-white text-sm font-semibold py-2 rounded-lg shadow-md disabled-action">購入する (UI)</button>
                         </div>
                     `).join('')}
                 </div>
@@ -438,25 +454,25 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
                 <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('tournament-detail', { id: MOCK_DATA.tournamentId })">
                     <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> 戻る
                 </button>
-                <h2 class="text-2xl font-bold mb-6">${userName}さんのプロフィール</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">${userName}さんのプロフィール</h2>
 
-                <div class="p-4 bg-white border rounded-lg shadow-sm mb-6 flex items-center">
-                    <div class="bg-indigo-300 h-16 w-16 rounded-full mr-4"></div>
+                <div class="p-4 bg-white border rounded-xl shadow-sm mb-6 flex items-center card-shadow">
+                    <div class="bg-indigo-300 h-16 w-16 rounded-full mr-4 border border-indigo-400"></div>
                     <div>
-                        <p class="text-xl font-bold">${userName}</p>
+                        <p class="text-xl font-bold text-gray-800">${userName}</p>
                         <p class="text-sm text-gray-500">予想回数: 15回 | 的中率: 33%</p>
                         <p class="text-sm text-gray-700 mt-1">「週末ゴルファー。飛距離重視。」</p>
                     </div>
                 </div>
 
-                <h3 class="text-xl font-bold mb-3 border-b pb-1">最近の投稿</h3>
+                <h3 class="text-xl font-bold mb-3 border-b pb-1 text-gray-800">最近の投稿</h3>
                 ${MOCK_DATA.posts.map(p => `
-                    <div class="p-3 border rounded-lg mb-3 bg-white">
-                        <p class="text-sm font-semibold text-indigo-600 mb-1">🎯 ${p.player} に予想</p>
+                    <div class="p-3 border rounded-xl mb-3 bg-white card-shadow">
+                        <p class="text-sm font-bold text-indigo-700 mb-1 flex items-center"><i data-lucide="target" class="h-4 w-4 mr-1"></i> ${p.player} に予想</p>
                         <p class="text-gray-800">${p.text}</p>
                         <div class="flex justify-end mt-3 text-sm text-gray-500">
                             <span class="mr-3"><i data-lucide="heart" class="h-4 w-4 inline mr-1"></i> ${p.likes}</span>
-                            <span class="cursor-pointer hover:text-green-600"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援する</span>
+                            <span class="cursor-pointer hover:text-yellow-600"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援する</span>
                         </div>
                     </div>
                 `).join('')}
@@ -475,30 +491,30 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
 
                 <div class="space-y-6">
                     <!-- 新規イベント作成 (UI) -->
-                    <div class="p-4 border rounded-lg bg-gray-50">
-                        <h3 class="text-xl font-bold mb-3">新規イベント作成 (UI)</h3>
+                    <div class="p-4 border rounded-xl bg-gray-50 card-shadow">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">新規コンペ作成 (UI)</h3>
                         <div class="space-y-3">
-                            <input type="text" placeholder="イベント名" class="w-full p-2 border rounded-md disabled-action">
-                            <input type="text" placeholder="スポンサー名" class="w-full p-2 border rounded-md disabled-action">
-                            <select class="w-full p-2 border rounded-md disabled-action">
+                            <input type="text" placeholder="コンペ名" class="w-full p-2 border rounded-lg disabled-action">
+                            <input type="text" placeholder="スポンサー名" class="w-full p-2 border rounded-lg disabled-action">
+                            <select class="w-full p-2 border rounded-lg disabled-action">
                                 <option>クイズ回答 (ポイント2倍タスク)</option>
                                 <option>動画視聴 (ポイント2倍タスク)</option>
                             </select>
-                            <textarea placeholder="出場選手名 (カンマ区切り)" rows="3" class="w-full p-2 border rounded-md disabled-action"></textarea>
-                            <button class="w-full bg-red-600 text-white py-2 rounded-lg disabled-action">イベントを作成 (UI)</button>
+                            <textarea placeholder="出場選手名 (カンマ区切り)" rows="3" class="w-full p-2 border rounded-lg disabled-action"></textarea>
+                            <button class="w-full bg-red-600 text-white py-2 rounded-lg shadow-md disabled-action">イベントを作成 (UI)</button>
                         </div>
                     </div>
 
                     <!-- 結果確定とポイント付与 -->
-                    <div class="p-4 border rounded-lg bg-yellow-50">
+                    <div class="p-4 border rounded-xl bg-yellow-50 card-shadow">
                         <h3 class="text-xl font-bold mb-3 text-yellow-800">結果確定とポイント付与</h3>
                         <div class="space-y-3">
-                            <p class="font-semibold">対象イベント: ${t.title}</p>
-                            <select class="w-full p-2 border rounded-md disabled-action">
+                            <p class="font-semibold">対象コンペ: ${t.title}</p>
+                            <select class="w-full p-2 border rounded-lg disabled-action">
                                 <option>優勝者を選択...</option>
                                 ${t.players.map(p => `<option>${p.name}</option>`).join('')}
                             </select>
-                            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg disabled-action">結果確定 & ポイント付与 (UI)</button>
+                            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg shadow-md disabled-action">結果確定 & ポイント付与 (UI)</button>
                         </div>
                     </div>
                 </div>
@@ -523,8 +539,12 @@ NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機�
         const viewName = target.getAttribute('data-view');
         if (viewName) {
             window.navigate(viewName);
+        } else if (target.hasAttribute('onclick')) {
+            // onclick属性を持つ要素（ナビゲーションボタンなど）の処理
+            return;
         } else if (target.classList.contains('disabled-action')) {
-            alert('この機能はUI確認用のダミーです。データは保存されません。');
+            // alert('この機能はUI確認用のダミーです。データは保存されません。');
+            console.log('UI action disabled.');
         }
     });
 
