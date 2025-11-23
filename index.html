@@ -1,13 +1,9 @@
 <!-- 
 ================================================================================
-ゴルフ予想SNS MVP (Finalized)
-機能: 匿名認証, Firestoreデータ永続化, トーナメント予想, SNS投稿, 
-      スポンサー連携(タスクでポイント2倍インセンティブ), ポイント交換所, 管理ビュー
-      【追加】ポイントを使った「応援ギフト（投げ銭）」機能
-      【追加】出場選手とスポンサーへの投げ銭機能
-
-      【重要】このバージョンはGitHub Pages対応のためダミーのFirebase設定を含みます。
-      データ保存機能は動作しませんが、UIの確認は可能です。
+WIN Predict MVP (Finalized - STATIC UI VERSION)
+目的: UIデザインと画面構成の確認用。GitHub Pagesでのエラー回避を最優先。
+機能: 予想、SNS、タスクインセンティブ、ポイント交換所、管理画面のUI設計を表示。
+NOTE: データ保存、ポイント計算、画面遷移以外のJavaScript機能は無効化されています。
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -15,9 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WIN Predict - マルチスポーツ予想SNS MVP</title>
+    <title>WIN Predict - MVP UI</title>
     <!-- Tailwind CSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com/"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -31,46 +27,57 @@
             max-width: 420px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b;
+        }
+        .nav-item.active {
+            color: #4f46e5;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .disabled-action {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body class="p-2">
     <!-- メインコンテナ -->
     <div id="app" class="container-mobile mx-auto min-h-screen bg-white shadow-lg rounded-lg overflow-hidden">
-        <!-- ローディング/エラー表示エリア -->
-        <div id="loading-screen" class="flex flex-col items-center justify-center h-screen text-gray-500">
-            <svg class="animate-spin h-8 w-8 text-indigo-500 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 008-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 004 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <p>サービスを初期化中です...</p>
-        </div>
-        <div id="error-message" class="hidden p-8 text-center bg-red-100 text-red-700">
-            警告: データ機能は無効です。UI確認用にご利用ください。
-        </div>
         
-        <!-- コンテンツ表示エリア (初期化後にここに描画される) -->
-        <div id="content" class="hidden">
+        <!-- UI表示エリア -->
+        <div id="content">
             <!-- ナビゲーションバー (常に表示) -->
             <header class="sticky top-0 bg-white border-b border-gray-100 z-10 p-4 flex justify-between items-center">
-                <h1 class="text-2xl font-extrabold text-indigo-600 cursor-pointer" onclick="window.navigate('home')">WIN Predict</h1>
+                <h1 class="text-2xl font-extrabold text-indigo-600 cursor-pointer" data-view="home">WIN Predict</h1>
                 <div class="flex space-x-3 items-center">
-                    <button id="admin-view-btn" class="text-sm text-gray-500 hover:text-indigo-600" onclick="window.navigate('admin')">管理</button>
-                    <button onclick="window.navigate('mypage')" class="p-2 rounded-full bg-indigo-50 hover:bg-indigo-100 transition">
+                    <button class="text-sm text-gray-500 hover:text-indigo-600" data-view="admin">管理</button>
+                    <button data-view="mypage" class="p-2 rounded-full bg-indigo-50 hover:bg-indigo-100 transition">
                         <i data-lucide="user" class="h-6 w-6 text-indigo-600"></i>
                     </button>
                 </div>
             </header>
             
             <!-- メインビューがここに挿入される -->
-            <div id="view-container" class="p-4 pb-20"></div>
+            <div id="view-container" class="p-4 pb-20">
+                <!-- 初期コンテンツはここに挿入されます (Home View) -->
+            </div>
 
             <!-- ナビゲーションフッター -->
-            <footer id="nav-footer" class="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100 shadow-md flex justify-around p-3 container-mobile mx-auto hidden">
-                <button onclick="window.navigate('home')" class="nav-item">
+            <footer id="nav-footer" class="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100 shadow-md flex justify-around p-3 container-mobile mx-auto">
+                <button class="nav-item active" data-view="home">
                     <i data-lucide="home" class="h-6 w-6"></i>
                     <span class="text-xs">ホーム</span>
                 </button>
-                <button onclick="window.navigate('mypage')" class="nav-item">
+                <button class="nav-item" data-view="mypage">
                     <i data-lucide="award" class="h-6 w-6"></i>
                     <span class="text-xs">実績</span>
                 </button>
@@ -78,649 +85,453 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, query, where, getDocs, runTransaction, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+<script>
+    // ------------------------------------------------------------------------
+    // UI STATIC MODE SCRIPT
+    // NOTE: All Firebase and async logic are removed for stable UI display.
+    // ------------------------------------------------------------------------
 
-        // =========================================================================
-        // 1. グローバル変数と初期設定
-        // =========================================================================
-        let app, db, auth, storage;
-        let userId = 'default-user';
-        let appId = 'golfin-predict-mvp';
-        const DUMMY_MODE = true; // GitHub Pages用に強制的にダミーモードをONにする
+    const VIEWS = {
+        'home': renderHomeView,
+        'tournament-detail': renderTournamentPage,
+        'mypage': renderMyPageView,
+        'reward-store': renderRewardStore,
+        'item-store': renderItemStore,
+        'sponsor-page': renderSponsorPage,
+        'user-profile': renderUserProfilePage,
+        'admin': renderAdminPage
+    };
 
-        // ダミー設定（UI描画用 - プロジェクトIDを追加）
-        const firebaseConfig = { 
-            apiKey: "DUMMY_API_KEY",
-            projectId: "dummy-project-id", // UI描画のために必須
-            authDomain: "dummy.firebaseapp.com",
-            storageBucket: "dummy-bucket.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef0123456789abcdef",
-            measurementId: "G-XXXXXXXXXX"
-        };
-        const initialAuthToken = null;
-        
-        // コレクションパスを定義 (ダミー)
-        const getCollectionPath = (collectionName) => `/artifacts/${appId}/public/data/${collectionName}`;
+    let currentView = 'home';
+    const viewContainer = document.getElementById('view-container');
 
-        const tournamentsCol = getCollectionPath('tournaments');
-        const profilesCol = getCollectionPath('profiles');
-        const predictionsCol = getCollectionPath('predictions');
-        const postsCol = getCollectionPath('posts');
-        const userTasksCol = getCollectionPath('user_tasks');
-        const rewardsCol = getCollectionPath('rewards');
-        const itemsCol = getCollectionPath('items'); // アイテムストア用
+    // モックデータ (UI確認用)
+    const MOCK_DATA = {
+        userId: 'ui_mock_user_123',
+        userName: 'デモユーザー',
+        userPoints: 1500,
+        userHitRate: 45,
+        tournamentId: 't1',
+        tournaments: [
+            { id: 't1', title: '第1回 WIN Predict杯', sponsorName: 'GolfGear Pro', prizePool: 10000, status: 'voting', taskType: 'quiz_answer', players: [{ id: 'p1', name: '田中 太郎' }, { id: 'p2', name: '佐藤 花子' }, { id: 'p3', name: '山本 健太' }] },
+            { id: 't2', title: '欧州サッカー 優勝予想', sponsorName: 'Adidas', prizePool: 20000, status: 'upcoming', taskType: 'video_watch', players: [{ id: 'p4', name: 'FC Tokyo' }, { id: 'p5', name: 'Osaka Blue' }] },
+        ],
+        posts: [
+            { id: 'post1', userId: 'ui_mock_user_2', userName: '勝利の女神', text: '田中太郎選手、絶好調！今週も優勝間違いなし！ #WINPredict', player: '田中 太郎', likes: 15, isPrediction: true },
+            { id: 'post2', userId: 'ui_mock_user_3', userName: 'ゴルフ好き', text: '新しいシューズを買いました！ラウンド楽しみ！[写真]', player: null, likes: 5, isPrediction: false },
+        ],
+        rewards: [
+            { id: 'r1', name: 'Amazonギフトカード (1,000円)', cost: 500, imageUrl: 'https://placehold.co/100x100/FEF2F2/F87171?text=Amazon+Gift' },
+            { id: 'r2', name: '最新ゴルフボール (1ダース)', cost: 1200, imageUrl: 'https://placehold.co/100x100/DBEAFE/3B82F6?text=Golf+Ball' },
+        ],
+        items: [
+            { id: 'item1', name: '応援のバラ', cost: 10, icon: '🌹' },
+            { id: 'item2', name: '勝利のトロフィー', cost: 100, icon: '🏆' },
+        ],
+    };
 
-        // モックデータ (UI確認用)
-        let mockData = {
-            tournaments: [
-                { id: 't1', title: '第1回 WIN CUP (ゴルフ)', sponsorName: 'GolfGear Pro', prizePool: 10000, course: '富士カントリー', date: '2025-12-01', status: 'voting', winnerId: null, 
-                  taskType: 'quiz_answer', taskValue: 'このスポンサーのロゴカラーは？', taskAnswer: 'みどり',
-                  players: [{ id: 'p1', name: '田中 太郎' }, { id: 'p2', name: '佐藤 花子' }, { id: 'p3', name: '山本 健太' }] 
-                },
-                { id: 't2', title: 'eSports DOTA2 大会', sponsorName: 'Tech Giants', prizePool: 5000, course: 'オンライン', date: '2025-12-15', status: 'upcoming', winnerId: null,
-                  taskType: 'video_watch', taskValue: 'https://placehold.co/400x200/22C55E/white?text=Sponsor+Video', taskAnswer: null,
-                  players: [{ id: 'p4', name: 'Team Liquid' }, { id: 'p5', name: 'Evil Geniuses' }] 
-                },
-            ],
-            rewards: [
-                { id: 'r1', name: 'Amazonギフトカード (1,000円)', cost: 500, imageUrl: 'https://placehold.co/100x100/FEF2F2/F87171?text=Amazon+Gift' },
-                { id: 'r2', name: '最新ゴルフボール (1ダース)', cost: 1200, imageUrl: 'https://placehold.co/100x100/DBEAFE/3B82F6?text=Golf+Ball' },
-            ],
-            items: [ // 投げ銭用アイテム
-                { id: 'i1', name: '応援バラ', cost: 10, imageUrl: 'https://placehold.co/100x100/FF007F/FFFFFF?text=Rose', description: '小さな感謝を贈ります。' },
-                { id: 'i2', name: '優勝トロフィー', cost: 100, imageUrl: 'https://placehold.co/100x100/FFD700/000000?text=Trophy', description: '最高の予想に敬意を表します。' },
-            ],
-            dummyProfile: { name: '匿名ゴルファー (UI確認用)', totalPoints: 500, id: 'dummy-user-id', bio: 'UI確認用です。データは保存されません。' }
-        };
+    // ------------------------------------------------------------------------
+    // CORE NAVIGATION & UI FUNCTIONS
+    // ------------------------------------------------------------------------
 
-        // =========================================================================
-        // 2. 認証・初期化 (UI表示を保証するため、エラーを無視)
-        // =========================================================================
+    // グローバルナビゲーション関数
+    window.navigate = (viewName, params = {}) => {
+        currentView = viewName;
+        // ナビゲーションのactive状態を更新 (静的UI)
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        if (viewName === 'home') document.querySelector('[data-view="home"]').classList.add('active');
+        if (viewName === 'mypage') document.querySelector('[data-view="mypage"]').classList.add('active');
 
-        window.onload = async () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            const errorMessage = document.getElementById('error-message');
-            const content = document.getElementById('content');
-            
-            // UI表示を優先
-            loadingScreen.classList.add('hidden');
-            content.classList.remove('hidden');
-            document.getElementById('nav-footer').classList.remove('hidden');
-            
-            try {
-                // Firebase初期化を試行
-                app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                storage = getStorage(app);
-
-                // 認証処理 (エラーをキャッチし、userIdだけを確保)
-                try {
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                    userId = auth.currentUser?.uid || 'dummy-user-id';
-                } catch (e) {
-                    userId = 'dummy-user-id-fallback'; // 匿名サインイン失敗時
-                }
-                
-                // 初回描画
-                window.navigate('home');
-                
-            } catch (error) {
-                // Firebaseライブラリ読み込みや初期化自体の致命的な失敗
-                console.error("Firebase Initialization Failed (Ignored for UI):", error);
-                // エラーメッセージを表示しつつ、UI描画は継続
-                errorMessage.classList.remove('hidden');
-                errorMessage.textContent = '警告: データ機能は無効です。UI確認用にご利用ください。';
-                
-                // データ機能が使えないため、モックデータでUIをレンダリングする
-                window.navigate('home');
-            }
-        };
-
-        // =========================================================================
-        // 3. データ操作関数 (ダミーモード専用)
-        // =========================================================================
-        
-        const isDummyConfig = () => DUMMY_MODE;
-        const dummyAlert = (action) => alert(`警告: 現在UI確認モードのため、${action}は動作しません。`);
-
-        /** プロフィールを取得 (ダミー) */
-        const getProfile = async (id) => {
-             return mockData.dummyProfile;
-        };
-
-        /** タスク完了フラグを取得 (ダミー) */
-        const getTaskCompletion = async (tournamentId) => {
-            // ダミーでは常に未完了とすることで、タスク完了のUIをテスト可能
-            return false;
-        };
-        
-        /** タスクを完了状態に設定 (ダミー) */
-        const completeTask = async (tournamentId) => {
-            dummyAlert('タスク完了記録');
-            // ダミーでは完了とシミュレートし、UIを更新
-            return true;
-        };
-        
-        /** 予想と投稿をFirestoreに保存 (ダミー) */
-        const submitPrediction = async (tournamentId, predictedPlayerId, comment, imageUrl = null) => {
-            dummyAlert('予想投稿');
-            return true;
-        };
-
-        /** リワードの交換処理 (ダミー) */
-        window.handleExchangeReward = async (rewardId, cost) => {
-             dummyAlert(`リワード交換: ${rewardId} (${cost}pt)`);
-             return { success: false, message: '警告: ダミー設定のため交換は実行されません。' };
-        };
-        
-        /** 応援ギフト送信処理 (ダミー) */
-        window.handleSendGift = async (targetUserId, cost) => {
-            dummyAlert(`応援ギフト送信 (${targetUserId}へ ${cost}pt)`);
-            return true;
-        };
-        
-        /** アイテム購入処理 (ダミー) */
-        window.handleBuyItem = async (itemId, cost) => {
-            dummyAlert(`アイテム購入: ${itemId} (${cost}pt)`);
-            return true;
-        };
-        
-        /** 選手への応援ギフト送信処理 (ダミー) */
-        window.handleSendGiftToPlayer = async (tournamentId, playerId, cost) => {
-            dummyAlert(`選手への応援ギフト送信 (${playerId}へ ${cost}pt)`);
-            return true;
-        };
-        
-        /** スポンサーへの応援ギフト送信処理 (ダミー) */
-        window.handleSendGiftToSponsor = async (sponsorName, cost) => {
-            dummyAlert(`スポンサー (${sponsorName}) への応援ギフト送信 (${cost}pt)`);
-            return true;
-        };
-
-
-        // =========================================================================
-        // 4. UIルーティングとレンダリング
-        // =========================================================================
-
-        let currentView = 'home';
-
-        // グローバルにアクセスできるように window オブジェクトに設定
-        window.navigate = function(viewName, params = {}) {
-            currentView = viewName;
-            const viewContainer = document.getElementById('view-container');
+        // 対応するレンダリング関数を呼び出す
+        if (VIEWS[viewName]) {
             viewContainer.innerHTML = '';
-            
-            // ルーティング
-            switch (viewName) {
-                case 'home':
-                    renderHomePage(viewContainer);
-                    break;
-                case 'tournament':
-                    renderTournamentPage(viewContainer, params.id);
-                    break;
-                case 'sponsor':
-                    renderSponsorPage(viewContainer, params.id);
-                    break;
-                case 'mypage':
-                    renderMyPage(viewContainer);
-                    break;
-                case 'admin':
-                    renderAdminPage(viewContainer);
-                    break;
-                case 'userprofile':
-                    renderUserProfilePage(viewContainer, params.id);
-                    break;
-                case 'store':
-                    renderRewardStore(viewContainer);
-                    break;
-                case 'itemstore':
-                    renderItemStore(viewContainer);
-                    break;
-                default:
-                    renderHomePage(viewContainer);
-            }
-            // Lucideアイコンを再レンダリング
-            lucide.createIcons();
-            window.scrollTo(0, 0); // 画面トップへ移動
+            viewContainer.insertAdjacentHTML('beforeend', VIEWS[viewName](params));
+            // アイコンのレンダリングを強制
+            if (window.lucide) lucide.createIcons();
+        } else {
+            viewContainer.innerHTML = `<div class="p-8 text-center text-red-500">View not found: ${viewName}</div>`;
         }
+        window.scrollTo(0, 0);
+    };
 
-        // =========================================================================
-        // 5. 各ビューのレンダリング関数
-        // =========================================================================
+    // ------------------------------------------------------------------------
+    // VIEW RENDERING FUNCTIONS (STATIC HTML)
+    // ------------------------------------------------------------------------
 
-        /** ホーム画面 (トーナメント一覧) */
-        function renderHomePage(container) {
-            container.innerHTML = `
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">開催中の予想イベント</h2>
-                <p class="text-gray-600 mb-6">参加タスクは任意です。タスク完了で的中ポイント2倍のチャンス！</p>
-                <div id="tournament-list" class="space-y-4">
-                    <p class="text-center text-gray-500">UIデータをロード中...</p>
-                </div>
-            `;
-            
-            // ダミー設定の場合、モックデータで静的に表示
-            const events = mockData.tournaments;
-            const listHtml = events.map(t => `
-                <div class="bg-white p-4 border border-indigo-100 rounded-xl shadow-md flex justify-between items-center transition hover:shadow-lg">
-                    <div>
-                        <p class="text-xl font-bold text-indigo-700">${t.title} (UI確認用)</p>
-                        <p class="text-sm text-gray-500">${t.sponsorName} / 🏆 ${t.prizePool?.toLocaleString() || '---'}pt</p>
-                        <span class="inline-block mt-1 px-3 py-1 text-xs font-semibold rounded-full ${t.status === 'voting' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
-                            ${t.status === 'voting' ? '投票受付中' : '開催予定'}
-                        </span>
-                    </div>
-                    <button onclick="window.navigate('tournament', { id: '${t.id}' })" class="bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-600 transition">
-                        予想する
-                    </button>
-                </div>
-            `).join('');
-            document.getElementById('tournament-list').innerHTML = listHtml || '<p class="text-center text-gray-500 p-8">現在開催中のイベントはありません。</p>';
-            lucide.createIcons();
-        }
-        
-        /** トーナメント詳細画面 (投票とタイムライン) */
-        async function renderTournamentPage(container, tournamentId) {
-            container.innerHTML = '<p class="text-center text-gray-500">ロード中...</p>';
-            
-            const t = mockData.tournaments.find(mt => mt.id === tournamentId);
-            const isTaskCompleted = false; // ダミーでは常に未完了
+    function renderHomeView() {
+        return `
+            <div class="fade-in">
+                <h2 class="text-2xl font-bold mb-2">開催中の予想イベント</h2>
+                <p class="text-indigo-600 mb-6 font-semibold">
+                    参加タスクは任意です。タスク完了で的中ポイント2倍のチャンス！
+                </p>
 
-            container.innerHTML = `
-                <div class="space-y-6">
-                    <!-- 大会情報 -->
-                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
-                        <h2 class="text-3xl font-extrabold text-indigo-800 mb-2">${t.title} (UI確認用)</h2>
-                        <p class="text-md text-indigo-600 mb-1">主催: ${t.sponsorName}</p>
-                        <p class="text-sm text-gray-600">会場/場所: ${t.course} / 開催日: ${t.date}</p>
-                        <p class="text-sm font-bold text-green-700 mt-2">🏆 賞金総額: ${t.prizePool?.toLocaleString()}pt</p>
-                    </div>
-
-                    <!-- 予想フォーム -->
-                    <div id="prediction-section" class="bg-white p-5 rounded-xl shadow-lg border">
-                        <h3 class="text-xl font-bold mb-4 text-gray-800">🎯 優勝予想 (単勝)</h3>
-                        <div id="task-incentive-status">
-                            ${isTaskCompleted ? 
-                                `<p class="text-green-600 font-bold mb-3 flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-1"></i> タスク完了済み！的中時ポイント2倍確定！</p>` :
-                                `<p class="text-yellow-600 font-bold mb-3">タスク未完了: 的中時ポイント2倍のチャンスを逃しています！</p>
-                                 <button onclick="window.navigate('sponsor', { id: '${tournamentId}' })" class="text-indigo-600 hover:text-indigo-800 font-semibold mb-3 flex items-center">
-                                     <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> スポンサーのタスクを確認する →
-                                 </button>`
-                            }
-                        </div>
-                        <form id="prediction-form" class="space-y-4"></form>
-                    </div>
-
-                    <!-- 選手リスト (投げ銭用) -->
-                    <div class="p-4 bg-gray-50 rounded-xl border">
-                        <h3 class="text-xl font-bold mb-3 text-gray-800">🏆 出場選手・チームを応援</h3>
-                        <div class="space-y-2">
-                            ${t.players.map(p => `
-                                <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm border">
-                                    <span class="font-medium">${p.name}</span>
-                                    <button onclick="window.handleSendGiftToPlayer('${t.id}', '${p.id}', 10)" class="text-pink-600 hover:text-pink-700 text-sm font-semibold flex items-center">
-                                        <i data-lucide="heart" class="w-4 h-4 mr-1"></i> 応援ギフト (10pt)
-                                    </button>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- タイムライン -->
-                    <h3 class="text-2xl font-bold pt-4 border-t-2 mt-8 text-gray-800">💬 イベントタイムライン</h3>
-                    <div id="timeline" class="space-y-4">
-                        <p class="text-center text-red-500">データ機能がオフです。投稿は表示されません。</p>
-                        <!-- ダミー投稿を挿入 -->
-                        <div class="bg-white p-4 rounded-xl shadow border border-gray-100">
-                            <div class="flex justify-between items-start mb-2">
-                                <div class="flex items-center">
-                                    <i data-lucide="user" class="h-6 w-6 mr-2 text-gray-500"></i>
-                                    <button onclick="window.navigate('userprofile', { id: 'dummy-user-2' })" class="font-bold text-gray-800 hover:text-indigo-600">中島プロ</button>
-                                </div>
-                                <p class="text-xs text-gray-400">10分前</p>
-                            </div>
-                            <p class="font-bold text-indigo-600">🏆 ${t.players[0].name} に優勝予想</p>
-                            <p class="text-gray-700 my-2">今回はeSportsだけど、プレースタイルが安定してるから期待！</p>
-                            <div class="flex items-center mt-3 text-sm text-gray-500 border-t pt-2 space-x-4">
-                                <span class="flex items-center">
-                                    <i data-lucide="heart" class="h-4 w-4 mr-1"></i> 15
-                                </span>
-                                <button onclick="window.handleSendGift('dummy-user-2', 50)" class="flex items-center text-sm text-pink-600 hover:text-pink-700 font-bold transition">
-                                    <i data-lucide="send" class="h-4 w-4 mr-1"></i> 応援ギフト (50pt)
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // 予想フォームのレンダリング
-            const form = document.getElementById('prediction-form');
-            form.innerHTML = `
-                ${t.players.map(p => `
-                    <label class="flex items-center p-3 bg-gray-50 rounded-lg border cursor-pointer hover:bg-indigo-50 transition">
-                        <input type="radio" name="predictedPlayer" value="${p.id}" class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 mr-3">
-                        <span class="font-medium text-gray-700">${p.name}</span>
-                    </label>
-                `).join('')}
-                
-                <textarea id="comment-input" rows="2" placeholder="予想にコメントを添えてSNS投稿（任意）" class="w-full p-3 border rounded-lg focus:ring-indigo-500"></textarea>
-                
-                <div class="flex items-center space-x-2">
-                    <input type="file" id="photo-upload" accept="image/*" class="hidden">
-                    <button type="button" onclick="document.getElementById('photo-upload').click()" class="flex-shrink-0 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition">
-                        <i data-lucide="camera" class="w-5 h-5 mr-1 inline-block"></i> 写真を追加
-                    </button>
-                    <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" ${t.status !== 'voting' ? 'disabled' : ''}>
-                        ${t.status === 'voting' ? '予想を確定 & 投稿する' : '投票締切'}
-                    </button>
-                </div>
-            `;
-            
-            // 予想投稿処理 (ダミーアラート)
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                alert('警告: データ保存機能は無効です。UI確認用です。');
-                window.navigate('tournament', { id: tournamentId });
-            });
-        }
-        
-        /** スポンサーページ (タスク完了) */
-        async function renderSponsorPage(container, tournamentId) {
-            const t = mockData.tournaments.find(mt => mt.id === tournamentId);
-            const isTaskCompleted = false; // ダミーでは常に未完了
-
-            let taskContentHtml = '';
-            let isCompleted = isTaskCompleted;
-
-            if (t.taskType === 'quiz_answer') {
-                taskContentHtml = `
-                    <h3 class="text-xl font-bold mb-3 text-indigo-700">クイズに回答してボーナスポイント獲得</h3>
-                    <p class="mb-4">${t.taskValue}</p>
-                    <input type="text" id="quiz-answer" placeholder="回答を入力" class="w-full p-3 border rounded-lg mb-4 focus:ring-indigo-500">
-                    <button id="task-complete-btn" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" ${isCompleted ? 'disabled' : ''}>
-                        ${isCompleted ? 'タスク完了済み' : '回答を送信'}
-                    </button>
-                `;
-            } else if (t.taskType === 'video_watch') {
-                taskContentHtml = `
-                    <h3 class="text-xl font-bold mb-3 text-indigo-700">プロモ動画を視聴してボーナスポイント獲得</h3>
-                    <div class="aspect-video bg-gray-300 rounded-lg flex items-center justify-center mb-4">
-                        <p class="text-gray-600">動画プレイヤー (${t.taskValue})</p>
-                    </div>
-                    <button id="task-complete-btn" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" ${isCompleted ? 'disabled' : ''}>
-                        ${isCompleted ? 'タスク完了済み' : '動画を最後まで視聴'}
-                    </button>
-                `;
-            }
-
-
-            container.innerHTML = `
-                <button onclick="window.navigate('tournament', { id: '${tournamentId}' })" class="text-indigo-600 hover:underline mb-4 flex items-center">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> イベント詳細に戻る
-                </button>
-                
-                <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 space-y-6">
-                    <h2 class="text-3xl font-extrabold text-gray-900 mb-4">${t.sponsorName} - スポンサーページ</h2>
-                    <p class="text-gray-600">このイベントは${t.sponsorName}様の提供でお送りしています。タスクを完了してボーナスポイントをゲットしましょう。</p>
-
-                    <!-- タスクエリア -->
-                    <div id="task-area" class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
-                        ${taskContentHtml}
-                    </div>
-
-                    <!-- スポンサー紹介 -->
-                    <div class="pt-4 border-t">
-                        <h3 class="text-2xl font-bold mb-3">企業紹介</h3>
-                        <p class="text-gray-700">最高の体験を提供するために、私たちは常に革新的な製品を開発しています。</p>
-                        <img src="https://placehold.co/400x150/000000/FFFFFF?text=${t.sponsorName}+Logo" alt="スポンサーロゴ" class="w-full rounded-lg mt-3">
-                    </div>
-                    
-                    <!-- スポンサーへの投げ銭 -->
-                    <div class="pt-4 border-t">
-                        <h3 class="text-2xl font-bold mb-3">企業を応援</h3>
-                        <p class="text-gray-700 mb-3">感謝の気持ちを込めて応援ギフトを贈りましょう。</p>
-                        <button onclick="window.handleSendGiftToSponsor('${t.sponsorName}', 50)" class="bg-pink-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-600 transition flex items-center justify-center">
-                            <i data-lucide="send" class="w-5 h-5 mr-2"></i> 応援ギフトを贈る (50pt)
-                        </button>
-                    </div>
-                </div>
-            `;
-            lucide.createIcons();
-            
-            // イベントリスナーの再設定 (DOM挿入後)
-            const taskCompleteBtn = document.getElementById('task-complete-btn');
-            if (taskCompleteBtn && !isCompleted) {
-                if (t.taskType === 'quiz_answer') {
-                    taskCompleteBtn.addEventListener('click', async () => {
-                        const answerInput = document.getElementById('quiz-answer');
-                        const answer = answerInput ? answerInput.value.trim().toLowerCase() : '';
-                        
-                        const normalizedAnswer = answer.replace(/色/g, '').toLowerCase();
-                        const correctAnswers = ['みどり', '緑', 'グリーン'];
-
-                        if (correctAnswers.includes(normalizedAnswer)) {
-                            alert('正解！タスク完了がシミュレートされました。');
-                            // ダミーでは完了とシミュレートし、UIを更新
-                            window.navigate('tournament', { id: tournamentId });
-                        } else {
-                            alert('不正解です。もう一度お試しください。');
-                        }
-                    });
-                } else if (t.taskType === 'video_watch') {
-                    taskCompleteBtn.addEventListener('click', async () => {
-                        alert('視聴完了！タスク完了がシミュレートされました。');
-                        window.navigate('tournament', { id: tournamentId });
-                    });
-                }
-            }
-        }
-
-        /** マイページ (実績とポイント) */
-        async function renderMyPage(container) {
-            const profile = mockData.dummyProfile; // ダミープロフィールを使用
-            
-            // ダミーデータ
-            const totalPredictions = 5;
-            const correctPredictions = 2;
-            const hitRate = (correctPredictions / totalPredictions * 100).toFixed(1);
-
-            container.innerHTML = `
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">マイページ</h2>
-                
-                <!-- サマリー -->
-                <div class="bg-indigo-600 p-6 rounded-xl text-white shadow-xl mb-6">
-                    <p class="text-sm">ようこそ、</p>
-                    <p class="text-3xl font-extrabold mb-4">${profile?.name || '---'}さん</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="window.navigate('store')" class="flex-grow bg-white text-indigo-600 font-bold py-2 px-4 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
-                            <i data-lucide="gift" class="w-5 h-5 mr-2"></i> リワード交換所へ
-                        </button>
-                        <button onclick="window.navigate('itemstore')" class="flex-grow bg-white text-indigo-600 font-bold py-2 px-4 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
-                            <i data-lucide="package" class="w-5 h-5 mr-2"></i> アイテム購入ストアへ
-                        </button>
-                    </div>
-                </div>
-
-                <!-- ステータスカード -->
-                <div class="grid grid-cols-3 gap-3 mb-6">
-                    <div class="bg-white p-4 rounded-xl shadow border text-center">
-                        <p class="text-xs text-gray-500">累計ポイント</p>
-                        <p class="text-2xl font-extrabold text-indigo-700">${profile?.totalPoints?.toLocaleString() || 0}pt</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl shadow border text-center">
-                        <p class="text-xs text-gray-500">的中率</p>
-                        <p class="text-2xl font-extrabold text-green-600">${hitRate}%</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-xl shadow border text-center">
-                        <p class="text-xs text-gray-500">予想回数</p>
-                        <p class="text-2xl font-extrabold">${totalPredictions}</p>
-                    </div>
-                </div>
-
-                <!-- 予想履歴 -->
-                <h3 class="text-2xl font-bold mb-4 pt-4 border-t">予想履歴 (${totalPredictions}件)</h3>
-                <div id="prediction-history" class="space-y-3">
-                    <p class="text-center text-red-500 p-8">ダミー設定のため投稿履歴は表示されません。</p>
-                </div>
-            `;
-            
-            const historyContainer = document.getElementById('prediction-history');
-            const historyHtml = `<div class="bg-white p-4 rounded-xl shadow border">
-                <p class="font-semibold text-gray-800">第1回 WIN CUP (ゴルフ)</p>
-                <p class="text-sm text-gray-600">予想: 田中 太郎</p>
-                <p class="text-sm font-semibold text-indigo-600 mt-1">結果待ち</p>
-            </div>`;
-            historyContainer.innerHTML = historyHtml;
-            lucide.createIcons();
-        }
-        
-        /** ポイント交換所 */
-        async function renderRewardStore(container) {
-            const profile = mockData.dummyProfile;
-            const currentPoints = profile?.totalPoints || 0;
-
-            container.innerHTML = `
-                <button onclick="window.navigate('mypage')" class="text-indigo-600 hover:underline mb-4 flex items-center">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> マイページに戻る
-                </button>
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">リワード交換所</h2>
-                
-                <div class="bg-green-100 p-4 rounded-xl border border-green-300 mb-6 text-center">
-                    <p class="text-sm text-green-800">現在のポイント残高</p>
-                    <p class="text-4xl font-extrabold text-green-700">${currentPoints.toLocaleString()}pt</p>
-                </div>
-                <p class="text-center text-red-500 p-4">警告: UI確認モードのため、交換ボタンは動作しません。</p>
-                <div id="rewards-list" class="grid grid-cols-2 gap-4">
-                    ${mockData.rewards.map(r => {
-                        const canAfford = currentPoints >= r.cost;
-                        return `
-                            <div class="bg-white rounded-xl shadow border overflow-hidden transition hover:shadow-lg flex flex-col">
-                                <img src="${r.imageUrl}" alt="${r.name}" class="w-full h-24 object-cover">
-                                <div class="p-3 flex flex-col flex-grow">
-                                    <p class="font-semibold text-gray-800 flex-grow">${r.name}</p>
-                                    <p class="text-lg font-bold text-indigo-600 mt-2">${r.cost.toLocaleString()}pt</p>
-                                    <button onclick="window.handleExchangeReward('${r.id}', ${r.cost})" class="w-full py-2 mt-3 rounded-lg text-white font-bold transition ${canAfford ? 'bg-indigo-500 hover:bg-indigo-600' : 'bg-gray-400 cursor-not-allowed'}" ${!canAfford ? 'disabled' : ''}>
-                                        ${canAfford ? '交換する' : 'ポイント不足'}
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-            lucide.createIcons();
-        }
-        
-        /** アイテム購入ストア */
-        async function renderItemStore(container) {
-            const profile = mockData.dummyProfile;
-            const currentPoints = profile?.totalPoints || 0;
-
-            container.innerHTML = `
-                <button onclick="window.navigate('mypage')" class="text-indigo-600 hover:underline mb-4 flex items-center">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> マイページに戻る
-                </button>
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">アイテム購入ストア (投げ銭用)</h2>
-                
-                <div class="bg-pink-100 p-4 rounded-xl border border-pink-300 mb-6 text-center">
-                    <p class="text-sm text-pink-800">現在のポイント残高</p>
-                    <p class="text-4xl font-extrabold text-pink-700">${currentPoints.toLocaleString()}pt</p>
-                </div>
-                <p class="text-center text-red-500 p-4">警告: UI確認モードのため、購入ボタンは動作しません。</p>
-                <div id="items-list" class="grid grid-cols-2 gap-4">
-                    ${mockData.items.map(item => {
-                        const canAfford = currentPoints >= item.cost;
-                        return `
-                            <div class="bg-white rounded-xl shadow border overflow-hidden transition hover:shadow-lg flex flex-col">
-                                <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-24 object-cover">
-                                <div class="p-3 flex flex-col flex-grow">
-                                    <p class="font-semibold text-gray-800">${item.name}</p>
-                                    <p class="text-xs text-gray-500 mb-2">${item.description}</p>
-                                    <p class="text-lg font-bold text-pink-600 mt-auto">${item.cost.toLocaleString()}pt</p>
-                                    <button onclick="window.handleBuyItem('${item.id}', ${item.cost})" class="w-full py-2 mt-3 rounded-lg text-white font-bold transition ${canAfford ? 'bg-pink-500 hover:bg-pink-600' : 'bg-gray-400 cursor-not-allowed'}" ${!canAfford ? 'disabled' : ''}>
-                                        ${canAfford ? '購入する (ポイント消費)' : 'ポイント不足'}
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-            lucide.createIcons();
-        }
-
-
-        /** ユーザープロフィール画面 */
-        async function renderUserProfilePage(container, targetUserId) {
-            const profile = mockData.dummyProfile;
-            
-            container.innerHTML = `
-                <button onclick="window.navigate('home')" class="text-indigo-600 hover:underline mb-4 flex items-center">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> ホームに戻る
-                </button>
-                <div class="p-6 bg-white rounded-xl shadow-lg border space-y-6">
-                    <div class="flex items-center space-x-4 border-b pb-4">
-                        <i data-lucide="user-circle" class="h-12 w-12 text-indigo-500"></i>
+                ${MOCK_DATA.tournaments.map(t => `
+                    <div class="bg-white p-4 border rounded-lg shadow-md mb-4 flex justify-between items-center">
                         <div>
-                            <h2 class="text-3xl font-extrabold text-gray-900">${profile.name}</h2>
-                            <p class="text-sm text-gray-600">累計ポイント: ${profile.totalPoints?.toLocaleString() || 0}pt</p>
+                            <h3 class="text-lg font-bold">${t.title} (UI確認用)</h3>
+                            <p class="text-sm text-gray-500">${t.sponsorName} / 🏆 ${t.prizePool}pt</p>
+                            <span class="text-xs font-semibold px-2 py-0.5 mt-1 rounded-full ${t.status === 'voting' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">
+                                ${t.status === 'voting' ? '投票受付中' : '開催予定'}
+                            </span>
+                        </div>
+                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition" 
+                            onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
+                            予想する
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function renderTournamentPage(params) {
+        const t = MOCK_DATA.tournaments.find(t => t.id === params.id) || MOCK_DATA.tournaments[0];
+        const isTaskCompleted = false; // UI確認用
+        const predictionMade = false; // UI確認用
+        
+        return `
+            <div class="fade-in">
+                <h2 class="text-2xl font-bold mb-4">${t.title}</h2>
+                <div class="mb-6 p-4 bg-gray-50 border rounded-lg">
+                    <p class="text-sm text-gray-600">スポンサー: <strong>${t.sponsorName}</strong></p>
+                    <p class="text-sm text-gray-600">賞金プール: <strong>${t.prizePool}pt</strong></p>
+                    <p class="text-sm text-gray-600">状態: <strong>${t.status === 'voting' ? '投票受付中' : '開催予定'}</strong></p>
+                </div>
+                
+                <!-- 参加登録セクション -->
+                <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <h3 class="text-lg font-bold text-blue-800 flex items-center mb-2">
+                        <i data-lucide="users" class="h-5 w-5 mr-2"></i>イベント参加（コンペ幹事・参加者向け）
+                    </h3>
+                    <p class="text-sm mb-3">このイベントに参加登録し、アプリでスコア集計を行うことができます。</p>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm disabled-action">参加登録する (UI)</button>
+                    ${!isTaskCompleted ? `<p class="mt-2 text-sm text-blue-600 font-semibold">（参加登録後はスコア入力が可能になります）</p>` : ''}
+                </div>
+
+                <!-- 予想フォーム -->
+                <div class="p-4 border rounded-lg shadow-sm bg-white mb-8">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        🏆 優勝予想を投稿する
+                    </h3>
+                    
+                    <!-- インセンティブバナー -->
+                    ${!isTaskCompleted ? `
+                        <div class="bg-yellow-100 text-yellow-800 p-3 rounded-md mb-4 text-sm font-semibold flex justify-between items-center">
+                            <span>✨ タスク完了で的中ポイントが2倍に！</span>
+                            <button class="text-indigo-600 underline" onclick="window.navigate('sponsor-page', { id: '${t.id}' })">確認する →</button>
+                        </div>
+                    ` : `<p class="text-green-600 font-semibold mb-4 flex items-center"><i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>ポイント2倍ボーナス有効です！</p>`}
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${t.players.map(p => `
+                            <label class="p-2 border rounded-full cursor-pointer bg-gray-100 text-gray-700 hover:bg-indigo-50 transition">
+                                <input type="radio" name="player" value="${p.id}" class="hidden" />
+                                ${p.name}
+                            </label>
+                        `).join('')}
+                    </div>
+                    
+                    <textarea placeholder="予想に一言コメントを追加 (任意)" rows="2" class="w-full p-2 border rounded-md mb-4 focus:ring-indigo-500"></textarea>
+                    
+                    <div class="flex space-x-2 mb-4">
+                        <input type="file" accept="image/*" class="w-full text-sm border p-1 rounded-md" disabled>
+                        <button class="bg-gray-400 text-white px-3 py-1 rounded-md text-sm disabled-action"><i data-lucide="image" class="h-4 w-4"></i></button>
+                    </div>
+
+                    <button class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">予想を確定 & 投稿する (UI)</button>
+                </div>
+
+                <!-- タイムライン -->
+                <h3 class="text-xl font-bold mt-8 mb-4 border-b pb-2">リアルタイム 予想タイムライン</h3>
+                ${MOCK_DATA.posts.map(p => `
+                    <div class="p-4 border rounded-lg mb-3 bg-white">
+                        <div class="flex items-center mb-2">
+                            <div class="bg-indigo-200 h-8 w-8 rounded-full mr-3"></div>
+                            <span class="font-semibold text-sm cursor-pointer" onclick="window.navigate('user-profile', { userId: '${p.userId}' })">${p.userName}</span>
+                        </div>
+                        ${p.isPrediction ? `<p class="text-sm font-semibold text-indigo-600 mb-1">🎯 ${p.player} に優勝を予想</p>` : ''}
+                        <p class="text-gray-800">${p.text}</p>
+                        ${p.player === null ? `<div class="mt-3"><img src="https://placehold.co/100x100/A7F3D0/065F46?text=Photo" alt="投稿写真" class="rounded-lg w-24 h-24 object-cover"></div>` : ''}
+                        
+                        <div class="flex justify-between items-center mt-3 pt-3 border-t text-sm text-gray-500">
+                            <div class="flex space-x-3">
+                                <span class="cursor-pointer hover:text-red-500"><i data-lucide="heart" class="h-4 w-4 inline mr-1"></i> ${p.likes}</span>
+                                <span class="cursor-pointer hover:text-indigo-500"><i data-lucide="message-square" class="h-4 w-4 inline mr-1"></i> 3</span>
+                            </div>
+                            <button class="text-green-600 font-semibold disabled-action"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援ギフト (UI)</button>
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold mb-3">自己紹介</h3>
-                    <p class="text-gray-700 p-3 bg-gray-50 rounded-lg">${profile.bio || '自己紹介文はありません。'}</p>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    function renderSponsorPage(params) {
+        const t = MOCK_DATA.tournaments.find(t => t.id === params.id) || MOCK_DATA.tournaments[0];
+        const isTaskCompleted = false; // UI確認用
+        const taskType = t.taskType || 'quiz_answer';
+        const taskValue = "このブランドの創業者の出身地は？";
+        
+        let taskContent = '';
+        let taskTitle = '';
 
-                    <h3 class="text-xl font-bold pt-4 border-t">投稿履歴 (0件)</h3>
-                    <div id="user-posts" class="space-y-4">
-                        <p class="text-center text-red-500 p-8">ダミー設定のため投稿履歴は表示されません。</p>
+        if (taskType === 'quiz_answer') {
+            taskTitle = 'クイズに回答してボーナスをゲット！';
+            taskContent = `
+                <p><strong>${taskValue}</strong></p>
+                <input type="text" placeholder="回答を入力" class="w-full p-2 border rounded-md my-4 focus:ring-indigo-500 disabled-action">
+                <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">回答を送信 (UI)</button>
+            `;
+        } else if (taskType === 'video_watch') {
+            taskTitle = '動画を視聴してボーナスをゲット！';
+            taskContent = `
+                <div class="w-full bg-gray-200 h-40 flex items-center justify-center rounded-lg my-4">
+                    <i data-lucide="play-circle" class="h-10 w-10 text-gray-500"></i>
+                </div>
+                <p class="text-sm text-gray-600">動画を最後まで視聴するとタスク完了となります。</p>
+                <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg disabled-action">動画を視聴完了 (UI)</button>
+            `;
+        }
+
+        return `
+            <div class="fade-in">
+                <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('tournament-detail', { id: '${t.id}' })">
+                    <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> イベント詳細に戻る
+                </button>
+                <h2 class="text-2xl font-bold mb-4">${t.sponsorName} - スポンサーページ</h2>
+                
+                <p class="mb-6">この大会は${t.sponsorName}様の提供でお送りしています。タスクを完了して的中ボーナスをゲットしましょう。</p>
+
+                <!-- タスクエリア -->
+                <div class="p-5 border rounded-lg mb-8 ${isTaskCompleted ? 'bg-green-50' : 'bg-indigo-50 border-indigo-200'}">
+                    <h3 class="text-xl font-bold ${isTaskCompleted ? 'text-green-700' : 'text-indigo-700'} flex items-center mb-3">
+                        ${isTaskCompleted ? '<i data-lucide="check-circle" class="h-6 w-6 mr-2"></i> タスク完了済み' : '<i data-lucide="list-check" class="h-6 w-6 mr-2"></i> ' + taskTitle}
+                    </h3>
+                    ${isTaskCompleted ? 
+                        '<p>ボーナスは有効です！予想に戻って投票しましょう。</p>' : 
+                        taskContent
+                    }
+                </div>
+                
+                <!-- 企業への投げ銭 -->
+                <h3 class="text-lg font-bold mt-6 mb-3">🤝 スポンサーを応援する</h3>
+                <p class="text-sm mb-3">応援ギフトを贈ることで、スポンサー企業に感謝の気持ちを伝えられます。</p>
+                <button class="text-indigo-600 font-semibold disabled-action"><i data-lucide="gift" class="h-5 w-5 inline"></i> 応援ギフトを贈る (UI)</button>
+
+                <!-- 企業紹介 -->
+                <h3 class="text-lg font-bold mt-8 mb-3 border-t pt-4">企業紹介</h3>
+                <p class="text-gray-700">最高のゴルフ体験を提供するために、私たちは常に革新的なギアとサービスを開発しています。ブランドのビジョンや製品ラインナップについて、ぜひご覧ください。</p>
+            </div>
+        `;
+    }
+
+    function renderMyPageView() {
+        const totalPredictions = 22; // UI確認用
+        const correctPredictions = 10; // UI確認用
+        const hitRate = (correctPredictions / totalPredictions * 100).toFixed(1) || '0.0';
+
+        return `
+            <div class="fade-in">
+                <h2 class="text-2xl font-bold mb-6">マイページ / 実績</h2>
+
+                <!-- ユーザーサマリー -->
+                <section class="p-4 bg-indigo-50 border border-indigo-200 rounded-lg mb-8">
+                    <p class="text-xl font-semibold mb-2">${MOCK_DATA.userName}さん</p>
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="p-2 bg-white rounded-md shadow-sm">
+                            <p class="text-xs text-gray-500">累計ポイント</p>
+                            <p class="text-2xl font-extrabold text-indigo-600">${MOCK_DATA.userPoints.toLocaleString()}pt</p>
+                        </div>
+                        <div class="p-2 bg-white rounded-md shadow-sm">
+                            <p class="text-xs text-gray-500">的中率</p>
+                            <p class="text-2xl font-extrabold text-green-600">${hitRate}%</p>
+                        </div>
+                        <div class="p-2 bg-white rounded-md shadow-sm">
+                            <p class="text-xs text-gray-500">予想回数</p>
+                            <p class="text-2xl font-extrabold">${totalPredictions}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ポイントの使い道 -->
+                <h3 class="text-xl font-bold mb-3">💰 ポイントの使い道</h3>
+                <div class="flex space-x-4 mb-8">
+                    <button class="flex-1 bg-red-500 text-white font-semibold p-3 rounded-lg flex flex-col items-center disabled-action" onclick="window.navigate('reward-store')">
+                        <i data-lucide="gift" class="h-6 w-6 mb-1"></i>
+                        <span>リワード交換所へ</span>
+                    </button>
+                    <button class="flex-1 bg-yellow-500 text-white font-semibold p-3 rounded-lg flex flex-col items-center disabled-action" onclick="window.navigate('item-store')">
+                        <i data-lucide="shopping-cart" class="h-6 w-6 mb-1"></i>
+                        <span>アイテム購入ストアへ</span>
+                    </button>
+                </div>
+
+                <!-- 予想履歴セクション -->
+                <section>
+                    <h2 class="text-xl font-bold mb-3">予想履歴 (UI)</h2>
+                    <p class="text-sm text-gray-600">ここに過去の予想と結果が表示されます。</p>
+                </section>
+            </div>
+        `;
+    }
+    
+    function renderRewardStore() {
+        return `
+            <div class="fade-in">
+                <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('mypage')">
+                    <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> マイページに戻る
+                </button>
+                <h2 class="text-2xl font-bold mb-6">ポイント交換所 (リワードストア)</h2>
+                
+                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-6 flex justify-between items-center">
+                    <p class="text-sm text-yellow-800">現在の残高:</p>
+                    <p class="text-2xl font-extrabold text-yellow-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    ${MOCK_DATA.rewards.map(r => `
+                        <div class="p-3 border rounded-lg shadow-sm bg-white flex flex-col items-center text-center">
+                            <img src="${r.imageUrl}" alt="${r.name}" class="w-20 h-20 rounded-lg mb-2 object-cover">
+                            <p class="text-sm font-semibold mb-1">${r.name}</p>
+                            <p class="text-lg font-bold text-indigo-600 mb-3">${r.cost.toLocaleString()} pt</p>
+                            <button class="w-full bg-red-500 text-white text-sm font-semibold py-2 rounded-lg disabled-action">交換する (UI)</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    function renderItemStore() {
+        return `
+            <div class="fade-in">
+                <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('mypage')">
+                    <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> マイページに戻る
+                </button>
+                <h2 class="text-2xl font-bold mb-6">アイテム購入ストア (投げ銭用)</h2>
+                
+                <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mb-6 flex justify-between items-center">
+                    <p class="text-sm text-yellow-800">現在の残高:</p>
+                    <p class="text-2xl font-extrabold text-yellow-700">${MOCK_DATA.userPoints.toLocaleString()} pt</p>
+                </div>
+                <p class="text-sm mb-4 text-gray-600">購入したアイテムは、投稿者、選手、スポンサーへの応援ギフトとして使用できます。</p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    ${MOCK_DATA.items.map(i => `
+                        <div class="p-3 border rounded-lg shadow-sm bg-white flex flex-col items-center text-center">
+                            <div class="text-5xl my-2">${i.icon}</div>
+                            <p class="text-sm font-semibold mb-1">${i.name}</p>
+                            <p class="text-lg font-bold text-red-500 mb-3">${i.cost.toLocaleString()} pt</p>
+                            <button class="w-full bg-indigo-600 text-white text-sm font-semibold py-2 rounded-lg disabled-action">購入する (UI)</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderUserProfilePage(params) {
+        const userName = MOCK_DATA.posts[0].userName; // UI確認用
+        return `
+            <div class="fade-in">
+                <button class="text-indigo-600 mb-4 flex items-center" onclick="window.navigate('tournament-detail', { id: MOCK_DATA.tournamentId })">
+                    <i data-lucide="arrow-left" class="h-5 w-5 mr-1"></i> 戻る
+                </button>
+                <h2 class="text-2xl font-bold mb-6">${userName}さんのプロフィール</h2>
+
+                <div class="p-4 bg-white border rounded-lg shadow-sm mb-6 flex items-center">
+                    <div class="bg-indigo-300 h-16 w-16 rounded-full mr-4"></div>
+                    <div>
+                        <p class="text-xl font-bold">${userName}</p>
+                        <p class="text-sm text-gray-500">予想回数: 15回 | 的中率: 33%</p>
+                        <p class="text-sm text-gray-700 mt-1">「週末ゴルファー。飛距離重視。」</p>
                     </div>
                 </div>
-            `;
-            lucide.createIcons();
-        }
 
+                <h3 class="text-xl font-bold mb-3 border-b pb-1">最近の投稿</h3>
+                ${MOCK_DATA.posts.map(p => `
+                    <div class="p-3 border rounded-lg mb-3 bg-white">
+                        <p class="text-sm font-semibold text-indigo-600 mb-1">🎯 ${p.player} に予想</p>
+                        <p class="text-gray-800">${p.text}</p>
+                        <div class="flex justify-end mt-3 text-sm text-gray-500">
+                            <span class="mr-3"><i data-lucide="heart" class="h-4 w-4 inline mr-1"></i> ${p.likes}</span>
+                            <span class="cursor-pointer hover:text-green-600"><i data-lucide="gift" class="h-4 w-4 inline"></i> 応援する</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
 
-        /** 管理画面 (結果確定とポイント付与) */
-        async function renderAdminPage(container) {
-            container.innerHTML = `
-                <h2 class="text-3xl font-extrabold text-red-700 mb-6">⚙️ 管理者ビュー</h2>
-                <p class="text-center text-red-500 p-4">警告: UI確認モードのため、機能は動作しません。UIのみ確認可能です。</p>
-                <div id="admin-list" class="space-y-4">
-                    <p class="text-center text-gray-500">ロード中...</p>
+    function renderAdminPage() {
+        const t = MOCK_DATA.tournaments[0];
+        return `
+            <div class="fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-red-700">管理者コンソール</h2>
+                <div class="bg-red-50 border border-red-200 p-3 rounded-lg mb-6">
+                    <p class="text-sm text-red-800 font-semibold">⚠️ 注意: この画面は運営管理者専用です。すべての操作はUI確認用のダミーです。</p>
                 </div>
-            `;
-            
-            const events = mockData.tournaments;
-            const listHtml = events.map(t => `
-                <div class="bg-white p-4 rounded-xl shadow border">
-                    <p class="text-xl font-bold">${t.title} (UI確認用)</p>
-                    <p class="text-gray-600 mt-1">結果確定はシミュレーションのみ可能です。</p>
-                    
-                    <form onsubmit="alert('警告: UI確認モードです。結果確定処理は動作しません。'); return false;" class="mt-3 space-y-2">
-                        <select name="winnerId" class="w-full p-2 border rounded-lg">
-                            <option value="">--- 優勝者を選択 ---</option>
-                            ${t.players?.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
-                        </select>
-                        <button type="submit" class="w-full bg-gray-400 text-white font-bold py-2 rounded-lg cursor-not-allowed">
-                            結果を確定しポイント付与 (シミュレーション)
-                        </button>
-                    </form>
-                </div>
-            `).join('');
-            document.getElementById('admin-list').innerHTML = listHtml;
-        }
 
-    </script>
+                <div class="space-y-6">
+                    <!-- 新規イベント作成 (UI) -->
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="text-xl font-bold mb-3">新規イベント作成 (UI)</h3>
+                        <div class="space-y-3">
+                            <input type="text" placeholder="イベント名" class="w-full p-2 border rounded-md disabled-action">
+                            <input type="text" placeholder="スポンサー名" class="w-full p-2 border rounded-md disabled-action">
+                            <select class="w-full p-2 border rounded-md disabled-action">
+                                <option>クイズ回答 (ポイント2倍タスク)</option>
+                                <option>動画視聴 (ポイント2倍タスク)</option>
+                            </select>
+                            <textarea placeholder="出場選手名 (カンマ区切り)" rows="3" class="w-full p-2 border rounded-md disabled-action"></textarea>
+                            <button class="w-full bg-red-600 text-white py-2 rounded-lg disabled-action">イベントを作成 (UI)</button>
+                        </div>
+                    </div>
+
+                    <!-- 結果確定とポイント付与 -->
+                    <div class="p-4 border rounded-lg bg-yellow-50">
+                        <h3 class="text-xl font-bold mb-3 text-yellow-800">結果確定とポイント付与</h3>
+                        <div class="space-y-3">
+                            <p class="font-semibold">対象イベント: ${t.title}</p>
+                            <select class="w-full p-2 border rounded-md disabled-action">
+                                <option>優勝者を選択...</option>
+                                ${t.players.map(p => `<option>${p.name}</option>`).join('')}
+                            </select>
+                            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg disabled-action">結果確定 & ポイント付与 (UI)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // ------------------------------------------------------------------------
+    // INITIALIZATION
+    // ------------------------------------------------------------------------
+    
+    // UIのレンダリングをすぐに開始
+    document.addEventListener('DOMContentLoaded', () => {
+        window.navigate('home');
+    });
+
+    // すべてのボタンクリックはダミー処理 (GitHub Pages対応)
+    document.getElementById('app').addEventListener('click', (e) => {
+        const target = e.target.closest('button, h1');
+        if (!target) return;
+
+        const viewName = target.getAttribute('data-view');
+        if (viewName) {
+            window.navigate(viewName);
+        } else if (target.classList.contains('disabled-action')) {
+            alert('この機能はUI確認用のダミーです。データは保存されません。');
+        }
+    });
+
+    // ダミーアラート関数 (ブラウザの alert() を避けるため)
+    window.alert = (msg) => console.log('UI Alert:', msg);
+
+
+</script>
 </body>
 </html>
