@@ -1,0 +1,937 @@
+{\rtf1\ansi\ansicpg932\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red109\green115\blue120;\red23\green24\blue24;\red202\green202\blue202;
+\red70\green137\blue204;\red140\green211\blue254;\red109\green109\blue109;\red194\green126\blue101;\red183\green111\blue247;
+\red212\green212\blue212;\red113\green192\blue131;\red167\green197\blue152;\red54\green192\blue160;\red246\green124\blue48;
+\red163\green79\blue131;}
+{\*\expandedcolortbl;;\cssrgb\c50196\c52549\c54510;\cssrgb\c11765\c12157\c12549;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c33725\c61176\c83922;\cssrgb\c61176\c86275\c99608;\cssrgb\c50196\c50196\c50196;\cssrgb\c80784\c56863\c47059;\cssrgb\c77255\c54118\c97647;
+\cssrgb\c86275\c86275\c86275;\cssrgb\c50588\c78824\c58431;\cssrgb\c70980\c80784\c65882;\cssrgb\c23922\c78824\c69020;\cssrgb\c98039\c56471\c24314;
+\cssrgb\c70588\c40000\c58431;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!-- \cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 ================================================================================\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 \uc0\u12468 \u12523 \u12501 \u20104 \u24819 SNS MVP (Finalized)\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 \uc0\u27231 \u33021 : \u21311 \u21517 \u35469 \u35388 , Firestore\u12487 \u12540 \u12479 \u27704 \u32154 \u21270 , \u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u20104 \u24819 , SNS\u25237 \u31295 , \cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2       \uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u36899 \u25658 (\u12479 \u12473 \u12463 \u12391 \u12509 \u12452 \u12531 \u12488 2\u20493 \u12452 \u12531 \u12475 \u12531 \u12486 \u12451 \u12502 ), \u12509 \u12452 \u12531 \u12488 \u20132 \u25563 \u25152 , \u31649 \u29702 \u12499 \u12517 \u12540 \cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 ================================================================================\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2 -->\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \strokec5 <!DOCTYPE\cf6 \strokec6  html\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb3 \strokec7 <\cf5 \strokec5 html\cf4 \strokec4  \cf6 \strokec6 lang\cf7 \strokec7 =\cf8 \strokec8 "ja"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cf7 \cb3 \strokec7 <\cf5 \strokec5 head\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf7 \strokec7 <\cf5 \strokec5 meta\cf4 \strokec4  \cf6 \strokec6 charset\cf7 \strokec7 =\cf8 \strokec8 "UTF-8"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 meta\cf4 \strokec4  \cf6 \strokec6 name\cf7 \strokec7 =\cf8 \strokec8 "viewport"\cf4 \strokec4  \cf6 \strokec6 content\cf7 \strokec7 =\cf8 \strokec8 "width=device-width, initial-scale=1.0"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 title\cf7 \strokec7 >\cf4 \strokec4 GOLFIN \uc0\u20104 \u24819 SNS MVP\cf7 \strokec7 </\cf5 \strokec5 title\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 <!-- Tailwind CSS (CDN) -->\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 script\cf4 \strokec4  \cf6 \strokec6 src\cf7 \strokec7 =\cf8 \strokec8 "https://cdn.tailwindcss.com"\cf7 \strokec7 ></\cf5 \strokec5 script\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 <!-- Lucide Icons -->\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 script\cf4 \strokec4  \cf6 \strokec6 src\cf7 \strokec7 =\cf8 \strokec8 "https://unpkg.com/lucide@latest"\cf7 \strokec7 ></\cf5 \strokec5 script\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 style\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 /* Inter\uc0\u12501 \u12457 \u12531 \u12488 \u35373 \u23450  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 @import\cf4 \strokec4  \cf8 \strokec8 url\cf10 \strokec10 (\cf11 \strokec11 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf5 \strokec5 body\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 font-family:\cf4 \strokec4  \cf11 \strokec11 'Inter'\cf10 \strokec10 ,\cf4 \strokec4  \cf8 \strokec8 sans-serif\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 background-color:\cf4 \strokec4  #f7f7f9\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf5 \strokec5 .container-mobile\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 max-width:\cf4 \strokec4  \cf12 \strokec12 420px\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf6 \strokec6 box-shadow:\cf4 \strokec4  \cf12 \strokec12 0\cf4 \strokec4  \cf12 \strokec12 4px\cf4 \strokec4  \cf12 \strokec12 6px\cf4 \strokec4  \cf12 \strokec12 -1px\cf4 \strokec4  \cf8 \strokec8 rgba(\cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0.1\cf8 \strokec8 )\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0\cf4 \strokec4  \cf12 \strokec12 2px\cf4 \strokec4  \cf12 \strokec12 4px\cf4 \strokec4  \cf12 \strokec12 -2px\cf4 \strokec4  \cf8 \strokec8 rgba(\cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0\cf10 \strokec10 ,\cf4 \strokec4  \cf12 \strokec12 0.1\cf8 \strokec8 )\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 </\cf5 \strokec5 style\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb3 \strokec7 </\cf5 \strokec5 head\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cf7 \cb3 \strokec7 <\cf5 \strokec5 body\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "p-2"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3     \cf2 \strokec2 <!-- \uc0\u12513 \u12452 \u12531 \u12467 \u12531 \u12486 \u12490  -->\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "app"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "container-mobile mx-auto min-h-screen bg-white shadow-lg rounded-lg overflow-hidden"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 <!-- \uc0\u12525 \u12540 \u12487 \u12451 \u12531 \u12464 /\u12456 \u12521 \u12540 \u34920 \u31034 \u12456 \u12522 \u12450  -->\cf4 \cb1 \strokec4 \
+\cb3         \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "loading-screen"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "flex flex-col items-center justify-center h-screen text-gray-500"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 <\cf5 \strokec5 svg\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "animate-spin h-8 w-8 text-indigo-500 mb-3"\cf4 \strokec4  \cf6 \strokec6 xmlns\cf7 \strokec7 =\cf8 \strokec8 "http://www.w3.org/2000/svg"\cf4 \strokec4  \cf6 \strokec6 fill\cf7 \strokec7 =\cf8 \strokec8 "none"\cf4 \strokec4  \cf6 \strokec6 viewBox\cf7 \strokec7 =\cf8 \strokec8 "0 0 24 24"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 circle\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "opacity-25"\cf4 \strokec4  \cf6 \strokec6 cx\cf7 \strokec7 =\cf8 \strokec8 "12"\cf4 \strokec4  \cf6 \strokec6 cy\cf7 \strokec7 =\cf8 \strokec8 "12"\cf4 \strokec4  \cf6 \strokec6 r\cf7 \strokec7 =\cf8 \strokec8 "10"\cf4 \strokec4  \cf6 \strokec6 stroke\cf7 \strokec7 =\cf8 \strokec8 "currentColor"\cf4 \strokec4  \cf6 \strokec6 stroke-width\cf7 \strokec7 =\cf8 \strokec8 "4"\cf7 \strokec7 ></\cf5 \strokec5 circle\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 path\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "opacity-75"\cf4 \strokec4  \cf6 \strokec6 fill\cf7 \strokec7 =\cf8 \strokec8 "currentColor"\cf4 \strokec4  \cf6 \strokec6 d\cf7 \strokec7 =\cf8 \strokec8 "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"\cf7 \strokec7 ></\cf5 \strokec5 path\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 </\cf5 \strokec5 svg\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 <\cf5 \strokec5 p\cf7 \strokec7 >\cf4 \strokec4 \uc0\u12469 \u12540 \u12499 \u12473 \u12434 \u21021 \u26399 \u21270 \u20013 \u12391 \u12377 ...\cf7 \strokec7 </\cf5 \strokec5 p\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf7 \strokec7 </\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "error-message"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "hidden p-8 text-center bg-red-100 text-red-700"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \uc0\u21021 \u26399 \u21270 \u12395 \u22833 \u25943 \u12375 \u12414 \u12375 \u12383 \u12290 \u12467 \u12531 \u12477 \u12540 \u12523 \u12434 \u30906 \u35469 \u12375 \u12390 \u12367 \u12384 \u12373 \u12356 \u12290 \cb1 \
+\cb3         \cf7 \strokec7 </\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 <!-- \uc0\u12467 \u12531 \u12486 \u12531 \u12484 \u34920 \u31034 \u12456 \u12522 \u12450  (\u21021 \u26399 \u21270 \u24460 \u12395 \u12371 \u12371 \u12395 \u25551 \u30011 \u12373 \u12428 \u12427 ) -->\cf4 \cb1 \strokec4 \
+\cb3         \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "content"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "hidden"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf2 \strokec2 <!-- \uc0\u12490 \u12499 \u12466 \u12540 \u12471 \u12519 \u12531 \u12496 \u12540  (\u24120 \u12395 \u34920 \u31034 ) -->\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 <\cf5 \strokec5 header\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "sticky top-0 bg-white border-b border-gray-100 z-10 p-4 flex justify-between items-center"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 h1\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "text-2xl font-extrabold text-indigo-600 cursor-pointer"\cf4 \strokec4  \cf6 \strokec6 onclick\cf7 \strokec7 =\cf8 \strokec8 "navigate('home')"\cf7 \strokec7 >\cf4 \strokec4 GOLFIN Predict\cf7 \strokec7 </\cf5 \strokec5 h1\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "flex space-x-3 items-center"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 button\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "admin-view-btn"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "text-sm text-gray-500 hover:text-indigo-600"\cf4 \strokec4  \cf6 \strokec6 onclick\cf7 \strokec7 =\cf8 \strokec8 "navigate('admin')"\cf7 \strokec7 >\cf4 \strokec4 \uc0\u31649 \u29702 \cf7 \strokec7 </\cf5 \strokec5 button\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 button\cf4 \strokec4  \cf6 \strokec6 onclick\cf7 \strokec7 =\cf8 \strokec8 "navigate('mypage')"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "p-2 rounded-full bg-indigo-50 hover:bg-indigo-100 transition"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                         \cf7 \strokec7 <\cf5 \strokec5 i\cf4 \strokec4  \cf6 \strokec6 data-lucide\cf7 \strokec7 =\cf8 \strokec8 "user"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "h-6 w-6 text-indigo-600"\cf7 \strokec7 ></\cf5 \strokec5 i\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 </\cf5 \strokec5 button\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 </\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 </\cf5 \strokec5 header\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cb1 \
+\cb3             \cf2 \strokec2 <!-- \uc0\u12513 \u12452 \u12531 \u12499 \u12517 \u12540 \u12364 \u12371 \u12371 \u12395 \u25407 \u20837 \u12373 \u12428 \u12427  -->\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 <\cf5 \strokec5 div\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "view-container"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "p-4 pb-20"\cf7 \strokec7 ></\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf2 \strokec2 <!-- \uc0\u12490 \u12499 \u12466 \u12540 \u12471 \u12519 \u12531 \u12501 \u12483 \u12479 \u12540  -->\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 <\cf5 \strokec5 footer\cf4 \strokec4  \cf6 \strokec6 id\cf7 \strokec7 =\cf8 \strokec8 "nav-footer"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-100 shadow-md flex justify-around p-3 container-mobile mx-auto hidden"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 button\cf4 \strokec4  \cf6 \strokec6 onclick\cf7 \strokec7 =\cf8 \strokec8 "navigate('home')"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "nav-item"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 i\cf4 \strokec4  \cf6 \strokec6 data-lucide\cf7 \strokec7 =\cf8 \strokec8 "home"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "h-6 w-6"\cf7 \strokec7 ></\cf5 \strokec5 i\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 span\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "text-xs"\cf7 \strokec7 >\cf4 \strokec4 \uc0\u12507 \u12540 \u12512 \cf7 \strokec7 </\cf5 \strokec5 span\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 </\cf5 \strokec5 button\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 <\cf5 \strokec5 button\cf4 \strokec4  \cf6 \strokec6 onclick\cf7 \strokec7 =\cf8 \strokec8 "navigate('mypage')"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "nav-item"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 i\cf4 \strokec4  \cf6 \strokec6 data-lucide\cf7 \strokec7 =\cf8 \strokec8 "award"\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "h-6 w-6"\cf7 \strokec7 ></\cf5 \strokec5 i\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                     \cf7 \strokec7 <\cf5 \strokec5 span\cf4 \strokec4  \cf6 \strokec6 class\cf7 \strokec7 =\cf8 \strokec8 "text-xs"\cf7 \strokec7 >\cf4 \strokec4 \uc0\u23455 \u32318 \cf7 \strokec7 </\cf5 \strokec5 span\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3                 \cf7 \strokec7 </\cf5 \strokec5 button\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3             \cf7 \strokec7 </\cf5 \strokec5 footer\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf7 \strokec7 </\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 </\cf5 \strokec5 div\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf2 \strokec2 <!-- Firebase SDKs -->\cf4 \cb1 \strokec4 \
+\cb3     \cf7 \strokec7 <\cf5 \strokec5 script\cf4 \strokec4  \cf6 \strokec6 type\cf7 \strokec7 =\cf8 \strokec8 "module"\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 import\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  initializeApp \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 from\cf4 \strokec4  \cf11 \strokec11 "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 import\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  getAuth\cf10 \strokec10 ,\cf4 \strokec4  signInAnonymously\cf10 \strokec10 ,\cf4 \strokec4  signInWithCustomToken\cf10 \strokec10 ,\cf4 \strokec4  onAuthStateChanged \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 from\cf4 \strokec4  \cf11 \strokec11 "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 import\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  getFirestore\cf10 \strokec10 ,\cf4 \strokec4  doc\cf10 \strokec10 ,\cf4 \strokec4  getDoc\cf10 \strokec10 ,\cf4 \strokec4  setDoc\cf10 \strokec10 ,\cf4 \strokec4  updateDoc\cf10 \strokec10 ,\cf4 \strokec4  deleteDoc\cf10 \strokec10 ,\cf4 \strokec4  onSnapshot\cf10 \strokec10 ,\cf4 \strokec4  collection\cf10 \strokec10 ,\cf4 \strokec4  query\cf10 \strokec10 ,\cf4 \strokec4  where\cf10 \strokec10 ,\cf4 \strokec4  getDocs\cf10 \strokec10 ,\cf4 \strokec4  runTransaction\cf10 \strokec10 ,\cf4 \strokec4  \cf13 \strokec13 Timestamp\cf4 \strokec4  \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 from\cf4 \strokec4  \cf11 \strokec11 "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 import\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  getStorage\cf10 \strokec10 ,\cf4 \strokec4  ref as storageRef\cf10 \strokec10 ,\cf4 \strokec4  uploadBytes\cf10 \strokec10 ,\cf4 \strokec4  getDownloadURL \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 from\cf4 \strokec4  \cf11 \strokec11 "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js"\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // 1. \uc0\u12464 \u12525 \u12540 \u12496 \u12523 \u22793 \u25968 \u12392 \u21021 \u26399 \u35373 \u23450 \cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 let\cf4 \strokec4  app\cf10 \strokec10 ,\cf4 \strokec4  db\cf10 \strokec10 ,\cf4 \strokec4  auth\cf10 \strokec10 ,\cf4 \strokec4  storage\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 let\cf4 \strokec4  userId \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 'default-user'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 let\cf4 \strokec4  appId \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 'default-app-id'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // \uc0\u24517 \u38920 \u12398 \u29872 \u22659 \u22793 \u25968 \u12434 \u30906 \u20445 \cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  firebaseConfig \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 typeof\cf4 \strokec4  __firebase_config \cf10 \strokec10 !==\cf4 \strokec4  \cf11 \strokec11 'undefined'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf13 \strokec13 JSON\cf10 \strokec10 .\cf4 \strokec4 parse\cf10 \strokec10 (\cf4 \strokec4 __firebase_config\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  initialAuthToken \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 typeof\cf4 \strokec4  __initial_auth_token \cf10 \strokec10 !==\cf4 \strokec4  \cf11 \strokec11 'undefined'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  __initial_auth_token \cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         appId \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 typeof\cf4 \strokec4  __app_id \cf10 \strokec10 !==\cf4 \strokec4  \cf11 \strokec11 'undefined'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  __app_id \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'golfin-predict-mvp'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // \uc0\u12467 \u12524 \u12463 \u12471 \u12519 \u12531 \u12497 \u12473 \u12434 \u23450 \u32681  (\u12497 \u12502 \u12522 \u12483 \u12463 \u12487 \u12540 \u12479 )\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  getCollectionPath \cf10 \strokec10 =\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 collectionName\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 return\cf4 \strokec4  \cf11 \strokec11 `/artifacts/\cf10 \strokec10 $\{\cf4 \strokec4 appId\cf10 \strokec10 \}\cf11 \strokec11 /public/data/\cf10 \strokec10 $\{\cf4 \strokec4 collectionName\cf10 \strokec10 \}\cf11 \strokec11 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  tournamentsCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'tournaments'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  profilesCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'profiles'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  predictionsCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'predictions'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  postsCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'posts'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  userTasksCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'user_tasks'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  rewardsCol \cf10 \strokec10 =\cf4 \strokec4  getCollectionPath\cf10 \strokec10 (\cf11 \strokec11 'rewards'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // \uc0\u12514 \u12483 \u12463 \u12487 \u12540 \u12479  (\u21021 \u26399 \u29366 \u24907 )\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 let\cf4 \strokec4  mockData \cf10 \strokec10 =\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             tournaments\cf10 \strokec10 :\cf4 \strokec4  \cf10 \strokec10 [\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 't1'\cf10 \strokec10 ,\cf4 \strokec4  title\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u31532 1\u22238  GOLFIN\u26479 '\cf10 \strokec10 ,\cf4 \strokec4  sponsorName\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'GolfGear Pro'\cf10 \strokec10 ,\cf4 \strokec4  prizePool\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 10000\cf10 \strokec10 ,\cf4 \strokec4  course\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u23500 \u22763 \u12459 \u12531 \u12488 \u12522 \u12540 '\cf10 \strokec10 ,\cf4 \strokec4  date\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '2025-12-01'\cf10 \strokec10 ,\cf4 \strokec4  status\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'voting'\cf10 \strokec10 ,\cf4 \strokec4  winnerId\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ,\cf4 \strokec4  \cb1 \
+\cb3                   taskType\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'quiz_answer'\cf10 \strokec10 ,\cf4 \strokec4  taskValue\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12371 \u12398 \u12473 \u12509 \u12531 \u12469 \u12540 \u12398 \u12525 \u12468 \u12459 \u12521 \u12540 \u12399 \u65311 '\cf10 \strokec10 ,\cf4 \strokec4  taskAnswer\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12415 \u12393 \u12426 '\cf10 \strokec10 ,\cf4 \strokec4  \cf2 \strokec2 // 'green'\uc0\u12434 \u12300 \u12415 \u12393 \u12426 \u12301 \u12395 \u20462 \u27491 \cf4 \cb1 \strokec4 \
+\cb3                   players\cf10 \strokec10 :\cf4 \strokec4  \cf10 \strokec10 [\{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'p1'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u30000 \u20013  \u22826 \u37070 '\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'p2'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u20304 \u34276  \u33457 \u23376 '\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'p3'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u23665 \u26412  \u20581 \u22826 '\cf4 \strokec4  \cf10 \strokec10 \}]\cf4 \strokec4  \cb1 \
+\cb3                 \cf10 \strokec10 \},\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 't2'\cf10 \strokec10 ,\cf4 \strokec4  title\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u20908 \u12398 \u12458 \u12540 \u12503 \u12531 \u12467 \u12531 \u12506 '\cf10 \strokec10 ,\cf4 \strokec4  sponsorName\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'Travel Golf'\cf10 \strokec10 ,\cf4 \strokec4  prizePool\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 5000\cf10 \strokec10 ,\cf4 \strokec4  course\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u27798 \u32260 \u12458 \u12540 \u12471 \u12515 \u12531 '\cf10 \strokec10 ,\cf4 \strokec4  date\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '2025-12-15'\cf10 \strokec10 ,\cf4 \strokec4  status\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'upcoming'\cf10 \strokec10 ,\cf4 \strokec4  winnerId\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                   taskType\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'video_watch'\cf10 \strokec10 ,\cf4 \strokec4  taskValue\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'https://placehold.co/400x200/22C55E/white?text=Sponsor+Video'\cf10 \strokec10 ,\cf4 \strokec4  taskAnswer\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                   players\cf10 \strokec10 :\cf4 \strokec4  \cf10 \strokec10 [\{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'p4'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u37428 \u26408  \u19968 \u37070 '\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'p5'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u39640 \u27211  \u20778 \u23376 '\cf4 \strokec4  \cf10 \strokec10 \}]\cf4 \strokec4  \cb1 \
+\cb3                 \cf10 \strokec10 \},\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 ],\cf4 \cb1 \strokec4 \
+\cb3             rewards\cf10 \strokec10 :\cf4 \strokec4  \cf10 \strokec10 [\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'r1'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'Amazon\uc0\u12462 \u12501 \u12488 \u12459 \u12540 \u12489  (1,000\u20870 )'\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 500\cf10 \strokec10 ,\cf4 \strokec4  imageUrl\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'https://placehold.co/100x100/FEF2F2/F87171?text=Amazon+Gift'\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'r2'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u26368 \u26032 \u12468 \u12523 \u12501 \u12508 \u12540 \u12523  (1\u12480 \u12540 \u12473 )'\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 1200\cf10 \strokec10 ,\cf4 \strokec4  imageUrl\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'https://placehold.co/100x100/DBEAFE/3B82F6?text=Golf+Ball'\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'r3'\cf10 \strokec10 ,\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u38480 \u23450 \u12461 \u12515 \u12483 \u12503 '\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 800\cf10 \strokec10 ,\cf4 \strokec4  imageUrl\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'https://placehold.co/100x100/F0F9FF/0EA5E9?text=Cap'\cf4 \strokec4  \cf10 \strokec10 \},\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 ]\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // 2. \uc0\u35469 \u35388 \u12539 \u21021 \u26399 \u21270 \cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\
+\cb3         window\cf10 \strokec10 .\cf4 \strokec4 onload \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  loadingScreen \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'loading-screen'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  errorMessage \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'error-message'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  content \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'content'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cb1 \
+\cb3             \cf9 \strokec9 try\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 firebaseConfig\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 throw\cf4 \strokec4  \cf9 \strokec9 new\cf4 \strokec4  \cf13 \strokec13 Error\cf10 \strokec10 (\cf11 \strokec11 "Firebase config is missing. Cannot initialize."\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf2 \strokec2 // 1. Firebase\uc0\u21021 \u26399 \u21270 \cf4 \cb1 \strokec4 \
+\cb3                 app \cf10 \strokec10 =\cf4 \strokec4  initializeApp\cf10 \strokec10 (\cf4 \strokec4 firebaseConfig\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 auth \cf10 \strokec10 =\cf4 \strokec4  getAuth\cf10 \strokec10 (\cf4 \strokec4 app\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 db \cf10 \strokec10 =\cf4 \strokec4  getFirestore\cf10 \strokec10 (\cf4 \strokec4 app\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 storage \cf10 \strokec10 =\cf4 \strokec4  getStorage\cf10 \strokec10 (\cf4 \strokec4 app\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cb1 \
+\cb3                 \cf2 \strokec2 // 2. \uc0\u35469 \u35388 \u20966 \u29702 \cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 initialAuthToken\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 await\cf4 \strokec4  signInWithCustomToken\cf10 \strokec10 (\cf4 \strokec4 auth\cf10 \strokec10 ,\cf4 \strokec4  initialAuthToken\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 await\cf4 \strokec4  signInAnonymously\cf10 \strokec10 (\cf4 \strokec4 auth\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf2 \strokec2 // 3. \uc0\u35469 \u35388 \u29366 \u24907 \u12398 \u30906 \u35469 \u12392 \u12518 \u12540 \u12470 \u12540 ID\u35373 \u23450 \cf4 \cb1 \strokec4 \
+\cb3                 userId \cf10 \strokec10 =\cf4 \strokec4  auth\cf10 \strokec10 .\cf4 \strokec4 currentUser\cf10 \strokec10 ?.\cf4 \strokec4 uid \cf10 \strokec10 ||\cf4 \strokec4  crypto\cf10 \strokec10 .\cf4 \strokec4 randomUUID\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3                 \cb1 \
+\cb3                 \cf2 \strokec2 // 4. \uc0\u12487 \u12540 \u12479 \u21021 \u26399 \u21270  (\u21021 \u22238 \u36215 \u21205 \u26178 \u12398 \u12415 )\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 await\cf4 \strokec4  initializeMockData\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf2 \strokec2 // 5. UI\uc0\u12398 \u34920 \u31034 \cf4 \cb1 \strokec4 \
+\cb3                 loadingScreen\cf10 \strokec10 .\cf4 \strokec4 classList\cf10 \strokec10 .\cf4 \strokec4 add\cf10 \strokec10 (\cf11 \strokec11 'hidden'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 content\cf10 \strokec10 .\cf4 \strokec4 classList\cf10 \strokec10 .\cf4 \strokec4 remove\cf10 \strokec10 (\cf11 \strokec11 'hidden'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'nav-footer'\cf10 \strokec10 ).\cf4 \strokec4 classList\cf10 \strokec10 .\cf4 \strokec4 remove\cf10 \strokec10 (\cf11 \strokec11 'hidden'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cb1 \
+\cb3                 \cf2 \strokec2 // \uc0\u21021 \u22238 \u25551 \u30011 \cf4 \cb1 \strokec4 \
+\cb3                 window\cf10 \strokec10 .\cf4 \strokec4 navigate\cf10 \strokec10 (\cf11 \strokec11 'home'\cf10 \strokec10 );\cf4 \strokec4  \cf2 \strokec2 // window.\uc0\u12434 \u20184 \u12369 \u12390 \u21628 \u12403 \u20986 \u12377 \cf4 \cb1 \strokec4 \
+\cb3                 \cb1 \
+\cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 catch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 error\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 console\cf10 \strokec10 .\cf4 \strokec4 error\cf10 \strokec10 (\cf11 \strokec11 "Initialization Error:"\cf10 \strokec10 ,\cf4 \strokec4  error\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 loadingScreen\cf10 \strokec10 .\cf4 \strokec4 classList\cf10 \strokec10 .\cf4 \strokec4 add\cf10 \strokec10 (\cf11 \strokec11 'hidden'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 errorMessage\cf10 \strokec10 .\cf4 \strokec4 classList\cf10 \strokec10 .\cf4 \strokec4 remove\cf10 \strokec10 (\cf11 \strokec11 'hidden'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 errorMessage\cf10 \strokec10 .\cf4 \strokec4 textContent \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\uc0\u12456 \u12521 \u12540 : \u12469 \u12540 \u12499 \u12473 \u12398 \u21021 \u26399 \u21270 \u12395 \u22833 \u25943 \u12375 \u12414 \u12375 \u12383 \u12290 \u35443 \u32048 \u12434 \u12467 \u12531 \u12477 \u12540 \u12523 \u12391 \u30906 \u35469 \u12375 \u12390 \u12367 \u12384 \u12373 \u12356 \u12290 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // \uc0\u21021 \u22238 \u36215 \u21205 \u26178 \u12395 \u12514 \u12483 \u12463 \u12487 \u12540 \u12479 \u12434 Firestore\u12395 \u26360 \u12365 \u36796 \u12416 \u38306 \u25968 \cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  initializeMockData\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 try\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf2 \strokec2 // \uc0\u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u12487 \u12540 \u12479 \u12398 \u23384 \u22312 \u12481 \u12455 \u12483 \u12463 \cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  firstTournamentDoc \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  mockData\cf10 \strokec10 .\cf4 \strokec4 tournaments\cf10 \strokec10 [\cf14 \strokec14 0\cf10 \strokec10 ].\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  docSnap \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 firstTournamentDoc\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 docSnap\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ())\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     console\cf10 \strokec10 .\cf4 \strokec4 log\cf10 \strokec10 (\cf11 \strokec11 "Mock data not found. Initializing data..."\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf2 \strokec2 // \uc0\u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u12289 \u12522 \u12527 \u12540 \u12489 \u12434 \u26360 \u12365 \u36796 \u12415 \cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 for\cf4 \strokec4  \cf10 \strokec10 (\cf9 \strokec9 const\cf4 \strokec4  t \cf9 \strokec9 of\cf4 \strokec4  mockData\cf10 \strokec10 .\cf4 \strokec4 tournaments\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  players \cf10 \strokec10 =\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 delete\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ;\cf4 \strokec4  \cf2 \strokec2 // players\uc0\u37197 \u21015 \u12399 \u12469 \u12502 \u12467 \u12524 \u12463 \u12471 \u12519 \u12531 \u12395 \u12375 \u12394 \u12356 \u12383 \u12417 \u21066 \u38500 \cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ),\cf4 \strokec4  t\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         \cb1 \
+\cb3                         \cf2 \strokec2 // \uc0\u36984 \u25163 \u12487 \u12540 \u12479 \u12434 \u12469 \u12502 \u12467 \u12524 \u12463 \u12471 \u12519 \u12531 \u12395 \u26360 \u12365 \u36796 \u12416  (\u20170 \u22238 \u12399 \u12471 \u12531 \u12503 \u12523 \u12395 \u37197 \u21015 \u12434 \u12501 \u12451 \u12540 \u12523 \u12489 \u12392 \u12375 \u12390 \u20445 \u25345 )\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  players\cf10 \strokec10 :\cf4 \strokec4  players \cf10 \strokec10 \},\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  merge\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 true\cf4 \strokec4  \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 for\cf4 \strokec4  \cf10 \strokec10 (\cf9 \strokec9 const\cf4 \strokec4  r \cf9 \strokec9 of\cf4 \strokec4  mockData\cf10 \strokec10 .\cf4 \strokec4 rewards\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                          \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  rewardsCol\cf10 \strokec10 ,\cf4 \strokec4  r\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ),\cf4 \strokec4  r\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf2 \strokec2 // \uc0\u12518 \u12540 \u12470 \u12540 \u12503 \u12525 \u12501 \u12451 \u12540 \u12523 \u21021 \u26399 \u21270 \cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  profilesCol\cf10 \strokec10 ,\cf4 \strokec4  userId\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  \cb1 \
+\cb3                         name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u21311 \u21517 \u12468 \u12523 \u12501 \u12449 \u12540 '\cf10 \strokec10 ,\cf4 \strokec4  \cb1 \
+\cb3                         totalPoints\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 500\cf10 \strokec10 ,\cf4 \strokec4  \cf2 \strokec2 // \uc0\u21021 \u26399 \u12509 \u12452 \u12531 \u12488 \cf4 \cb1 \strokec4 \
+\cb3                         bio\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12468 \u12523 \u12501 \u20104 \u24819 \u22987 \u12417 \u12414 \u12375 \u12383 \u65281 '\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                         id\cf10 \strokec10 :\cf4 \strokec4  userId \cb1 \
+\cb3                     \cf10 \strokec10 \},\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  merge\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 true\cf4 \strokec4  \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 catch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 e\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 console\cf10 \strokec10 .\cf4 \strokec4 error\cf10 \strokec10 (\cf11 \strokec11 "Error initializing mock data:"\cf10 \strokec10 ,\cf4 \strokec4  e\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf2 \strokec2 // \uc0\u21021 \u26399 \u21270 \u22833 \u25943 \u12375 \u12390 \u12418 \u12450 \u12503 \u12522 \u12399 \u32153 \u32154 \u12373 \u12379 \u12427 \cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // 3. \uc0\u12487 \u12540 \u12479 \u25805 \u20316 \u38306 \u25968  (Firestore CRUD)\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12503 \u12525 \u12501 \u12451 \u12540 \u12523 \u12434 \u21462 \u24471  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  getProfile \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 id\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  docSnap \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  profilesCol\cf10 \strokec10 ,\cf4 \strokec4  id\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 return\cf4 \strokec4  docSnap\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  docSnap\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u12501 \u12521 \u12464 \u12434 \u21462 \u24471  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  getTaskCompletion \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  taskDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  userTasksCol\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 `\cf10 \strokec10 $\{\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 _\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 `\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 return\cf4 \strokec4  taskDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  taskDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ().\cf4 \strokec4 completed \cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 false\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 /** \uc0\u12479 \u12473 \u12463 \u12434 \u23436 \u20102 \u29366 \u24907 \u12395 \u35373 \u23450  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  completeTask \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  userTasksCol\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 `\cf10 \strokec10 $\{\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 _\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 `\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 userId\cf10 \strokec10 :\cf4 \strokec4  userId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 tournamentId\cf10 \strokec10 :\cf4 \strokec4  tournamentId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 completed\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 true\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 completedAt\cf10 \strokec10 :\cf4 \strokec4  \cf13 \strokec13 Timestamp\cf10 \strokec10 .\cf4 \strokec4 now\cf10 \strokec10 ()\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 /** \uc0\u20104 \u24819 \u12392 \u25237 \u31295 \u12434 Firestore\u12395 \u20445 \u23384  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  submitPrediction \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 ,\cf4 \strokec4  predictedPlayerId\cf10 \strokec10 ,\cf4 \strokec4  comment\cf10 \strokec10 ,\cf4 \strokec4  imageUrl \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf2 \strokec2 // \uc0\u20104 \u24819  (predictions) \u12434 \u20445 \u23384 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  predictionsCol\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 `\cf10 \strokec10 $\{\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 _\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 `\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 tournamentId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 userId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 predictedPlayerId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 isCorrect\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 pointsAwarded\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 createdAt\cf10 \strokec10 :\cf4 \strokec4  \cf13 \strokec13 Timestamp\cf10 \strokec10 .\cf4 \strokec4 now\cf10 \strokec10 (),\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf2 \strokec2 // SNS\uc0\u25237 \u31295  (posts) \u12434 \u20445 \u23384 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  newPostRef \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  postsCol\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 await\cf4 \strokec4  setDoc\cf10 \strokec10 (\cf4 \strokec4 newPostRef\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 id\cf10 \strokec10 :\cf4 \strokec4  newPostRef\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 userId\cf10 \strokec10 :\cf4 \strokec4  userId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 tournamentId\cf10 \strokec10 :\cf4 \strokec4  tournamentId\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 type\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'prediction'\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 text\cf10 \strokec10 :\cf4 \strokec4  comment\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 imageUrl\cf10 \strokec10 :\cf4 \strokec4  imageUrl\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3                 createdAt\cf10 \strokec10 :\cf4 \strokec4  \cf13 \strokec13 Timestamp\cf10 \strokec10 .\cf4 \strokec4 now\cf10 \strokec10 (),\cf4 \cb1 \strokec4 \
+\cb3                 likes\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 ,\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 return\cf4 \strokec4  \cf9 \strokec9 true\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12522 \u12527 \u12540 \u12489 \u12398 \u20132 \u25563 \u20966 \u29702  (\u12488 \u12521 \u12531 \u12470 \u12463 \u12471 \u12519 \u12531 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 const\cf4 \strokec4  handleExchangeReward \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 rewardId\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  profileRef \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  profilesCol\cf10 \strokec10 ,\cf4 \strokec4  userId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 try\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 await\cf4 \strokec4  runTransaction\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 transaction\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  profileDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  transaction\cf10 \strokec10 .\cf9 \strokec9 get\cf10 \strokec10 (\cf4 \strokec4 profileRef\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 profileDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ())\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 throw\cf4 \strokec4  \cf9 \strokec9 new\cf4 \strokec4  \cf13 \strokec13 Error\cf10 \strokec10 (\cf11 \strokec11 "\uc0\u12518 \u12540 \u12470 \u12540 \u12503 \u12525 \u12501 \u12451 \u12540 \u12523 \u12364 \u35211 \u12388 \u12363 \u12426 \u12414 \u12379 \u12435 \u12290 "\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  currentPoints \cf10 \strokec10 =\cf4 \strokec4  profileDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ().\cf4 \strokec4 totalPoints \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 currentPoints \cf10 \strokec10 <\cf4 \strokec4  cost\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 throw\cf4 \strokec4  \cf9 \strokec9 new\cf4 \strokec4  \cf13 \strokec13 Error\cf10 \strokec10 (\cf11 \strokec11 `\uc0\u12509 \u12452 \u12531 \u12488 \u19981 \u36275 \u12391 \u12377 \u12290 \cf10 \strokec10 $\{\cf4 \strokec4 cost\cf10 \strokec10 \}\cf11 \strokec11 pt\uc0\u24517 \u35201 \u12391 \u12377 \u12290 `\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf2 \strokec2 // \uc0\u12509 \u12452 \u12531 \u12488 \u12434 \u28040 \u36027 \u12375 \u12289 \u12522 \u12527 \u12540 \u12489 \u20132 \u25563 \u23653 \u27508 \u12434 \u35352 \u37682  (MVP\u12391 \u12399 \u23653 \u27508 \u35352 \u37682 \u12399 \u30465 \u30053 )\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  newPoints \cf10 \strokec10 =\cf4 \strokec4  currentPoints \cf10 \strokec10 -\cf4 \strokec4  cost\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     transaction\cf10 \strokec10 .\cf4 \strokec4 update\cf10 \strokec10 (\cf4 \strokec4 profileRef\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  totalPoints\cf10 \strokec10 :\cf4 \strokec4  newPoints \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf2 \strokec2 // \uc0\u25104 \u21151 \u12513 \u12483 \u12475 \u12540 \u12472 \cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 return\cf4 \strokec4  \cf11 \strokec11 `\uc0\u20132 \u25563 \u25104 \u21151 \u65281 \cf10 \strokec10 $\{\cf4 \strokec4 cost\cf10 \strokec10 \}\cf11 \strokec11 pt\uc0\u12434 \u28040 \u36027 \u12375 \u12289 \cf10 \strokec10 $\{\cf4 \strokec4 rewardId\cf10 \strokec10 \}\cf11 \strokec11 \uc0\u12434 \u29554 \u24471 \u12375 \u12414 \u12375 \u12383 \u12290 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 return\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  success\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 true\cf10 \strokec10 ,\cf4 \strokec4  message\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12522 \u12527 \u12540 \u12489 \u20132 \u25563 \u12364 \u23436 \u20102 \u12375 \u12414 \u12375 \u12383 \u65281 '\cf4 \strokec4  \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 catch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 e\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 console\cf10 \strokec10 .\cf4 \strokec4 error\cf10 \strokec10 (\cf11 \strokec11 "Exchange Transaction Failed:"\cf10 \strokec10 ,\cf4 \strokec4  e\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 return\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  success\cf10 \strokec10 :\cf4 \strokec4  \cf9 \strokec9 false\cf10 \strokec10 ,\cf4 \strokec4  message\cf10 \strokec10 :\cf4 \strokec4  e\cf10 \strokec10 .\cf4 \strokec4 message \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '\uc0\u20132 \u25563 \u12395 \u22833 \u25943 \u12375 \u12414 \u12375 \u12383 \u12290 '\cf4 \strokec4  \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // 4. UI\uc0\u12523 \u12540 \u12486 \u12451 \u12531 \u12464 \u12392 \u12524 \u12531 \u12480 \u12522 \u12531 \u12464 \cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf9 \strokec9 let\cf4 \strokec4  currentView \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 'home'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // \uc0\u12464 \u12525 \u12540 \u12496 \u12523 \u12395 \u12450 \u12463 \u12475 \u12473 \u12391 \u12365 \u12427 \u12424 \u12358 \u12395  window \u12458 \u12502 \u12472 \u12455 \u12463 \u12488 \u12395 \u35373 \u23450 \cf4 \cb1 \strokec4 \
+\cb3         window\cf10 \strokec10 .\cf4 \strokec4 navigate \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 function\cf10 \strokec10 (\cf4 \strokec4 viewName\cf10 \strokec10 ,\cf4 \strokec4  params \cf10 \strokec10 =\cf4 \strokec4  \cf10 \strokec10 \{\})\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             currentView \cf10 \strokec10 =\cf4 \strokec4  viewName\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  viewContainer \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'view-container'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             viewContainer\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cb1 \
+\cb3             \cf9 \strokec9 switch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 viewName\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'home'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderHomePage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'tournament'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderTournamentPage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 ,\cf4 \strokec4  params\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'sponsor'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderSponsorPage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 ,\cf4 \strokec4  params\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'mypage'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderMyPage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'admin'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderAdminPage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'userprofile'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderUserProfilePage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 ,\cf4 \strokec4  params\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 case\cf4 \strokec4  \cf11 \strokec11 'store'\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderRewardStore\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 break\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 default\cf10 \strokec10 :\cf4 \cb1 \strokec4 \
+\cb3                     renderHomePage\cf10 \strokec10 (\cf4 \strokec4 viewContainer\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf2 \strokec2 // Lucide\uc0\u12450 \u12452 \u12467 \u12531 \u12434 \u20877 \u12524 \u12531 \u12480 \u12522 \u12531 \u12464 \cf4 \cb1 \strokec4 \
+\cb3             lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             window\cf10 \strokec10 .\cf4 \strokec4 scrollTo\cf10 \strokec10 (\cf14 \strokec14 0\cf10 \strokec10 ,\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 );\cf4 \strokec4  \cf2 \strokec2 // \uc0\u30011 \u38754 \u12488 \u12483 \u12503 \u12408 \u31227 \u21205 \cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // 5. \uc0\u21508 \u12499 \u12517 \u12540 \u12398 \u12524 \u12531 \u12480 \u12522 \u12531 \u12464 \u38306 \u25968 \cf4 \cb1 \strokec4 \
+\cb3         \cf2 \strokec2 // =========================================================================\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12507 \u12540 \u12512 \u30011 \u38754  (\u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u19968 \u35239 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 function\cf4 \strokec4  renderHomePage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <h2 class="text-3xl font-extrabold text-gray-900 mb-6">\uc0\u38283 \u20652 \u20013 \u12398 \u20104 \u24819 \u12467 \u12531 \u12506 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <p class="text-gray-600 mb-6">\uc0\u21442 \u21152 \u12479 \u12473 \u12463 \u12399 \u20219 \u24847 \u12391 \u12377 \u12290 \u12479 \u12473 \u12463 \u23436 \u20102 \u12391 \u30340 \u20013 \u12509 \u12452 \u12531 \u12488 2\u20493 \u12398 \u12481 \u12515 \u12531 \u12473 \u65281 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div id="tournament-list" class="space-y-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-center text-gray-500">\uc0\u12525 \u12540 \u12489 \u20013 ...</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             onSnapshot\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 snapshot\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  tournaments \cf10 \strokec10 =\cf4 \strokec4  snapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 doc \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 (\{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  doc\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 ...\cf4 \strokec4 doc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 \}));\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  listHtml \cf10 \strokec10 =\cf4 \strokec4  tournaments\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 t \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 border border-indigo-100 rounded-xl shadow-md flex justify-between items-center transition hover:shadow-lg">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="text-xl font-bold text-indigo-700">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 title\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="text-sm text-gray-500">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 sponsorName\cf10 \strokec10 \}\cf11 \strokec11  / \uc0\u55356 \u57286  \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 prizePool\cf10 \strokec10 ?.\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '---'\cf10 \strokec10 \}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <span class="inline-block mt-1 px-3 py-1 text-xs font-semibold rounded-full \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 status \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'voting'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'bg-green-100 text-green-800'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'bg-yellow-100 text-yellow-800'\cf10 \strokec10 \}\cf11 \strokec11 ">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 status \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'voting'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u25237 \u31080 \u21463 \u20184 \u20013 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u38283 \u20652 \u20104 \u23450 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </span>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <button onclick="navigate('tournament', \{ id: '\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 ' \})" class="bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-600 transition">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \uc0\u20104 \u24819 \u12377 \u12427 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                 document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'tournament-list'\cf10 \strokec10 ).\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  listHtml \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '<p class="text-center text-gray-500 p-8">\uc0\u29694 \u22312 \u38283 \u20652 \u20013 \u12398 \u12467 \u12531 \u12506 \u12399 \u12354 \u12426 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 /** \uc0\u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u35443 \u32048 \u30011 \u38754  (\u25237 \u31080 \u12392 \u12479 \u12452 \u12512 \u12521 \u12452 \u12531 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderTournamentPage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 '<p class="text-center text-gray-500">\uc0\u12525 \u12540 \u12489 \u20013 ...</p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cb1 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  tournamentDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 tournamentDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ())\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 '<p class="text-red-500">\uc0\u12371 \u12398 \u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u12399 \u35211 \u12388 \u12363 \u12426 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 return\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  t \cf10 \strokec10 =\cf4 \strokec4  tournamentDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  isTaskCompleted \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getTaskCompletion\cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <div class="space-y-6">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <!-- \uc0\u22823 \u20250 \u24773 \u22577  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <h2 class="text-3xl font-extrabold text-indigo-800 mb-2">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 title\cf10 \strokec10 \}\cf11 \strokec11 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-md text-indigo-600 mb-1">\uc0\u20027 \u20652 : \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 sponsorName\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-sm text-gray-600">\uc0\u12467 \u12540 \u12473 : \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 course\cf10 \strokec10 \}\cf11 \strokec11  / \uc0\u38283 \u20652 \u26085 : \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 date\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-sm font-bold text-green-700 mt-2">\uc0\u55356 \u57286  \u36062 \u37329 \u32207 \u38989 : \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 prizePool\cf10 \strokec10 ?.\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                     <!-- \uc0\u20104 \u24819 \u12501 \u12457 \u12540 \u12512  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div id="prediction-section" class="bg-white p-5 rounded-xl shadow-lg border">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <h3 class="text-xl font-bold mb-4 text-gray-800">\uc0\u55356 \u57263  \u20778 \u21213 \u20104 \u24819  (\u21336 \u21213 )</h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <div id="task-incentive-status"></div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <form id="prediction-form" class="space-y-4"></form>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                     <!-- \uc0\u12479 \u12452 \u12512 \u12521 \u12452 \u12531  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <h3 class="text-2xl font-bold pt-4 border-t-2 mt-8 text-gray-800">\uc0\u55357 \u56492  \u22823 \u20250 \u12479 \u12452 \u12512 \u12521 \u12452 \u12531 </h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div id="timeline" class="space-y-4"></div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cb1 \
+\cb3             \cf2 \strokec2 // \uc0\u20104 \u24819 \u27177 \u12452 \u12531 \u12475 \u12531 \u12486 \u12451 \u12502 \u34920 \u31034 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  taskIncentiveStatus \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'task-incentive-status'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskType \cf10 \strokec10 &&\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 status \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'voting'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 isTaskCompleted\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     taskIncentiveStatus\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                         <div class="bg-yellow-100 p-3 mb-4 rounded-lg border border-yellow-300">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="font-semibold text-yellow-800 mb-2 flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <i data-lucide="zap" class="w-5 h-5 mr-2"></i> \uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u12391 \u30340 \u20013 \u12509 \u12452 \u12531 \u12488 <span class="text-red-600 text-lg font-extrabold mx-1">2\u20493 </span>\u65281 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <button onclick="navigate('sponsor', \{ id: '\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 ' \})" class="text-sm text-indigo-600 font-bold hover:underline">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 \uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u12398 \u12479 \u12473 \u12463 \u12434 \u30906 \u35469 \u12377 \u12427  \u8594 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                 \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     taskIncentiveStatus\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                         <div class="bg-green-100 p-3 mb-4 rounded-lg border border-green-300">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="font-semibold text-green-800 flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> \uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u28168 \u12415 \u65281 \u30340 \u20013 \u26178 \u12399 \u12509 \u12452 \u12531 \u12488 2\u20493 \u12391 \u12377 \u65281 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\
+\cb3             \cf2 \strokec2 // \uc0\u20104 \u24819 \u12501 \u12457 \u12540 \u12512 \u12398 \u12524 \u12531 \u12480 \u12522 \u12531 \u12464 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  form \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'prediction-form'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             form\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <label class="flex items-center p-3 bg-gray-50 rounded-lg border cursor-pointer hover:bg-indigo-50 transition">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <input type="radio" name="predictedPlayer" value="\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 " class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 mr-3">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <span class="font-medium text-gray-700">\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </span>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </label>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 )\}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <textarea id="comment-input" rows="2" placeholder="\uc0\u20104 \u24819 \u12395 \u12467 \u12513 \u12531 \u12488 \u12434 \u28155 \u12360 \u12390 SNS\u25237 \u31295 \u65288 \u20219 \u24847 \u65289 " class="w-full p-3 border rounded-lg focus:ring-indigo-500"></textarea>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="flex items-center space-x-2">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <input type="file" id="photo-upload" accept="image/*" class="hidden">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <button type="button" onclick="document.getElementById('photo-upload').click()" class="flex-shrink-0 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <i data-lucide="camera" class="w-5 h-5 mr-1 inline-block"></i> \uc0\u20889 \u30495 \u12434 \u36861 \u21152 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 status \cf10 \strokec10 !==\cf4 \strokec4  \cf11 \strokec11 'voting'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'disabled'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 >\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 status \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'voting'\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u20104 \u24819 \u12434 \u30906 \u23450  & \u25237 \u31295 \u12377 \u12427 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u25237 \u31080 \u32224 \u20999 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cb1 \
+\cb3             \cf2 \strokec2 // \uc0\u20104 \u24819 \u25237 \u31295 \u20966 \u29702 \cf4 \cb1 \strokec4 \
+\cb3             form\cf10 \strokec10 .\cf4 \strokec4 addEventListener\cf10 \strokec10 (\cf11 \strokec11 'submit'\cf10 \strokec10 ,\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 e\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 e\cf10 \strokec10 .\cf4 \strokec4 preventDefault\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  playerInput \cf10 \strokec10 =\cf4 \strokec4  form\cf10 \strokec10 .\cf4 \strokec4 querySelector\cf10 \strokec10 (\cf11 \strokec11 'input[name="predictedPlayer"]:checked'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  comment \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'comment-input'\cf10 \strokec10 ).\cf4 \strokec4 value\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  photoFile \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'photo-upload'\cf10 \strokec10 ).\cf4 \strokec4 files\cf10 \strokec10 [\cf14 \strokec14 0\cf10 \strokec10 ];\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 playerInput\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  \cf9 \strokec9 return\cf4 \strokec4  alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u36984 \u25163 \u12434 \u36984 \u25246 \u12375 \u12390 \u12367 \u12384 \u12373 \u12356 \u12290 '\cf10 \strokec10 );\cf4 \strokec4  \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf9 \strokec9 try\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     form\cf10 \strokec10 .\cf4 \strokec4 querySelector\cf10 \strokec10 (\cf11 \strokec11 'button[type="submit"]'\cf10 \strokec10 ).\cf4 \strokec4 disabled \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 true\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf9 \strokec9 let\cf4 \strokec4  imageUrl \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 null\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 photoFile\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  storageRefPath \cf10 \strokec10 =\cf4 \strokec4  storageRef\cf10 \strokec10 (\cf4 \strokec4 storage\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 `posts/\cf10 \strokec10 $\{\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 /\cf10 \strokec10 $\{\cf4 \strokec4 photoFile\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 _\cf10 \strokec10 $\{\cf13 \strokec13 Date\cf10 \strokec10 .\cf4 \strokec4 now\cf10 \strokec10 ()\}\cf11 \strokec11 `\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  snapshot \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  uploadBytes\cf10 \strokec10 (\cf4 \strokec4 storageRefPath\cf10 \strokec10 ,\cf4 \strokec4  photoFile\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         imageUrl \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDownloadURL\cf10 \strokec10 (\cf4 \strokec4 snapshot\cf10 \strokec10 .\cf4 \strokec4 ref\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf9 \strokec9 await\cf4 \strokec4  submitPrediction\cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 ,\cf4 \strokec4  playerInput\cf10 \strokec10 .\cf4 \strokec4 value\cf10 \strokec10 ,\cf4 \strokec4  comment\cf10 \strokec10 ,\cf4 \strokec4  imageUrl\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u20104 \u24819 \u12392 \u25237 \u31295 \u12364 \u23436 \u20102 \u12375 \u12414 \u12375 \u12383 \u65281 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     navigate\cf10 \strokec10 (\cf11 \strokec11 'tournament'\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  tournamentId \cf10 \strokec10 \});\cf4 \strokec4  \cf2 \strokec2 // \uc0\u30011 \u38754 \u12434 \u20877 \u35501 \u12415 \u36796 \u12415 \cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 catch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 error\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     console\cf10 \strokec10 .\cf4 \strokec4 error\cf10 \strokec10 (\cf11 \strokec11 "Submission Error:"\cf10 \strokec10 ,\cf4 \strokec4  error\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u25237 \u31295 \u12395 \u22833 \u25943 \u12375 \u12414 \u12375 \u12383 \u12290 \u20108 \u37325 \u25237 \u31080 \u12391 \u12399 \u12394 \u12356 \u12363 \u30906 \u35469 \u12375 \u12390 \u12367 \u12384 \u12373 \u12356 \u12290 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 finally\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     form\cf10 \strokec10 .\cf4 \strokec4 querySelector\cf10 \strokec10 (\cf11 \strokec11 'button[type="submit"]'\cf10 \strokec10 ).\cf4 \strokec4 disabled \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 false\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf2 \strokec2 // \uc0\u12479 \u12452 \u12512 \u12521 \u12452 \u12531 \u12398 \u12522 \u12450 \u12523 \u12479 \u12452 \u12512 \u26356 \u26032 \cf4 \cb1 \strokec4 \
+\cb3             onSnapshot\cf10 \strokec10 (\cf4 \strokec4 query\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  postsCol\cf10 \strokec10 ),\cf4 \strokec4  where\cf10 \strokec10 (\cf11 \strokec11 'tournamentId'\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 '=='\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 )),\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 snapshot\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  postsContainer \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'timeline'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 let\cf4 \strokec4  postsHtml \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf9 \strokec9 for\cf4 \strokec4  \cf10 \strokec10 (\cf9 \strokec9 const\cf4 \strokec4  postDoc \cf9 \strokec9 of\cf4 \strokec4  snapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  post \cf10 \strokec10 =\cf4 \strokec4  postDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  postUser \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getProfile\cf10 \strokec10 (\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 userId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  name\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12466 \u12473 \u12488 \u12518 \u12540 \u12470 \u12540 '\cf10 \strokec10 ,\cf4 \strokec4  totalPoints\cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 0\cf4 \strokec4  \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf9 \strokec9 let\cf4 \strokec4  predictionText \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 type \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'prediction'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf2 \strokec2 // \uc0\u20104 \u24819 \u36984 \u25163 \u21517 \u12434 \u21462 \u24471 \u65288 Players\u12467 \u12524 \u12463 \u12471 \u12519 \u12531 \u12363 \u12425 \u25506 \u12377 \u24517 \u35201 \u12354 \u12426 \u12290 \u20170 \u22238 \u12399 \u12514 \u12483 \u12463 \u12487 \u12540 \u12479 \u12363 \u12425 \u30452 \u25509 \u25506 \u12377 \u65289 \cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  predictedPlayer \cf10 \strokec10 =\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 pl \cf10 \strokec10 =>\cf4 \strokec4  pl\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  post\cf10 \strokec10 .\cf4 \strokec4 predictedPlayerId\cf10 \strokec10 )?.\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         predictionText \cf10 \strokec10 =\cf4 \strokec4  predictedPlayer \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `<p class="font-bold text-indigo-600">\uc0\u55356 \u57286  \cf10 \strokec10 $\{\cf4 \strokec4 predictedPlayer\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11  \uc0\u12395 \u20778 \u21213 \u20104 \u24819 </p>`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                     postsHtml \cf10 \strokec10 +=\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                         <div class="bg-white p-4 rounded-xl shadow border border-gray-100">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <div class="flex justify-between items-start mb-2">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <div class="flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     <i data-lucide="user" class="h-6 w-6 mr-2 text-gray-500"></i>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     <button onclick="navigate('userprofile', \{ id: '\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 ' \})" class="font-bold text-gray-800 hover:text-indigo-600">\cf10 \strokec10 $\{\cf4 \strokec4 postUser\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <p class="text-xs text-gray-400">\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 createdAt\cf10 \strokec10 ?.\cf4 \strokec4 toDate\cf10 \strokec10 ().\cf4 \strokec4 toLocaleTimeString\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf10 \strokec10 $\{\cf4 \strokec4 predictionText\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 text \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `<p class="text-gray-700 my-2">\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 text\cf10 \strokec10 \}\cf11 \strokec11 </p>`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 imageUrl \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `<img src="\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 imageUrl\cf10 \strokec10 \}\cf11 \strokec11 " alt="\uc0\u25237 \u31295 \u20889 \u30495 " class="w-full max-h-48 object-cover rounded-lg mt-2">`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <div class="flex items-center mt-3 text-sm text-gray-500 border-t pt-2">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <i data-lucide="heart" class="h-4 w-4 mr-1"></i> <span>\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 likes \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 \}\cf11 \strokec11 </span>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                 postsContainer\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  postsHtml \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '<p class="text-center text-gray-500 p-4">\uc0\u12414 \u12384 \u25237 \u31295 \u12364 \u12354 \u12426 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 /** \uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u12506 \u12540 \u12472  (\u12479 \u12473 \u12463 \u23436 \u20102 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderSponsorPage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  tournamentDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 tournamentDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ())\cf4 \strokec4  \cf9 \strokec9 return\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  t \cf10 \strokec10 =\cf4 \strokec4  tournamentDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  isTaskCompleted \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getTaskCompletion\cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 let\cf4 \strokec4  taskContentHtml \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 let\cf4 \strokec4  isCompleted \cf10 \strokec10 =\cf4 \strokec4  isTaskCompleted\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskType \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'quiz_answer'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 taskContentHtml \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                     <h3 class="text-xl font-bold mb-3 text-indigo-700">\uc0\u12463 \u12452 \u12474 \u12395 \u22238 \u31572 \u12375 \u12390 \u20104 \u24819 \u27177 \u12434 \u12450 \u12531 \u12525 \u12483 \u12463 </h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="mb-4">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskValue\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <input type="text" id="quiz-answer" placeholder="\uc0\u22238 \u31572 \u12434 \u20837 \u21147 " class="w-full p-3 border rounded-lg mb-4 focus:ring-indigo-500">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <button id="task-complete-btn" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" \cf10 \strokec10 $\{\cf4 \strokec4 isCompleted \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'disabled'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 >\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 isCompleted \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u28168 \u12415 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u22238 \u31572 \u12434 \u36865 \u20449 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskType \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'video_watch'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 taskContentHtml \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                     <h3 class="text-xl font-bold mb-3 text-indigo-700">\uc0\u12503 \u12525 \u12514 \u21205 \u30011 \u12434 \u35222 \u32884 \u12375 \u12390 \u20104 \u24819 \u27177 \u12434 \u12450 \u12531 \u12525 \u12483 \u12463 </h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="aspect-video bg-gray-300 rounded-lg flex items-center justify-center mb-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-gray-600">\uc0\u21205 \u30011 \u12503 \u12524 \u12452 \u12516 \u12540  (\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskValue\cf10 \strokec10 \}\cf11 \strokec11 )</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <button id="task-complete-btn" class="w-full bg-green-500 text-white font-bold py-3 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400" \cf10 \strokec10 $\{\cf4 \strokec4 isCompleted \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'disabled'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 >\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 isCompleted \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u28168 \u12415 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u21205 \u30011 \u12434 \u26368 \u24460 \u12414 \u12391 \u35222 \u32884 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <button onclick="navigate('tournament', \{ id: '\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 ' \})" class="text-indigo-600 hover:underline mb-4 flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> \uc0\u22823 \u20250 \u35443 \u32048 \u12395 \u25147 \u12427 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 space-y-6">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <h2 class="text-3xl font-extrabold text-gray-900 mb-4">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 sponsorName\cf10 \strokec10 \}\cf11 \strokec11  - \uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u12506 \u12540 \u12472 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-gray-600">\uc0\u12371 \u12398 \u22823 \u20250 \u12399 \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 sponsorName\cf10 \strokec10 \}\cf11 \strokec11 \uc0\u27096 \u12398 \u25552 \u20379 \u12391 \u12362 \u36865 \u12426 \u12375 \u12390 \u12356 \u12414 \u12377 \u12290 \u12479 \u12473 \u12463 \u12434 \u23436 \u20102 \u12375 \u12390 \u12508 \u12540 \u12490 \u12473 \u12509 \u12452 \u12531 \u12488 \u12434 \u12466 \u12483 \u12488 \u12375 \u12414 \u12375 \u12423 \u12358 \u12290 </p>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                     <!-- \uc0\u12479 \u12473 \u12463 \u12456 \u12522 \u12450  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div id="task-area" class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 taskContentHtml\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                     <!-- \uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u32057 \u20171  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="pt-4 border-t">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <h3 class="text-2xl font-bold mb-3">\uc0\u20225 \u26989 \u32057 \u20171 </h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-gray-700">\uc0\u26368 \u39640 \u12398 \u12468 \u12523 \u12501 \u20307 \u39443 \u12434 \u25552 \u20379 \u12377 \u12427 \u12383 \u12417 \u12395 \u12289 \u31169 \u12383 \u12385 \u12399 \u24120 \u12395 \u38761 \u26032 \u30340 \u12394 \u35069 \u21697 \u12434 \u38283 \u30330 \u12375 \u12390 \u12356 \u12414 \u12377 \u12290 \u31169 \u12383 \u12385 \u12398 \u35069 \u21697 \u12391 \u12354 \u12394 \u12383 \u12398 \u12473 \u12467 \u12450 \u12399 \u24517 \u12378 \u21521 \u19978 \u12375 \u12414 \u12377 \u65281 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <img src="https://placehold.co/400x150/000000/FFFFFF?text=\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 sponsorName\cf10 \strokec10 \}\cf11 \strokec11 +Logo" alt="\uc0\u12473 \u12509 \u12531 \u12469 \u12540 \u12525 \u12468 " class="w-full rounded-lg mt-3">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cb1 \
+\cb3             \cf2 \strokec2 // \uc0\u12452 \u12505 \u12531 \u12488 \u12522 \u12473 \u12490 \u12540 \u12398 \u20877 \u35373 \u23450  (DOM\u25407 \u20837 \u24460 )\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  taskCompleteBtn \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'task-complete-btn'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 taskCompleteBtn \cf10 \strokec10 &&\cf4 \strokec4  \cf10 \strokec10 !\cf4 \strokec4 isCompleted\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskType \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'quiz_answer'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     taskCompleteBtn\cf10 \strokec10 .\cf4 \strokec4 addEventListener\cf10 \strokec10 (\cf11 \strokec11 'click'\cf10 \strokec10 ,\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  answerInput \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'quiz-answer'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  answer \cf10 \strokec10 =\cf4 \strokec4  answerInput \cf10 \strokec10 ?\cf4 \strokec4  answerInput\cf10 \strokec10 .\cf4 \strokec4 value\cf10 \strokec10 .\cf4 \strokec4 trim\cf10 \strokec10 ().\cf4 \strokec4 toLowerCase\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                         \cb1 \
+\cb3                         \cf2 \strokec2 // \uc0\u26085 \u26412 \u35486 \u12398 \u12422 \u12425 \u12366 \u12395 \u23550 \u24540 : "\u32209 ", "\u12415 \u12393 \u12426 ", "\u12464 \u12522 \u12540 \u12531 " \u12394 \u12393 \u12434 \u35377 \u23481 \cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  normalizedAnswer \cf10 \strokec10 =\cf4 \strokec4  answer\cf10 \strokec10 .\cf4 \strokec4 replace\cf10 \strokec10 (\cf15 \strokec15 /\uc0\u33394 /\cf9 \strokec9 g\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ).\cf4 \strokec4 toLowerCase\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\
+\cb3                         \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 normalizedAnswer \cf10 \strokec10 ===\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 taskAnswer\cf10 \strokec10 .\cf4 \strokec4 toLowerCase\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  normalizedAnswer \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 '\uc0\u32209 '\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  normalizedAnswer \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12415 \u12393 \u12426 '\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  normalizedAnswer \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12464 \u12522 \u12540 \u12531 '\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                             \cf9 \strokec9 await\cf4 \strokec4  completeTask\cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                             alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u27491 \u35299 \u65281 \u12479 \u12473 \u12463 \u12364 \u23436 \u20102 \u12375 \u12289 \u12509 \u12452 \u12531 \u12488 2\u20493 \u12508 \u12540 \u12490 \u12473 \u12364 \u26377 \u21177 \u12395 \u12394 \u12426 \u12414 \u12375 \u12383 \u65281 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                             navigate\cf10 \strokec10 (\cf11 \strokec11 'tournament'\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  tournamentId \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                         \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                             alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u19981 \u27491 \u35299 \u12391 \u12377 \u12290 \u12418 \u12358 \u19968 \u24230 \u12362 \u35430 \u12375 \u12367 \u12384 \u12373 \u12356 \u12290 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 taskType \cf10 \strokec10 ===\cf4 \strokec4  \cf11 \strokec11 'video_watch'\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     taskCompleteBtn\cf10 \strokec10 .\cf4 \strokec4 addEventListener\cf10 \strokec10 (\cf11 \strokec11 'click'\cf10 \strokec10 ,\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf2 \strokec2 // \uc0\u21205 \u30011 \u35222 \u32884 \u12398 \u23436 \u20102 \u12399 \u12508 \u12479 \u12531 \u12463 \u12522 \u12483 \u12463 \u12391 \u12471 \u12511 \u12517 \u12524 \u12540 \u12488 \cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 await\cf4 \strokec4  completeTask\cf10 \strokec10 (\cf4 \strokec4 tournamentId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u35222 \u32884 \u23436 \u20102 \u65281 \u12479 \u12473 \u12463 \u12364 \u23436 \u20102 \u12375 \u12289 \u12509 \u12452 \u12531 \u12488 2\u20493 \u12508 \u12540 \u12490 \u12473 \u12364 \u26377 \u21177 \u12395 \u12394 \u12426 \u12414 \u12375 \u12383 \u65281 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         navigate\cf10 \strokec10 (\cf11 \strokec11 'tournament'\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  tournamentId \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12510 \u12452 \u12506 \u12540 \u12472  (\u23455 \u32318 \u12392 \u12509 \u12452 \u12531 \u12488 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderMyPage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  profile \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getProfile\cf10 \strokec10 (\cf4 \strokec4 userId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  q \cf10 \strokec10 =\cf4 \strokec4  query\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  predictionsCol\cf10 \strokec10 ),\cf4 \strokec4  where\cf10 \strokec10 (\cf11 \strokec11 'userId'\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 '=='\cf10 \strokec10 ,\cf4 \strokec4  userId\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  snapshot \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDocs\cf10 \strokec10 (\cf4 \strokec4 q\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  predictions \cf10 \strokec10 =\cf4 \strokec4  snapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 doc \cf10 \strokec10 =>\cf4 \strokec4  doc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ());\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  totalPredictions \cf10 \strokec10 =\cf4 \strokec4  predictions\cf10 \strokec10 .\cf4 \strokec4 length\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  correctPredictions \cf10 \strokec10 =\cf4 \strokec4  predictions\cf10 \strokec10 .\cf4 \strokec4 filter\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 isCorrect \cf10 \strokec10 ===\cf4 \strokec4  \cf9 \strokec9 true\cf10 \strokec10 ).\cf4 \strokec4 length\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  hitRate \cf10 \strokec10 =\cf4 \strokec4  totalPredictions \cf10 \strokec10 >\cf4 \strokec4  \cf14 \strokec14 0\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf10 \strokec10 ((\cf4 \strokec4 correctPredictions \cf10 \strokec10 /\cf4 \strokec4  totalPredictions\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 *\cf4 \strokec4  \cf14 \strokec14 100\cf10 \strokec10 ).\cf4 \strokec4 toFixed\cf10 \strokec10 (\cf14 \strokec14 1\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '0.0'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <h2 class="text-3xl font-extrabold text-gray-900 mb-6">\uc0\u12510 \u12452 \u12506 \u12540 \u12472 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <!-- \uc0\u12469 \u12510 \u12522 \u12540  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="bg-indigo-600 p-6 rounded-xl text-white shadow-xl mb-6">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-sm">\uc0\u12424 \u12358 \u12371 \u12381 \u12289 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-3xl font-extrabold mb-4">\cf10 \strokec10 $\{\cf4 \strokec4 profile\cf10 \strokec10 ?.\cf4 \strokec4 name \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '---'\cf10 \strokec10 \}\cf11 \strokec11 \uc0\u12373 \u12435 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <button onclick="navigate('store')" class="bg-white text-indigo-600 font-bold py-2 px-4 rounded-full hover:bg-gray-100 transition flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <i data-lucide="gift" class="w-5 h-5 mr-2"></i> \uc0\u12509 \u12452 \u12531 \u12488 \u20132 \u25563 \u25152 \u12408 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                 <!-- \uc0\u12473 \u12486 \u12540 \u12479 \u12473 \u12459 \u12540 \u12489  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="grid grid-cols-3 gap-3 mb-6">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 rounded-xl shadow border text-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-xs text-gray-500">\uc0\u32047 \u35336 \u12509 \u12452 \u12531 \u12488 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-2xl font-extrabold text-indigo-700">\cf10 \strokec10 $\{\cf4 \strokec4 profile\cf10 \strokec10 ?.\cf4 \strokec4 totalPoints\cf10 \strokec10 ?.\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 \}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 rounded-xl shadow border text-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-xs text-gray-500">\uc0\u30340 \u20013 \u29575 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-2xl font-extrabold text-green-600">\cf10 \strokec10 $\{\cf4 \strokec4 hitRate\cf10 \strokec10 \}\cf11 \strokec11 %</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 rounded-xl shadow border text-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-xs text-gray-500">\uc0\u20104 \u24819 \u22238 \u25968 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-2xl font-extrabold">\cf10 \strokec10 $\{\cf4 \strokec4 totalPredictions\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                 <!-- \uc0\u20104 \u24819 \u23653 \u27508  -->\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <h3 class="text-2xl font-bold mb-4 pt-4 border-t">\uc0\u20104 \u24819 \u23653 \u27508  (\cf10 \strokec10 $\{\cf4 \strokec4 totalPredictions\cf10 \strokec10 \}\cf11 \strokec11 \uc0\u20214 )</h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div id="prediction-history" class="space-y-3">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-center text-gray-500">\uc0\u12525 \u12540 \u12489 \u20013 ...</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cb1 \
+\cb3             \cf2 \strokec2 // \uc0\u23653 \u27508 \u12522 \u12473 \u12488 \u12398 \u12524 \u12531 \u12480 \u12522 \u12531 \u12464 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  historyContainer \cf10 \strokec10 =\cf4 \strokec4  document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'prediction-history'\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 predictions\cf10 \strokec10 .\cf4 \strokec4 length \cf10 \strokec10 ===\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 historyContainer\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 '<p class="text-center text-gray-500 p-8">\uc0\u12414 \u12384 \u20104 \u24819 \u12398 \u23653 \u27508 \u12399 \u12354 \u12426 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 return\cf4 \strokec4  lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf2 \strokec2 // \uc0\u23653 \u27508 \u12395 \u12399 \u22823 \u20250 \u21517 \u12364 \u24517 \u35201 \u12394 \u12383 \u12417 \u12289 \u22823 \u20250 ID\u12363 \u12425 \u21517 \u21069 \u12434 \u21462 \u24471 \cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  tournamentTitles \cf10 \strokec10 =\cf4 \strokec4  \cf10 \strokec10 \{\};\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 for\cf4 \strokec4  \cf10 \strokec10 (\cf9 \strokec9 const\cf4 \strokec4  t \cf9 \strokec9 of\cf4 \strokec4  mockData\cf10 \strokec10 .\cf4 \strokec4 tournaments\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  tournamentTitles\cf10 \strokec10 [\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ]\cf4 \strokec4  \cf10 \strokec10 =\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 title\cf10 \strokec10 ;\cf4 \strokec4  \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  historyHtml \cf10 \strokec10 =\cf4 \strokec4  predictions\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  statusClass \cf10 \strokec10 =\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 isCorrect \cf10 \strokec10 ===\cf4 \strokec4  \cf9 \strokec9 true\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'bg-green-500'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 isCorrect \cf10 \strokec10 ===\cf4 \strokec4  \cf9 \strokec9 false\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'bg-red-500'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'bg-yellow-500'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  statusText \cf10 \strokec10 =\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 isCorrect \cf10 \strokec10 ===\cf4 \strokec4  \cf9 \strokec9 true\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u30340 \u20013 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 isCorrect \cf10 \strokec10 ===\cf4 \strokec4  \cf9 \strokec9 false\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12495 \u12474 \u12524 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u32080 \u26524 \u24453 \u12385 '\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  awardedText \cf10 \strokec10 =\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 pointsAwarded \cf10 \strokec10 >\cf4 \strokec4  \cf14 \strokec14 0\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `+\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 pointsAwarded\cf10 \strokec10 \}\cf11 \strokec11 pt`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  predictedPlayerName \cf10 \strokec10 =\cf4 \strokec4  mockData\cf10 \strokec10 .\cf4 \strokec4 tournaments\cf10 \strokec10 .\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 t \cf10 \strokec10 =>\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 tournamentId\cf10 \strokec10 )?.\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 pl \cf10 \strokec10 =>\cf4 \strokec4  pl\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 predictedPlayerId\cf10 \strokec10 )?.\cf4 \strokec4 name \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '---'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3                 \cf9 \strokec9 return\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 rounded-xl shadow border flex justify-between items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="font-semibold text-gray-800">\cf10 \strokec10 $\{\cf4 \strokec4 tournamentTitles\cf10 \strokec10 [\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 tournamentId\cf10 \strokec10 ]\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '\uc0\u19981 \u26126 \u12394 \u22823 \u20250 '\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="text-sm text-gray-600">\uc0\u20104 \u24819 : \cf10 \strokec10 $\{\cf4 \strokec4 predictedPlayerName\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <div class="text-right">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <span class="inline-block px-3 py-1 text-xs font-bold text-white rounded-full \cf10 \strokec10 $\{\cf4 \strokec4 statusClass\cf10 \strokec10 \}\cf11 \strokec11 ">\cf10 \strokec10 $\{\cf4 \strokec4 statusText\cf10 \strokec10 \}\cf11 \strokec11 </span>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="text-sm font-semibold text-indigo-600 mt-1">\cf10 \strokec10 $\{\cf4 \strokec4 awardedText\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cf10 \strokec10 \}).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             historyContainer\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  historyHtml\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cb1 \
+\cb3         \cf2 \strokec2 /** \uc0\u12509 \u12452 \u12531 \u12488 \u20132 \u25563 \u25152  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderRewardStore\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  profile \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getProfile\cf10 \strokec10 (\cf4 \strokec4 userId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  currentPoints \cf10 \strokec10 =\cf4 \strokec4  profile\cf10 \strokec10 ?.\cf4 \strokec4 totalPoints \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <button onclick="navigate('mypage')" class="text-indigo-600 hover:underline mb-4 flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> \uc0\u12510 \u12452 \u12506 \u12540 \u12472 \u12395 \u25147 \u12427 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <h2 class="text-3xl font-extrabold text-gray-900 mb-6">\uc0\u12509 \u12452 \u12531 \u12488 \u20132 \u25563 \u25152 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="bg-green-100 p-4 rounded-xl border border-green-300 mb-6 text-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-sm text-green-800">\uc0\u29694 \u22312 \u12398 \u12509 \u12452 \u12531 \u12488 \u27531 \u39640 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-4xl font-extrabold text-green-700">\cf10 \strokec10 $\{\cf4 \strokec4 currentPoints\cf10 \strokec10 .\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                 <div id="rewards-list" class="grid grid-cols-2 gap-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     \cf10 \strokec10 $\{\cf4 \strokec4 mockData\cf10 \strokec10 .\cf4 \strokec4 rewards\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 r \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                         \cf9 \strokec9 const\cf4 \strokec4  canAfford \cf10 \strokec10 =\cf4 \strokec4  currentPoints \cf10 \strokec10 >=\cf4 \strokec4  r\cf10 \strokec10 .\cf4 \strokec4 cost\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 return\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                             <div class="bg-white rounded-xl shadow border overflow-hidden transition hover:shadow-lg flex flex-col">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <img src="\cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 imageUrl\cf10 \strokec10 \}\cf11 \strokec11 " alt="\cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 " class="w-full h-24 object-cover">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <div class="p-3 flex flex-col flex-grow">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     <p class="font-semibold text-gray-800 flex-grow">\cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     <p class="text-lg font-bold text-indigo-600 mt-2">\cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 cost\cf10 \strokec10 .\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     <button onclick="exchangeReward('\cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 ', \cf10 \strokec10 $\{\cf4 \strokec4 r\cf10 \strokec10 .\cf4 \strokec4 cost\cf10 \strokec10 \}\cf11 \strokec11 )" class="w-full py-2 mt-3 rounded-lg text-white font-bold transition \cf10 \strokec10 $\{\cf4 \strokec4 canAfford \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'bg-indigo-500 hover:bg-indigo-600'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'bg-gray-400 cursor-not-allowed'\cf10 \strokec10 \}\cf11 \strokec11 " \cf10 \strokec10 $\{!\cf4 \strokec4 canAfford \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'disabled'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 >\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                         \cf10 \strokec10 $\{\cf4 \strokec4 canAfford \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u20132 \u25563 \u12377 \u12427 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u12509 \u12452 \u12531 \u12488 \u19981 \u36275 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                     </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                     \cf10 \strokec10 \}).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 )\}\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12522 \u12527 \u12540 \u12489 \u20132 \u25563 \u12434 \u23455 \u34892 \u12377 \u12427 \u12464 \u12525 \u12540 \u12496 \u12523 \u38306 \u25968  */\cf4 \cb1 \strokec4 \
+\cb3         window\cf10 \strokec10 .\cf4 \strokec4 exchangeReward \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 rewardId\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 confirm\cf10 \strokec10 (\cf11 \strokec11 `\uc0\u26412 \u24403 \u12395  \cf10 \strokec10 $\{\cf4 \strokec4 cost\cf10 \strokec10 \}\cf11 \strokec11 pt \uc0\u12434 \u28040 \u36027 \u12375 \u12390  \cf10 \strokec10 $\{\cf4 \strokec4 rewardId\cf10 \strokec10 \}\cf11 \strokec11  \uc0\u12434 \u20132 \u25563 \u12375 \u12414 \u12377 \u12363 \u65311 `\cf10 \strokec10 ))\cf4 \strokec4  \cf9 \strokec9 return\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  result \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  handleExchangeReward\cf10 \strokec10 (\cf4 \strokec4 rewardId\cf10 \strokec10 ,\cf4 \strokec4  cost\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 result\cf10 \strokec10 .\cf4 \strokec4 success\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 alert\cf10 \strokec10 (\cf4 \strokec4 result\cf10 \strokec10 .\cf4 \strokec4 message\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 navigate\cf10 \strokec10 (\cf11 \strokec11 'store'\cf10 \strokec10 );\cf4 \strokec4  \cf2 \strokec2 // \uc0\u12473 \u12488 \u12450 \u12434 \u20877 \u35501 \u12415 \u36796 \u12415 \u12375 \u12390 \u27531 \u39640 \u12434 \u26356 \u26032 \cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 else\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 alert\cf10 \strokec10 (\cf4 \strokec4 result\cf10 \strokec10 .\cf4 \strokec4 message\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u12518 \u12540 \u12470 \u12540 \u12503 \u12525 \u12501 \u12451 \u12540 \u12523 \u30011 \u38754  */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderUserProfilePage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 ,\cf4 \strokec4  targetUserId\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  profile \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getProfile\cf10 \strokec10 (\cf4 \strokec4 targetUserId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 profile\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 '<p class="text-red-500">\uc0\u12371 \u12398 \u12518 \u12540 \u12470 \u12540 \u12399 \u35211 \u12388 \u12363 \u12426 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 return\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  q \cf10 \strokec10 =\cf4 \strokec4  query\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  postsCol\cf10 \strokec10 ),\cf4 \strokec4  where\cf10 \strokec10 (\cf11 \strokec11 'userId'\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 '=='\cf10 \strokec10 ,\cf4 \strokec4  targetUserId\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  snapshot \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDocs\cf10 \strokec10 (\cf4 \strokec4 q\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  posts \cf10 \strokec10 =\cf4 \strokec4  snapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 doc \cf10 \strokec10 =>\cf4 \strokec4  doc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ());\cf4 \cb1 \strokec4 \
+\
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <button onclick="navigate('home')" class="text-indigo-600 hover:underline mb-4 flex items-center">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> \uc0\u12507 \u12540 \u12512 \u12395 \u25147 \u12427 \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div class="p-6 bg-white rounded-xl shadow-lg border space-y-6">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div class="flex items-center space-x-4 border-b pb-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <i data-lucide="user-circle" class="h-12 w-12 text-indigo-500"></i>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <h2 class="text-3xl font-extrabold text-gray-900">\cf10 \strokec10 $\{\cf4 \strokec4 profile\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <p class="text-sm text-gray-600">\uc0\u32047 \u35336 \u12509 \u12452 \u12531 \u12488 : \cf10 \strokec10 $\{\cf4 \strokec4 profile\cf10 \strokec10 .\cf4 \strokec4 totalPoints\cf10 \strokec10 ?.\cf4 \strokec4 toLocaleString\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 \}\cf11 \strokec11 pt</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <h3 class="text-xl font-bold mb-3">\uc0\u33258 \u24049 \u32057 \u20171 </h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-gray-700 p-3 bg-gray-50 rounded-lg">\cf10 \strokec10 $\{\cf4 \strokec4 profile\cf10 \strokec10 .\cf4 \strokec4 bio \cf10 \strokec10 ||\cf4 \strokec4  \cf11 \strokec11 '\uc0\u33258 \u24049 \u32057 \u20171 \u25991 \u12399 \u12354 \u12426 \u12414 \u12379 \u12435 \u12290 '\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\
+\cf11 \cb3 \strokec11                     <h3 class="text-xl font-bold pt-4 border-t">\uc0\u25237 \u31295 \u23653 \u27508  (\cf10 \strokec10 $\{\cf4 \strokec4 posts\cf10 \strokec10 .\cf4 \strokec4 length\cf10 \strokec10 \}\cf11 \strokec11 \uc0\u20214 )</h3>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <div id="user-posts" class="space-y-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 posts\cf10 \strokec10 .\cf4 \strokec4 length \cf10 \strokec10 >\cf4 \strokec4  \cf14 \strokec14 0\cf4 \strokec4  \cf10 \strokec10 ?\cf4 \strokec4  posts\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 post \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <div class="bg-white p-3 rounded-lg shadow border border-gray-100">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <p class="text-xs text-gray-400 mb-1">\uc0\u22823 \u20250 ID: \cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <p class="text-gray-700">\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 text\cf10 \strokec10 \}\cf11 \strokec11 </p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 \cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 imageUrl \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `<img src="\cf10 \strokec10 $\{\cf4 \strokec4 post\cf10 \strokec10 .\cf4 \strokec4 imageUrl\cf10 \strokec10 \}\cf11 \strokec11 " alt="\uc0\u25237 \u31295 \u20889 \u30495 " class="w-full max-h-32 object-cover rounded-lg mt-2">`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         `\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '<p class="text-center text-gray-500 p-8">\uc0\u12371 \u12398 \u12518 \u12540 \u12470 \u12540 \u12399 \u12414 \u12384 \u25237 \u31295 \u12375 \u12390 \u12356 \u12414 \u12379 \u12435 \u12290 </p>'\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             lucide\cf10 \strokec10 .\cf4 \strokec4 createIcons\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\
+\cb3         \cf2 \strokec2 /** \uc0\u31649 \u29702 \u30011 \u38754  (\u32080 \u26524 \u30906 \u23450 \u12392 \u12509 \u12452 \u12531 \u12488 \u20184 \u19982 ) */\cf4 \cb1 \strokec4 \
+\cb3         \cf9 \strokec9 async\cf4 \strokec4  \cf9 \strokec9 function\cf4 \strokec4  renderAdminPage\cf10 \strokec10 (\cf4 \strokec4 container\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             container\cf10 \strokec10 .\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                 <h2 class="text-3xl font-extrabold text-red-700 mb-6">\uc0\u9881 \u65039  \u31649 \u29702 \u32773 \u12499 \u12517 \u12540 </h2>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 <div id="admin-list" class="space-y-4">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     <p class="text-center text-gray-500">\uc0\u12525 \u12540 \u12489 \u20013 ...</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11             `\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3             \cb1 \
+\cb3             onSnapshot\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ),\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 snapshot\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  tournaments \cf10 \strokec10 =\cf4 \strokec4  snapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 doc \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 (\{\cf4 \strokec4  id\cf10 \strokec10 :\cf4 \strokec4  doc\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 ...\cf4 \strokec4 doc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 \}));\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 const\cf4 \strokec4  listHtml \cf10 \strokec10 =\cf4 \strokec4  tournaments\cf10 \strokec10 .\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 t \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf11 \cb3 \strokec11                     <div class="bg-white p-4 rounded-xl shadow border">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <p class="text-xl font-bold">\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 title\cf10 \strokec10 \}\cf11 \strokec11  (\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 status\cf10 \strokec10 \}\cf11 \strokec11 )</p>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 winnerId \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 `<p class="text-green-600 font-semibold mt-1">\uc0\u32080 \u26524 \u30906 \u23450 \u28168 \u12415 : \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  t\cf10 \strokec10 .\cf4 \strokec4 winnerId\cf10 \strokec10 )?.\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </p>`\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         \cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         <form onsubmit="handleResultConfirmation(event, '\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 ', [\cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `\{id:'\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 ',name:'\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 '\}`\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ','\cf10 \strokec10 )\}\cf11 \strokec11 ])" class="mt-3 space-y-2">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <select name="winnerId" class="w-full p-2 border rounded-lg">\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 <option value="">--- \uc0\u20778 \u21213 \u32773 \u12434 \u36984 \u25246  ---</option>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 players\cf10 \strokec10 ?.\cf4 \strokec4 map\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  \cf11 \strokec11 `<option value="\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 \}\cf11 \strokec11 ">\cf10 \strokec10 $\{\cf4 \strokec4 p\cf10 \strokec10 .\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11 </option>`\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 )\}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </select>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             <button type="submit" class="w-full bg-red-600 text-white font-bold py-2 rounded-lg hover:bg-red-700 transition" \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 winnerId \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 'disabled'\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 ''\cf10 \strokec10 \}\cf11 \strokec11 >\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                                 \cf10 \strokec10 $\{\cf4 \strokec4 t\cf10 \strokec10 .\cf4 \strokec4 winnerId \cf10 \strokec10 ?\cf4 \strokec4  \cf11 \strokec11 '\uc0\u32080 \u26524 \u30906 \u23450 \u28168 \u12415 '\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 '\uc0\u32080 \u26524 \u12434 \u30906 \u23450 \u12375 \u12509 \u12452 \u12531 \u12488 \u20184 \u19982 '\cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                             </button>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                         </form>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                     </div>\cf4 \cb1 \strokec4 \
+\cf11 \cb3 \strokec11                 `\cf10 \strokec10 ).\cf4 \strokec4 join\cf10 \strokec10 (\cf11 \strokec11 ''\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3                 document\cf10 \strokec10 .\cf4 \strokec4 getElementById\cf10 \strokec10 (\cf11 \strokec11 'admin-list'\cf10 \strokec10 ).\cf4 \strokec4 innerHTML \cf10 \strokec10 =\cf4 \strokec4  listHtml\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3         \cf2 \strokec2 /** \uc0\u32080 \u26524 \u30906 \u23450 \u12392 \u12509 \u12452 \u12531 \u12488 \u20184 \u19982 \u20966 \u29702  (\u31649 \u29702 \u32773 \u23554 \u29992 ) */\cf4 \cb1 \strokec4 \
+\cb3         window\cf10 \strokec10 .\cf4 \strokec4 handleResultConfirmation \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 e\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 ,\cf4 \strokec4  players\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3             e\cf10 \strokec10 .\cf4 \strokec4 preventDefault\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3             \cf9 \strokec9 const\cf4 \strokec4  winnerId \cf10 \strokec10 =\cf4 \strokec4  e\cf10 \strokec10 .\cf4 \strokec4 target\cf10 \strokec10 .\cf4 \strokec4 elements\cf10 \strokec10 .\cf4 \strokec4 winnerId\cf10 \strokec10 .\cf4 \strokec4 value\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (!\cf4 \strokec4 winnerId \cf10 \strokec10 ||\cf4 \strokec4  \cf10 \strokec10 !\cf4 \strokec4 confirm\cf10 \strokec10 (\cf11 \strokec11 `\uc0\u26412 \u24403 \u12395  \cf10 \strokec10 $\{\cf4 \strokec4 players\cf10 \strokec10 .\cf4 \strokec4 find\cf10 \strokec10 (\cf4 \strokec4 p \cf10 \strokec10 =>\cf4 \strokec4  p\cf10 \strokec10 .\cf4 \strokec4 id \cf10 \strokec10 ===\cf4 \strokec4  winnerId\cf10 \strokec10 ).\cf4 \strokec4 name\cf10 \strokec10 \}\cf11 \strokec11  \uc0\u12434 \u20778 \u21213 \u32773 \u12392 \u12375 \u12390 \u30906 \u23450 \u12375 \u12414 \u12377 \u12363 \u65311  (\u12509 \u12452 \u12531 \u12488 \u20184 \u19982 \u12373 \u12428 \u12414 \u12377 )`\cf10 \strokec10 ))\cf4 \strokec4  \cf9 \strokec9 return\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3             \cf9 \strokec9 try\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 \cf9 \strokec9 await\cf4 \strokec4  runTransaction\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  \cf9 \strokec9 async\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 transaction\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 =>\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  tournamentRef \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  tournamentsCol\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf2 \strokec2 // 1. \uc0\u12488 \u12540 \u12490 \u12513 \u12531 \u12488 \u32080 \u26524 \u12398 \u26356 \u26032 \cf4 \cb1 \strokec4 \
+\cb3                     transaction\cf10 \strokec10 .\cf4 \strokec4 update\cf10 \strokec10 (\cf4 \strokec4 tournamentRef\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  winnerId\cf10 \strokec10 :\cf4 \strokec4  winnerId\cf10 \strokec10 ,\cf4 \strokec4  status\cf10 \strokec10 :\cf4 \strokec4  \cf11 \strokec11 'finished'\cf4 \strokec4  \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3                     \cf2 \strokec2 // 2. \uc0\u20104 \u24819 \u12487 \u12540 \u12479 \u12398 \u21462 \u24471 \u12392 \u26356 \u26032 \cf4 \cb1 \strokec4 \
+\cb3                     \cf9 \strokec9 const\cf4 \strokec4  predictionsSnapshot \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  transaction\cf10 \strokec10 .\cf9 \strokec9 get\cf10 \strokec10 (\cf4 \strokec4 query\cf10 \strokec10 (\cf4 \strokec4 collection\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  predictionsCol\cf10 \strokec10 ),\cf4 \strokec4  where\cf10 \strokec10 (\cf11 \strokec11 'tournamentId'\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 '=='\cf10 \strokec10 ,\cf4 \strokec4  tournamentId\cf10 \strokec10 )));\cf4 \cb1 \strokec4 \
+\cb3                     \cb1 \
+\cb3                     \cf9 \strokec9 for\cf4 \strokec4  \cf10 \strokec10 (\cf9 \strokec9 const\cf4 \strokec4  predDoc \cf9 \strokec9 of\cf4 \strokec4  predictionsSnapshot\cf10 \strokec10 .\cf4 \strokec4 docs\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  prediction \cf10 \strokec10 =\cf4 \strokec4  predDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ();\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  isCorrect \cf10 \strokec10 =\cf4 \strokec4  prediction\cf10 \strokec10 .\cf4 \strokec4 predictedPlayerId \cf10 \strokec10 ===\cf4 \strokec4  winnerId\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 let\cf4 \strokec4  points \cf10 \strokec10 =\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                         \cb1 \
+\cb3                         \cf2 \strokec2 // \uc0\u12479 \u12473 \u12463 \u23436 \u20102 \u12508 \u12540 \u12490 \u12473 \u12481 \u12455 \u12483 \u12463  (\u12509 \u12452 \u12531 \u12488 2\u20493 \u12525 \u12472 \u12483 \u12463 )\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  taskDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  getDoc\cf10 \strokec10 (\cf4 \strokec4 doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  userTasksCol\cf10 \strokec10 ,\cf4 \strokec4  \cf11 \strokec11 `\cf10 \strokec10 $\{\cf4 \strokec4 prediction\cf10 \strokec10 .\cf4 \strokec4 userId\cf10 \strokec10 \}\cf11 \strokec11 _\cf10 \strokec10 $\{\cf4 \strokec4 tournamentId\cf10 \strokec10 \}\cf11 \strokec11 `\cf10 \strokec10 ));\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  isTaskCompleted \cf10 \strokec10 =\cf4 \strokec4  taskDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ()\cf4 \strokec4  \cf10 \strokec10 &&\cf4 \strokec4  taskDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ().\cf4 \strokec4 completed\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\
+\cb3                         \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 isCorrect\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                             points \cf10 \strokec10 =\cf4 \strokec4  isTaskCompleted \cf10 \strokec10 ?\cf4 \strokec4  \cf14 \strokec14 200\cf4 \strokec4  \cf10 \strokec10 :\cf4 \strokec4  \cf14 \strokec14 100\cf10 \strokec10 ;\cf4 \strokec4  \cf2 \strokec2 // 2\uc0\u20493 \u12508 \u12540 \u12490 \u12473 \cf4 \cb1 \strokec4 \
+\cb3                         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\
+\cb3                         \cf2 \strokec2 // 3. \uc0\u20104 \u24819 \u12487 \u12540 \u12479 \u12395 \u32080 \u26524 \u12392 \u20184 \u19982 \u12509 \u12452 \u12531 \u12488 \u12434 \u35352 \u37682 \cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 const\cf4 \strokec4  predictionRef \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  predictionsCol\cf10 \strokec10 ,\cf4 \strokec4  predDoc\cf10 \strokec10 .\cf4 \strokec4 id\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                         transaction\cf10 \strokec10 .\cf4 \strokec4 update\cf10 \strokec10 (\cf4 \strokec4 predictionRef\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  isCorrect\cf10 \strokec10 :\cf4 \strokec4  isCorrect\cf10 \strokec10 ,\cf4 \strokec4  pointsAwarded\cf10 \strokec10 :\cf4 \strokec4  points \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3                         \cf2 \strokec2 // 4. \uc0\u30340 \u20013 \u32773 \u12408 \u12509 \u12452 \u12531 \u12488 \u20184 \u19982  (\u12509 \u12452 \u12531 \u12488  > 0 \u12398 \u22580 \u21512 \u12398 \u12415 )\cf4 \cb1 \strokec4 \
+\cb3                         \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 points \cf10 \strokec10 >\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                             \cf9 \strokec9 const\cf4 \strokec4  profileRef \cf10 \strokec10 =\cf4 \strokec4  doc\cf10 \strokec10 (\cf4 \strokec4 db\cf10 \strokec10 ,\cf4 \strokec4  profilesCol\cf10 \strokec10 ,\cf4 \strokec4  prediction\cf10 \strokec10 .\cf4 \strokec4 userId\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                             \cf9 \strokec9 const\cf4 \strokec4  profileDoc \cf10 \strokec10 =\cf4 \strokec4  \cf9 \strokec9 await\cf4 \strokec4  transaction\cf10 \strokec10 .\cf9 \strokec9 get\cf10 \strokec10 (\cf4 \strokec4 profileRef\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                             \cf9 \strokec9 if\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 profileDoc\cf10 \strokec10 .\cf4 \strokec4 exists\cf10 \strokec10 ())\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                                 \cf9 \strokec9 const\cf4 \strokec4  newPoints \cf10 \strokec10 =\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 profileDoc\cf10 \strokec10 .\cf4 \strokec4 data\cf10 \strokec10 ().\cf4 \strokec4 totalPoints \cf10 \strokec10 ||\cf4 \strokec4  \cf14 \strokec14 0\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 +\cf4 \strokec4  points\cf10 \strokec10 ;\cf4 \cb1 \strokec4 \
+\cb3                                 transaction\cf10 \strokec10 .\cf4 \strokec4 update\cf10 \strokec10 (\cf4 \strokec4 profileRef\cf10 \strokec10 ,\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \strokec4  totalPoints\cf10 \strokec10 :\cf4 \strokec4  newPoints \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\cb3                             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                         \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                     \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3                 \cf10 \strokec10 \});\cf4 \cb1 \strokec4 \
+\
+\cb3                 alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u32080 \u26524 \u30906 \u23450 \u12392 \u12509 \u12452 \u12531 \u12488 \u20184 \u19982 \u12364 \u23436 \u20102 \u12375 \u12414 \u12375 \u12383 \u65281 '\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 navigate\cf10 \strokec10 (\cf11 \strokec11 'admin'\cf10 \strokec10 );\cf4 \strokec4  \cf2 \strokec2 // \uc0\u30011 \u38754 \u26356 \u26032 \cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \strokec4  \cf9 \strokec9 catch\cf4 \strokec4  \cf10 \strokec10 (\cf4 \strokec4 error\cf10 \strokec10 )\cf4 \strokec4  \cf10 \strokec10 \{\cf4 \cb1 \strokec4 \
+\cb3                 console\cf10 \strokec10 .\cf4 \strokec4 error\cf10 \strokec10 (\cf11 \strokec11 "Transaction failed:"\cf10 \strokec10 ,\cf4 \strokec4  error\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3                 alert\cf10 \strokec10 (\cf11 \strokec11 '\uc0\u20966 \u29702 \u20013 \u12395 \u12456 \u12521 \u12540 \u12364 \u30330 \u29983 \u12375 \u12414 \u12375 \u12383 : '\cf4 \strokec4  \cf10 \strokec10 +\cf4 \strokec4  error\cf10 \strokec10 .\cf4 \strokec4 message\cf10 \strokec10 );\cf4 \cb1 \strokec4 \
+\cb3             \cf10 \strokec10 \}\cf4 \cb1 \strokec4 \
+\cb3         \cf10 \strokec10 \};\cf4 \cb1 \strokec4 \
+\
+\cb3     \cf7 \strokec7 </\cf5 \strokec5 script\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb3 \strokec7 </\cf5 \strokec5 body\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+\cf7 \cb3 \strokec7 </\cf5 \strokec5 html\cf7 \strokec7 >\cf4 \cb1 \strokec4 \
+}
