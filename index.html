@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLFIN 予想SNS MVP</title>
+    <title>WIN Predict - マルチスポーツ予想SNS MVP</title>
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com/"></script>
     <!-- Lucide Icons -->
@@ -52,7 +52,7 @@
         <div id="content" class="hidden">
             <!-- ナビゲーションバー (常に表示) -->
             <header class="sticky top-0 bg-white border-b border-gray-100 z-10 p-4 flex justify-between items-center">
-                <h1 class="text-2xl font-extrabold text-indigo-600 cursor-pointer" onclick="window.navigate('home')">GOLFIN Predict</h1>
+                <h1 class="text-2xl font-extrabold text-indigo-600 cursor-pointer" onclick="window.navigate('home')">WIN Predict</h1>
                 <div class="flex space-x-3 items-center">
                     <button id="admin-view-btn" class="text-sm text-gray-500 hover:text-indigo-600" onclick="window.navigate('admin')">管理</button>
                     <button onclick="window.navigate('mypage')" class="p-2 rounded-full bg-indigo-50 hover:bg-indigo-100 transition">
@@ -119,13 +119,13 @@
         // モックデータ (UI確認用)
         let mockData = {
             tournaments: [
-                { id: 't1', title: '第1回 GOLFIN杯', sponsorName: 'GolfGear Pro', prizePool: 10000, course: '富士カントリー', date: '2025-12-01', status: 'voting', winnerId: null, 
+                { id: 't1', title: '第1回 WIN CUP (ゴルフ)', sponsorName: 'GolfGear Pro', prizePool: 10000, course: '富士カントリー', date: '2025-12-01', status: 'voting', winnerId: null, 
                   taskType: 'quiz_answer', taskValue: 'このスポンサーのロゴカラーは？', taskAnswer: 'みどり',
                   players: [{ id: 'p1', name: '田中 太郎' }, { id: 'p2', name: '佐藤 花子' }, { id: 'p3', name: '山本 健太' }] 
                 },
-                { id: 't2', title: '冬のオープンコンペ', sponsorName: 'Travel Golf', prizePool: 5000, course: '沖縄オーシャン', date: '2025-12-15', status: 'upcoming', winnerId: null,
+                { id: 't2', title: 'eSports DOTA2 大会', sponsorName: 'Tech Giants', prizePool: 5000, course: 'オンライン', date: '2025-12-15', status: 'upcoming', winnerId: null,
                   taskType: 'video_watch', taskValue: 'https://placehold.co/400x200/22C55E/white?text=Sponsor+Video', taskAnswer: null,
-                  players: [{ id: 'p4', name: '鈴木 一郎' }, { id: 'p5', name: '高橋 優子' }] 
+                  players: [{ id: 'p4', name: 'Team Liquid' }, { id: 'p5', name: 'Evil Geniuses' }] 
                 },
             ],
             rewards: [
@@ -302,7 +302,7 @@
         /** ホーム画面 (トーナメント一覧) */
         function renderHomePage(container) {
             container.innerHTML = `
-                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">開催中の予想コンペ</h2>
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-6">開催中の予想イベント</h2>
                 <p class="text-gray-600 mb-6">参加タスクは任意です。タスク完了で的中ポイント2倍のチャンス！</p>
                 <div id="tournament-list" class="space-y-4">
                     <p class="text-center text-gray-500">UIデータをロード中...</p>
@@ -310,8 +310,8 @@
             `;
             
             // ダミー設定の場合、モックデータで静的に表示
-            const tournaments = mockData.tournaments;
-            const listHtml = tournaments.map(t => `
+            const events = mockData.tournaments;
+            const listHtml = events.map(t => `
                 <div class="bg-white p-4 border border-indigo-100 rounded-xl shadow-md flex justify-between items-center transition hover:shadow-lg">
                     <div>
                         <p class="text-xl font-bold text-indigo-700">${t.title} (UI確認用)</p>
@@ -325,7 +325,7 @@
                     </button>
                 </div>
             `).join('');
-            document.getElementById('tournament-list').innerHTML = listHtml || '<p class="text-center text-gray-500 p-8">現在開催中のコンペはありません。</p>';
+            document.getElementById('tournament-list').innerHTML = listHtml || '<p class="text-center text-gray-500 p-8">現在開催中のイベントはありません。</p>';
             lucide.createIcons();
         }
         
@@ -342,7 +342,7 @@
                     <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-200">
                         <h2 class="text-3xl font-extrabold text-indigo-800 mb-2">${t.title} (UI確認用)</h2>
                         <p class="text-md text-indigo-600 mb-1">主催: ${t.sponsorName}</p>
-                        <p class="text-sm text-gray-600">コース: ${t.course} / 開催日: ${t.date}</p>
+                        <p class="text-sm text-gray-600">会場/場所: ${t.course} / 開催日: ${t.date}</p>
                         <p class="text-sm font-bold text-green-700 mt-2">🏆 賞金総額: ${t.prizePool?.toLocaleString()}pt</p>
                     </div>
 
@@ -363,7 +363,7 @@
 
                     <!-- 選手リスト (投げ銭用) -->
                     <div class="p-4 bg-gray-50 rounded-xl border">
-                        <h3 class="text-xl font-bold mb-3 text-gray-800">🏌️ 出場選手を応援</h3>
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">🏆 出場選手・チームを応援</h3>
                         <div class="space-y-2">
                             ${t.players.map(p => `
                                 <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm border">
@@ -377,7 +377,7 @@
                     </div>
 
                     <!-- タイムライン -->
-                    <h3 class="text-2xl font-bold pt-4 border-t-2 mt-8 text-gray-800">💬 大会タイムライン</h3>
+                    <h3 class="text-2xl font-bold pt-4 border-t-2 mt-8 text-gray-800">💬 イベントタイムライン</h3>
                     <div id="timeline" class="space-y-4">
                         <p class="text-center text-red-500">データ機能がオフです。投稿は表示されません。</p>
                         <!-- ダミー投稿を挿入 -->
@@ -389,8 +389,8 @@
                                 </div>
                                 <p class="text-xs text-gray-400">10分前</p>
                             </div>
-                            <p class="font-bold text-indigo-600">🏆 佐藤 花子 に優勝予想</p>
-                            <p class="text-gray-700 my-2">ショットが安定してるから、ベテランの佐藤プロに期待！</p>
+                            <p class="font-bold text-indigo-600">🏆 ${t.players[0].name} に優勝予想</p>
+                            <p class="text-gray-700 my-2">今回はeSportsだけど、プレースタイルが安定してるから期待！</p>
                             <div class="flex items-center mt-3 text-sm text-gray-500 border-t pt-2 space-x-4">
                                 <span class="flex items-center">
                                     <i data-lucide="heart" class="h-4 w-4 mr-1"></i> 15
@@ -467,12 +467,12 @@
 
             container.innerHTML = `
                 <button onclick="window.navigate('tournament', { id: '${tournamentId}' })" class="text-indigo-600 hover:underline mb-4 flex items-center">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> 大会詳細に戻る
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-1"></i> イベント詳細に戻る
                 </button>
                 
                 <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 space-y-6">
                     <h2 class="text-3xl font-extrabold text-gray-900 mb-4">${t.sponsorName} - スポンサーページ</h2>
-                    <p class="text-gray-600">この大会は${t.sponsorName}様の提供でお送りしています。タスクを完了してボーナスポイントをゲットしましょう。</p>
+                    <p class="text-gray-600">このイベントは${t.sponsorName}様の提供でお送りしています。タスクを完了してボーナスポイントをゲットしましょう。</p>
 
                     <!-- タスクエリア -->
                     <div id="task-area" class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
@@ -482,7 +482,7 @@
                     <!-- スポンサー紹介 -->
                     <div class="pt-4 border-t">
                         <h3 class="text-2xl font-bold mb-3">企業紹介</h3>
-                        <p class="text-gray-700">最高のゴルフ体験を提供するために、私たちは常に革新的な製品を開発しています。私たちの製品であなたのスコアは必ず向上します！</p>
+                        <p class="text-gray-700">最高の体験を提供するために、私たちは常に革新的な製品を開発しています。</p>
                         <img src="https://placehold.co/400x150/000000/FFFFFF?text=${t.sponsorName}+Logo" alt="スポンサーロゴ" class="w-full rounded-lg mt-3">
                     </div>
                     
@@ -571,13 +571,13 @@
                 <!-- 予想履歴 -->
                 <h3 class="text-2xl font-bold mb-4 pt-4 border-t">予想履歴 (${totalPredictions}件)</h3>
                 <div id="prediction-history" class="space-y-3">
-                    <p class="text-center text-red-500 p-8">警告: データ機能無効のため、履歴は静的です。</p>
+                    <p class="text-center text-red-500 p-8">ダミー設定のため投稿履歴は表示されません。</p>
                 </div>
             `;
             
             const historyContainer = document.getElementById('prediction-history');
             const historyHtml = `<div class="bg-white p-4 rounded-xl shadow border">
-                <p class="font-semibold text-gray-800">第1回 GOLFIN杯</p>
+                <p class="font-semibold text-gray-800">第1回 WIN CUP (ゴルフ)</p>
                 <p class="text-sm text-gray-600">予想: 田中 太郎</p>
                 <p class="text-sm font-semibold text-indigo-600 mt-1">結果待ち</p>
             </div>`;
@@ -701,8 +701,8 @@
                 </div>
             `;
             
-            const tournaments = mockData.tournaments;
-            const listHtml = tournaments.map(t => `
+            const events = mockData.tournaments;
+            const listHtml = events.map(t => `
                 <div class="bg-white p-4 rounded-xl shadow border">
                     <p class="text-xl font-bold">${t.title} (UI確認用)</p>
                     <p class="text-gray-600 mt-1">結果確定はシミュレーションのみ可能です。</p>
