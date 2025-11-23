@@ -3,6 +3,9 @@
 ゴルフ予想SNS MVP (Finalized)
 機能: 匿名認証, Firestoreデータ永続化, トーナメント予想, SNS投稿, 
       スポンサー連携(タスクでポイント2倍インセンティブ), ポイント交換所, 管理ビュー
+      
+      【重要】このバージョンはGitHub Pages対応のためダミーのFirebase設定を含みます。
+      データ保存機能は動作しません。
 ================================================================================
 -->
 <!DOCTYPE html>
@@ -87,11 +90,26 @@
         let userId = 'default-user';
         let appId = 'default-app-id';
 
-        // 必須の環境変数を確保
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        // 外部環境対応: Firebaseの設定をチェック。存在しない場合はダミー設定を使用
+        let firebaseConfig = null;
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
         appId = typeof __app_id !== 'undefined' ? __app_id : 'golfin-predict-mvp';
 
+        if (typeof __firebase_config !== 'undefined') {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            // WARNING: GitHub Pagesなど、外部環境でのテスト用ダミー設定
+            console.warn("Firebase config not found in environment. Using dummy config. Database functions will NOT work.");
+            firebaseConfig = {
+                apiKey: "DUMMY_API_KEY", // ここに実際のキーを入れる必要があります
+                authDomain: "dummy-project.firebaseapp.com",
+                projectId: "dummy-project-12345",
+                storageBucket: "dummy-project-12345.appspot.com",
+                messagingSenderId: "123456789012",
+                appId: "1:123456789012:web:abcde12345abcde12345"
+            };
+        }
+        
         // コレクションパスを定義 (パブリックデータ)
         const getCollectionPath = (collectionName) => {
             return `/artifacts/${appId}/public/data/${collectionName}`;
@@ -133,10 +151,6 @@
             const content = document.getElementById('content');
             
             try {
-                if (!firebaseConfig) {
-                    throw new Error("Firebase config is missing. Cannot initialize.");
-                }
-
                 // 1. Firebase初期化
                 app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
@@ -168,12 +182,25 @@
                 console.error("Initialization Error:", error);
                 loadingScreen.classList.add('hidden');
                 errorMessage.classList.remove('hidden');
-                errorMessage.textContent = `エラー: サービスの初期化に失敗しました。詳細をコンソールで確認してください。`;
+                
+                // ダミー設定を使用している場合の警告表示
+                if (firebaseConfig.apiKey === "DUMMY_API_KEY") {
+                    errorMessage.textContent = '警告: 現在、ダミーのFirebase設定を使用中のため、データベース機能が動作しません。UIの確認用にご利用ください。';
+                } else {
+                    errorMessage.textContent = `エラー: サービスの初期化に失敗しました。詳細をコンソールで確認してください。`;
+                }
+                errorMessage.classList.remove('hidden');
             }
         };
 
         // 初回起動時にモックデータをFirestoreに書き込む関数
         async function initializeMockData() {
+            // ダミー設定の場合はFirestoreへの書き込みをスキップ
+            if (firebaseConfig.apiKey === "DUMMY_API_KEY") {
+                console.log("Using dummy config. Skipping Firestore initialization.");
+                return;
+            }
+            
             try {
                 // トーナメントデータの存在チェック
                 const firstTournamentDoc = doc(db, tournamentsCol, mockData.tournaments[0].id);
@@ -212,21 +239,28 @@
         // =========================================================================
         // 3. データ操作関数 (Firestore CRUD)
         // =========================================================================
+        
+        // ダミー設定使用時にFirestore操作を抑制するヘルパー
+        const isDummyConfig = () => firebaseConfig.apiKey === "DUMMY_API_KEY";
+        const dummyAlert = (action) => alert(`警告: 現在ダミー設定のため、${action}は動作しません。`);
 
         /** プロフィールを取得 */
         const getProfile = async (id) => {
+            if (isDummyConfig()) return { name: '匿名ゴルファー (ダミー)', totalPoints: 500, id: id };
             const docSnap = await getDoc(doc(db, profilesCol, id));
             return docSnap.exists() ? docSnap.data() : null;
         };
 
         /** タスク完了フラグを取得 */
         const getTaskCompletion = async (tournamentId) => {
+            if (isDummyConfig()) return false;
             const taskDoc = await getDoc(doc(db, userTasksCol, `${userId}_${tournamentId}`));
             return taskDoc.exists() ? taskDoc.data().completed : false;
         };
         
         /** タスクを完了状態に設定 */
         const completeTask = async (tournamentId) => {
+            if (isDummyConfig()) return dummyAlert('タスク完了記録');
             await setDoc(doc(db, userTasksCol, `${userId}_${tournamentId}`), {
                 userId: userId,
                 tournamentId: tournamentId,
@@ -237,6 +271,7 @@
         
         /** 予想と投稿をFirestoreに保存 */
         const submitPrediction = async (tournamentId, predictedPlayerId, comment, imageUrl = null) => {
+            if (isDummyConfig()) return dummyAlert('予想投稿');
             // 予想 (predictions) を保存
             await setDoc(doc(db, predictionsCol, `${userId}_${tournamentId}`), {
                 tournamentId,
@@ -264,6 +299,7 @@
 
         /** リワードの交換処理 (トランザクション) */
         const handleExchangeReward = async (rewardId, cost) => {
+            if (isDummyConfig()) return { success: false, message: '警告: ダミー設定のため交換は実行されません。' };
             const profileRef = doc(db, profilesCol, userId);
 
             try {
@@ -349,7 +385,30 @@
                     <p class="text-center text-gray-500">ロード中...</p>
                 </div>
             `;
+            
+            if (isDummyConfig()) {
+                // ダミー設定の場合、モックデータで静的に表示
+                const tournaments = mockData.tournaments;
+                const listHtml = tournaments.map(t => `
+                    <div class="bg-white p-4 border border-indigo-100 rounded-xl shadow-md flex justify-between items-center transition hover:shadow-lg">
+                        <div>
+                            <p class="text-xl font-bold text-indigo-700">${t.title} (ダミー)</p>
+                            <p class="text-sm text-gray-500">${t.sponsorName} / 🏆 ${t.prizePool?.toLocaleString() || '---'}pt</p>
+                            <span class="inline-block mt-1 px-3 py-1 text-xs font-semibold rounded-full ${t.status === 'voting' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                                ${t.status === 'voting' ? '投票受付中' : '開催予定'}
+                            </span>
+                        </div>
+                        <button onclick="window.navigate('tournament', { id: '${t.id}' })" class="bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-600 transition">
+                            予想する
+                        </button>
+                    </div>
+                `).join('');
+                document.getElementById('tournament-list').innerHTML = listHtml || '<p class="text-center text-gray-500 p-8">現在開催中のコンペはありません。</p>';
+                lucide.createIcons();
+                return;
+            }
 
+            // 本番環境の場合、Firestoreからリアルタイム更新
             onSnapshot(collection(db, tournamentsCol), (snapshot) => {
                 const tournaments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 const listHtml = tournaments.map(t => `
@@ -375,12 +434,19 @@
         async function renderTournamentPage(container, tournamentId) {
             container.innerHTML = '<p class="text-center text-gray-500">ロード中...</p>';
             
-            const tournamentDoc = await getDoc(doc(db, tournamentsCol, tournamentId));
-            if (!tournamentDoc.exists()) {
-                container.innerHTML = '<p class="text-red-500">このトーナメントは見つかりません。</p>';
-                return;
+            // データ取得 (ダミー対応)
+            let t = null;
+            if (isDummyConfig()) {
+                t = mockData.tournaments.find(mt => mt.id === tournamentId);
+            } else {
+                const tournamentDoc = await getDoc(doc(db, tournamentsCol, tournamentId));
+                if (!tournamentDoc.exists()) {
+                    container.innerHTML = '<p class="text-red-500">このトーナメントは見つかりません。</p>';
+                    return;
+                }
+                t = tournamentDoc.data();
             }
-            const t = tournamentDoc.data();
+
             const isTaskCompleted = await getTaskCompletion(tournamentId);
 
             container.innerHTML = `
@@ -402,7 +468,9 @@
 
                     <!-- タイムライン -->
                     <h3 class="text-2xl font-bold pt-4 border-t-2 mt-8 text-gray-800">💬 大会タイムライン</h3>
-                    <div id="timeline" class="space-y-4"></div>
+                    <div id="timeline" class="space-y-4">
+                        ${isDummyConfig() ? '<p class="text-center text-red-500">データ機能がオフです。投稿は表示されません。</p>' : '<p class="text-center text-gray-500">ロード中...</p>'}
+                    </div>
                 </div>
             `;
             
@@ -469,9 +537,13 @@
                     
                     let imageUrl = null;
                     if (photoFile) {
-                        const storageRefPath = storageRef(storage, `posts/${userId}/${photoFile.name}_${Date.now()}`);
-                        const snapshot = await uploadBytes(storageRefPath, photoFile);
-                        imageUrl = await getDownloadURL(snapshot.ref);
+                        if (isDummyConfig()) {
+                             dummyAlert('写真アップロード');
+                        } else {
+                            const storageRefPath = storageRef(storage, `posts/${userId}/${photoFile.name}_${Date.now()}`);
+                            const snapshot = await uploadBytes(storageRefPath, photoFile);
+                            imageUrl = await getDownloadURL(snapshot.ref);
+                        }
                     }
 
                     await submitPrediction(tournamentId, playerInput.value, comment, imageUrl);
@@ -485,7 +557,9 @@
                 }
             });
 
-            // タイムラインのリアルタイム更新
+            // タイムラインのリアルタイム更新 (ダミー設定ではスキップ)
+            if (isDummyConfig()) return;
+            
             onSnapshot(query(collection(db, postsCol), where('tournamentId', '==', tournamentId)), async (snapshot) => {
                 const postsContainer = document.getElementById('timeline');
                 let postsHtml = '';
@@ -530,9 +604,16 @@
         
         /** スポンサーページ (タスク完了) */
         async function renderSponsorPage(container, tournamentId) {
-            const tournamentDoc = await getDoc(doc(db, tournamentsCol, tournamentId));
-            if (!tournamentDoc.exists()) return;
-            const t = tournamentDoc.data();
+            // データ取得 (ダミー対応)
+            let t = null;
+            if (isDummyConfig()) {
+                t = mockData.tournaments.find(mt => mt.id === tournamentId);
+            } else {
+                const tournamentDoc = await getDoc(doc(db, tournamentsCol, tournamentId));
+                if (!tournamentDoc.exists()) return;
+                t = tournamentDoc.data();
+            }
+
             const isTaskCompleted = await getTaskCompletion(tournamentId);
 
             let taskContentHtml = '';
@@ -618,12 +699,21 @@
         /** マイページ (実績とポイント) */
         async function renderMyPage(container) {
             const profile = await getProfile(userId);
-            const q = query(collection(db, predictionsCol), where('userId', '==', userId));
-            const snapshot = await getDocs(q);
-            const predictions = snapshot.docs.map(doc => doc.data());
+            
+            // ダミー設定時のデータは静的に表示
+            let totalPredictions = 5;
+            let correctPredictions = 2;
+            let predictions = [];
+            
+            if (!isDummyConfig()) {
+                const q = query(collection(db, predictionsCol), where('userId', '==', userId));
+                const snapshot = await getDocs(q);
+                predictions = snapshot.docs.map(doc => doc.data());
 
-            const totalPredictions = predictions.length;
-            const correctPredictions = predictions.filter(p => p.isCorrect === true).length;
+                totalPredictions = predictions.length;
+                correctPredictions = predictions.filter(p => p.isCorrect === true).length;
+            }
+
             const hitRate = totalPredictions > 0 ? ((correctPredictions / totalPredictions) * 100).toFixed(1) : '0.0';
 
             container.innerHTML = `
@@ -657,13 +747,21 @@
                 <!-- 予想履歴 -->
                 <h3 class="text-2xl font-bold mb-4 pt-4 border-t">予想履歴 (${totalPredictions}件)</h3>
                 <div id="prediction-history" class="space-y-3">
-                    <p class="text-center text-gray-500">ロード中...</p>
+                    ${isDummyConfig() ? '<p class="text-center text-gray-500 p-8">現在ダミー設定のため、履歴は静的です。</p>' : '<p class="text-center text-gray-500">ロード中...</p>'}
                 </div>
             `;
             
             // 履歴リストのレンダリング
             const historyContainer = document.getElementById('prediction-history');
-            if (predictions.length === 0) {
+            if (isDummyConfig() && totalPredictions > 0) {
+                 const historyHtml = `<div class="bg-white p-4 rounded-xl shadow border">
+                        <p class="font-semibold text-gray-800">第1回 GOLFIN杯</p>
+                        <p class="text-sm text-gray-600">予想: 田中 太郎</p>
+                        <p class="text-sm font-semibold text-indigo-600 mt-1">結果待ち</p>
+                    </div>`;
+                historyContainer.innerHTML = historyHtml;
+                return lucide.createIcons();
+            } else if (predictions.length === 0 && !isDummyConfig()) {
                 historyContainer.innerHTML = '<p class="text-center text-gray-500 p-8">まだ予想の履歴はありません。</p>';
                 return lucide.createIcons();
             }
@@ -710,7 +808,7 @@
                     <p class="text-sm text-green-800">現在のポイント残高</p>
                     <p class="text-4xl font-extrabold text-green-700">${currentPoints.toLocaleString()}pt</p>
                 </div>
-
+                ${isDummyConfig() ? '<p class="text-center text-red-500 p-4">警告: ダミー設定のため、交換ボタンは動作しません。</p>' : ''}
                 <div id="rewards-list" class="grid grid-cols-2 gap-4">
                     ${mockData.rewards.map(r => {
                         const canAfford = currentPoints >= r.cost;
@@ -734,6 +832,7 @@
 
         /** リワード交換を実行するグローバル関数 */
         window.exchangeReward = async (rewardId, cost) => {
+            if (isDummyConfig()) return dummyAlert('リワード交換');
             if (!confirm(`本当に ${cost}pt を消費して ${rewardId} を交換しますか？`)) return;
 
             const result = await handleExchangeReward(rewardId, cost);
@@ -754,9 +853,13 @@
                 return;
             }
 
-            const q = query(collection(db, postsCol), where('userId', '==', targetUserId));
-            const snapshot = await getDocs(q);
-            const posts = snapshot.docs.map(doc => doc.data());
+            // ダミー設定時の投稿データは表示しない
+            let posts = [];
+            if (!isDummyConfig()) {
+                const q = query(collection(db, postsCol), where('userId', '==', targetUserId));
+                const snapshot = await getDocs(q);
+                posts = snapshot.docs.map(doc => doc.data());
+            }
 
             container.innerHTML = `
                 <button onclick="window.navigate('home')" class="text-indigo-600 hover:underline mb-4 flex items-center">
@@ -776,13 +879,13 @@
 
                     <h3 class="text-xl font-bold pt-4 border-t">投稿履歴 (${posts.length}件)</h3>
                     <div id="user-posts" class="space-y-4">
-                        ${posts.length > 0 ? posts.map(post => `
+                        ${isDummyConfig() ? '<p class="text-center text-red-500 p-8">ダミー設定のため投稿履歴は表示されません。</p>' : (posts.length > 0 ? posts.map(post => `
                             <div class="bg-white p-3 rounded-lg shadow border border-gray-100">
                                 <p class="text-xs text-gray-400 mb-1">大会ID: ${post.tournamentId}</p>
                                 <p class="text-gray-700">${post.text}</p>
                                 ${post.imageUrl ? `<img src="${post.imageUrl}" alt="投稿写真" class="w-full max-h-32 object-cover rounded-lg mt-2">` : ''}
                             </div>
-                        `).join('') : '<p class="text-center text-gray-500 p-8">このユーザーはまだ投稿していません。</p>'}
+                        `).join('') : '<p class="text-center text-gray-500 p-8">このユーザーはまだ投稿していません。</p>')}
                     </div>
                 </div>
             `;
@@ -794,11 +897,36 @@
         async function renderAdminPage(container) {
             container.innerHTML = `
                 <h2 class="text-3xl font-extrabold text-red-700 mb-6">⚙️ 管理者ビュー</h2>
+                ${isDummyConfig() ? '<p class="text-center text-red-500 p-4">警告: ダミー設定のため、機能は動作しません。UIのみ確認可能です。</p>' : ''}
                 <div id="admin-list" class="space-y-4">
                     <p class="text-center text-gray-500">ロード中...</p>
                 </div>
             `;
             
+            // ダミー設定の場合、モックデータで静的に表示
+            if (isDummyConfig()) {
+                const tournaments = mockData.tournaments;
+                const listHtml = tournaments.map(t => `
+                    <div class="bg-white p-4 rounded-xl shadow border">
+                        <p class="text-xl font-bold">${t.title} (ダミー)</p>
+                        <p class="text-gray-600 mt-1">ダミー設定では結果確定はできません。</p>
+                        
+                        <form class="mt-3 space-y-2">
+                            <select name="winnerId" class="w-full p-2 border rounded-lg" disabled>
+                                <option value="">--- 優勝者を選択 ---</option>
+                                ${t.players?.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
+                            </select>
+                            <button type="submit" class="w-full bg-gray-400 text-white font-bold py-2 rounded-lg cursor-not-allowed" disabled>
+                                結果を確定しポイント付与
+                            </button>
+                        </form>
+                    </div>
+                `).join('');
+                document.getElementById('admin-list').innerHTML = listHtml;
+                return;
+            }
+
+            // 本番環境の場合、Firestoreからリアルタイム更新
             onSnapshot(collection(db, tournamentsCol), (snapshot) => {
                 const tournaments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 const listHtml = tournaments.map(t => `
@@ -826,6 +954,7 @@
             e.preventDefault();
             const winnerId = e.target.elements.winnerId.value;
 
+            if (isDummyConfig()) return dummyAlert('結果確定');
             if (!winnerId || !confirm(`本当に ${players.find(p => p.id === winnerId).name} を優勝者として確定しますか？ (ポイント付与されます)`)) return;
 
             try {
